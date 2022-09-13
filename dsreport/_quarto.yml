@@ -1,0 +1,23 @@
+project:
+  type: book
+
+book:
+  title: "dsreport"
+  author: "Xinrui WANG and Tsai-Chun TSOU"
+  date: "`r Sys.Date()`"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+
