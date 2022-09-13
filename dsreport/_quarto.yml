@@ -7,8 +7,11 @@ book:
   date: "`r Sys.Date()`"
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
+    - "01-intro.qmd"
+    - "02-data.qmd"
+    - "02-1-datascraping.qmd"
+    - "03-methods.qmd"
+    - "04-textanalysis.qmd"
     - references.qmd
 
 bibliography: references.bib
