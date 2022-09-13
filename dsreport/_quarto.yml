@@ -5,6 +5,10 @@ book:
   title: "dsreport"
   author: "Xinrui WANG and Tsai-Chun TSOU"
   date: "`r Sys.Date()`"
+  search: true
+  downloads: [pdf]
+  repo-url: https://github.com/numbats/ds-report
+  repo-actions: [source]
   chapters:
     - index.qmd
     - "01-intro.qmd"
@@ -18,7 +22,9 @@ bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    theme: 
+        light: flatly
+        dark: darkly
   pdf:
     documentclass: scrreprt
 
