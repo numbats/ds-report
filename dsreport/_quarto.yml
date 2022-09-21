@@ -11,8 +11,8 @@ book:
   repo-actions: [source]
   chapters:
     - index.qmd
-    - "01-intro.qmd"
-    - "02-data.qmd"
+    - "01-abstract.qmd"
+    - "02-intro.qmd"
     - "02-1-datascraping.qmd"
     - "03-methods.qmd"
     - "04-textanalysis.qmd"
