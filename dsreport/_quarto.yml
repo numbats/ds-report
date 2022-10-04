@@ -13,9 +13,12 @@ book:
     - index.qmd
     - "01-abstract.qmd"
     - "02-intro.qmd"
-    - "02-1-datascraping.qmd"
-    - "03-methods.qmd"
+    - "03-data.qmd"
+    - "03_1-datascraping.qmd"
     - "04-textanalysis.qmd"
+    - "04_1-unitext.qmd"
+    - "04_2 jobtext.qmd"
+    - "05-word2vec.qmd"
     - references.qmd
 
 bibliography: references.bib
