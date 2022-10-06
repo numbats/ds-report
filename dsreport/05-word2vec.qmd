@@ -1,4 +1,4 @@
-# Text Analysis
+# Word2vec
 
 This is a book created from markdown and executable code.
 

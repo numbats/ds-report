@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>dsreport - 2&nbsp; Introduction</title>
+<title>dsreport - 4&nbsp; 3.1 Data Scraping</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,8 +25,8 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./03-data.html" rel="next">
-<link href="./01-abstract.html" rel="prev">
+<link href="./04-textanalysis.html" rel="next">
+<link href="./03-data.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -67,7 +67,7 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">3.1 Data Scraping</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -107,17 +107,17 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-intro.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="./02-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data</span></a>
+  <a href="./03-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_1-datascraping.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">3.1 Data Scraping</span></a>
+  <a href="./03_1-datascraping.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">3.1 Data Scraping</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -127,17 +127,17 @@ ul.task-list{list-style: none;}
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_1-unitext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></a>
+  <a href="./04_1-unitext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Methods</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_2 jobtext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></a>
+  <a href="./04_2 jobtext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Text Analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-word2vec.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Word2vec</span></a>
+  <a href="./05-word2vec.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Text Analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -150,14 +150,21 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#inconsistent-information" id="toc-inconsistent-information" class="nav-link active" data-scroll-target="#inconsistent-information"> <span class="header-section-number">4.1</span> 3.1.1 Inconsistent Information</a></li>
+  <li><a href="#difficult-to-manage-websites" id="toc-difficult-to-manage-websites" class="nav-link" data-scroll-target="#difficult-to-manage-websites"> <span class="header-section-number">4.2</span> 3.1.2 Difficult to Manage Websites</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/numbats/ds-report/blob/main/03_1-datascraping.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">3.1 Data Scraping</span></h1>
 </div>
 
 
@@ -171,9 +178,38 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<p>• Background is clearly outlined, and the analysis is well motivated.</p>
+<p>In order to explore the Data Science degrees around Australia Universities, we compiled a list of Schools and the Data Science and related degrees they offered. Universities’ websites is scraped using R.</p>
+<p>To start off the project, Professor Tanaka provided sample code for data scraping using Monash Handbook as example. Libraries <code>rvest</code> and <code>rSelenium</code> are two of the main tools. Initially, we studied her code and then tried to replicate her code to be applied to other university’s websites.</p>
+<p>The flow of the data scrapping is as follow:</p>
+<ol type="1">
+<li>Identify the main page (url) where the degree information is contained.</li>
+<li>Use functions from <code>rvest</code> to retrieve all the course unit code (or course unit url). Retreive the degree code and formal degree name and save it for later.</li>
+<li>Use <code>rSelenium</code> functions and course unit information, to direct R to the unit information page.</li>
+<li>Retrieve the following information from the page using <code>rvest</code> functions:
+<ul>
+<li><p>Unit Code</p></li>
+<li><p>Unit Name</p></li>
+<li><p>Unit Overview</p></li>
+<li><p>Unit Learning Outcome</p></li>
+<li><p>Unit Prohibition/ Pre-requisite/ Co-requisite</p></li>
+</ul></li>
+<li>Repeat step 3 &amp; 4 until all the course information has been retrieved.</li>
+<li>Compile all the retrieved data from the University into a dataframe and export it as csv file.</li>
+</ol>
+<p>Despite the process being similar for each University, we soon realize the process was going to be more challenging than expect.</p>
+<section id="inconsistent-information" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="inconsistent-information"><span class="header-section-number">4.1</span> 3.1.1 Inconsistent Information</h2>
+<p>Monash University’s student handbook on Degrees and Courses is a spectacular website for data scraping. Its html code is clearly labeled and anything you need to know about the degree/ course can be found on the website. The same cannot be said about other Universities.</p>
+<p>** Rachel can talk about the missing learning outcomes</p>
+</section>
+<section id="difficult-to-manage-websites" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="difficult-to-manage-websites"><span class="header-section-number">4.2</span> 3.1.2 Difficult to Manage Websites</h2>
+<p>Each university website is unique. Sometimes the information is not so straightforward. An example of this is University of Adelaide. The main website for the degree does contain the list of units that go into the degree.</p>
+<p>However, instead of having just one page with all the unit information, the link takes you to a page with different unit information depending on when the unit is offered and on what campus.</p>
+<p>I tried bypassing the pages by directly looking at the url of the final unit information page I want to be on. Unfortunately, the url is not designed or structured in a way which I am able to predict the url based on my unit code. With that said, my only option was to code the function to jump from pages to pages before landing on the right unit information page.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -378,13 +414,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./01-abstract.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abstract</span></span>
+      <a href="./03-data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Methods</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03-data.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04-textanalysis.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Text Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

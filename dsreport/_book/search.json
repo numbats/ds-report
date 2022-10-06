@@ -65,7 +65,7 @@
   {
     "objectID": "04-textanalysis.html",
     "href": "04-textanalysis.html",
-    "title": "5  Text Analysis",
+    "title": "Text Analysis",
     "section": "",
     "text": "See Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
@@ -82,5 +82,54 @@
     "title": "2  Introduction",
     "section": "",
     "text": "• Background is clearly outlined, and the analysis is well motivated."
+  },
+  {
+    "objectID": "03-data.html",
+    "href": "03-data.html",
+    "title": "3  Data",
+    "section": "",
+    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "03_1-datascraping.html",
+    "href": "03_1-datascraping.html",
+    "title": "4  3.1 Data Scraping",
+    "section": "",
+    "text": "In order to explore the Data Science degrees around Australia Universities, we compiled a list of Schools and the Data Science and related degrees they offered. Universities’ websites is scraped using R.\nTo start off the project, Professor Tanaka provided sample code for data scraping using Monash Handbook as example. Libraries rvest and rSelenium are two of the main tools. Initially, we studied her code and then tried to replicate her code to be applied to other university’s websites.\nThe flow of the data scrapping is as follow:\nDespite the process being similar for each University, we soon realize the process was going to be more challenging than expect."
+  },
+  {
+    "objectID": "03_1-datascraping.html#inconsistent-information",
+    "href": "03_1-datascraping.html#inconsistent-information",
+    "title": "4  3.1 Data Scraping",
+    "section": "4.1 3.1.1 Inconsistent Information",
+    "text": "4.1 3.1.1 Inconsistent Information\nMonash University’s student handbook on Degrees and Courses is a spectacular website for data scraping. Its html code is clearly labeled and anything you need to know about the degree/ course can be found on the website. The same cannot be said about other Universities.\n** Rachel can talk about the missing learning outcomes"
+  },
+  {
+    "objectID": "03_1-datascraping.html#difficult-to-manage-websites",
+    "href": "03_1-datascraping.html#difficult-to-manage-websites",
+    "title": "4  3.1 Data Scraping",
+    "section": "4.2 3.1.2 Difficult to Manage Websites",
+    "text": "4.2 3.1.2 Difficult to Manage Websites\nEach university website is unique. Sometimes the information is not so straightforward. An example of this is University of Adelaide. The main website for the degree does contain the list of units that go into the degree.\nHowever, instead of having just one page with all the unit information, the link takes you to a page with different unit information depending on when the unit is offered and on what campus.\nI tried bypassing the pages by directly looking at the url of the final unit information page I want to be on. Unfortunately, the url is not designed or structured in a way which I am able to predict the url based on my unit code. With that said, my only option was to code the function to jump from pages to pages before landing on the right unit information page."
+  },
+  {
+    "objectID": "04_1-unitext.html",
+    "href": "04_1-unitext.html",
+    "title": "6  Unit Text Analysis",
+    "section": "",
+    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "04_2 jobtext.html",
+    "href": "04_2 jobtext.html",
+    "title": "7  Job Text Analysis",
+    "section": "",
+    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "05-word2vec.html",
+    "href": "05-word2vec.html",
+    "title": "8  Word2vec",
+    "section": "",
+    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   }
 ]
