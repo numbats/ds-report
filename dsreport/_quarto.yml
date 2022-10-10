@@ -14,7 +14,6 @@ book:
     - "01-abstract.qmd"
     - "02-intro.qmd"
     - "03-data.qmd"
-    - "03_1-datascraping.qmd"
     - "04-textanalysis.qmd"
     - "04_1-unitext.qmd"
     - "04_2 jobtext.qmd"

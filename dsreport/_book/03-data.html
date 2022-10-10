@@ -15,25 +15,6 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 
@@ -44,7 +25,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./03_1-datascraping.html" rel="next">
+<link href="./04-textanalysis.html" rel="next">
 <link href="./02-intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -136,27 +117,22 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_1-datascraping.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">3.1 Data Scraping</span></a>
+  <a href="./04-textanalysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Text Analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-textanalysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Text Analysis</span></a>
+  <a href="./04_1-unitext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_1-unitext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Methods</span></a>
+  <a href="./04_2 jobtext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_2 jobtext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Text Analysis</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./05-word2vec.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Text Analysis</span></a>
+  <a href="./05-word2vec.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Word2vec</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -169,7 +145,17 @@ div.csl-indent {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-scraping" id="toc-data-scraping" class="nav-link active" data-scroll-target="#data-scraping"> <span class="header-section-number">3.1</span> Data Scraping</a>
+  <ul class="collapse">
+  <li><a href="#inconsistent-information" id="toc-inconsistent-information" class="nav-link" data-scroll-target="#inconsistent-information"> <span class="header-section-number">3.1.1</span> Inconsistent Information</a></li>
+  <li><a href="#difficult-to-manage-websites" id="toc-difficult-to-manage-websites" class="nav-link" data-scroll-target="#difficult-to-manage-websites"> <span class="header-section-number">3.1.2</span> Difficult to Manage Websites</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/numbats/ds-report/blob/main/03-data.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -190,15 +176,43 @@ div.csl-indent {
 
 </header>
 
-<p>This is a book created from markdown and executable code.</p>
-<p>See <span class="citation" data-cites="knuth84">Knuth (<a href="references.html#ref-knuth84" role="doc-biblioref">1984</a>)</span> for additional discussion of literate programming.</p>
+<section id="data-scraping" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="data-scraping"><span class="header-section-number">3.1</span> Data Scraping</h2>
+<p>In order to explore the Data Science degrees around Australia Universities, we compiled a list of Schools and the Data Science and related degrees they offered. Universities’ websites is scraped using R.</p>
+<p>To start off the project, Professor Tanaka provided sample code for data scraping using Monash Handbook as example. Libraries rvest and rSelenium are two of the main tools. Initially, we studied her code and then tried to replicate her code to be applied to other university’s websites.</p>
+<p>The flow of the data scrapping is as follow:</p>
+<ol type="1">
+<li><p>Identify the main page (url) where the degree information is contained.</p></li>
+<li><p>Use functions from <code>rvest</code> to retrieve all the course unit code (or course unit url). Retreive the degree code and formal degree name and save it for later.</p></li>
+<li><p>Use <code>rSelenium</code> functions and course unit information, to direct R to the unit information page.</p></li>
+<li><p>Retrieve the following information from the page using rvest functions:</p></li>
+</ol>
+<ul>
+<li><p>Unit Code</p></li>
+<li><p>Unit Name</p></li>
+<li><p>Unit Overview</p></li>
+<li><p>Unit Learning Outcome</p></li>
+<li><p>Unit Prohibition/ Pre-requisite/ Co-requisite</p></li>
+</ul>
+<ol start="5" type="1">
+<li>Repeat step 3 &amp; 4 until all the course information has been retrieved.</li>
+<li>Compile all the retrieved data from the University into a dataframe and export it as csv file.</li>
+</ol>
+<p>Despite the process being similar for each University, we soon realize the process was going to be more challenging than expect.</p>
+<section id="inconsistent-information" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="inconsistent-information"><span class="header-section-number">3.1.1</span> Inconsistent Information</h3>
+<p>Monash University’s student handbook on Degrees and Courses is a spectacular website for data scraping. Its html code is clearly labeled and anything you need to know about the degree/ course can be found on the website. The same cannot be said about other Universities.</p>
+<p>** Rachel can talk about the missing learning outcomes</p>
+</section>
+<section id="difficult-to-manage-websites" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="difficult-to-manage-websites"><span class="header-section-number">3.1.2</span> Difficult to Manage Websites</h3>
+<p>Each university website is unique. Sometimes the information is not so straightforward. An example of this is University of Adelaide. The main website for the degree does contain the list of units that go into the degree.</p>
+<p>However, instead of having just one page with all the unit information, the link takes you to a page with different unit information depending on when the unit is offered and on what campus.</p>
+<p>I tried bypassing the pages by directly looking at the url of the final unit information page I want to be on. Unfortunately, the url is not designed or structured in a way which I am able to predict the url based on my unit code. With that said, my only option was to code the function to jump from pages to pages before landing on the right unit information page.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-knuth84" class="csl-entry" role="doc-biblioentry">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput. J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -408,8 +422,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03_1-datascraping.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">3.1 Data Scraping</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04-textanalysis.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Text Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
