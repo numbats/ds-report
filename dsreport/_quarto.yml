@@ -2,7 +2,8 @@ project:
   type: book
 
 book:
-  title: "dsreport"
+  title: "Defining Data Science"
+  subtitle: "A Case Study in Australia"
   author: "Xinrui WANG and Tsai-Chun TSOU"
   date: "`r Sys.Date()`"
   search: true
