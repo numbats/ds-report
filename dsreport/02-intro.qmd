@@ -1,2 +1,5 @@
 # Introduction
 
+Data Science has ranked as one of the most in-demand jobs in Australia in recent consecutive years. As demands steadily grows, students are also increasingly interested in Data Science degrees, yet recruiters still seem to struggle to fill up data science positions. This leads to our main question: what is Data Science? Are students and employers' perception of data science similar? To answer this question, we looked a data from both University and Employer perspectives. 
+
+Through data scraping, and 
