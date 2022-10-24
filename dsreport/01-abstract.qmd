@@ -1,3 +1,6 @@
 # Abstract
 
-• Abstract or summary is well written and contains key information: aims, methods, data, findings, etc.
+With the increase in demand for data scientist and the rising popularity of the degrees, how does one define Data Science in Australia. The Australian Mathematical Sciences Institute (AMSI) and the Statistical Society of Australia (SSA) are conducting a review of Australian Data Science Degrees with [surveys](https://amsi.org.au/amsi-ssa-data-science-review/) and focus groups. The survey method is prone to biases due to the subjective nature. Our research attempts to tackle similar topic but with a more objective approach by collecting data directly from public resources. We collected Data Science related unit information from Great of Eight Universities and Data Scientist Job Listings from [kaggle](https://www.kaggle.com/code/nomilk/exploring-2-years-of-data-scientist-job-listings/data). We used the data to decompose the core disciplines involved in the degree as well the type of skill sets that may be required. To expand on the initial exploratory data analysis, we also build Latent Dirichlet Allocation models to construct our own text corpus.
+
+From the exploratory data analysis, we observe a lack of homogeneity within the Universities' analysis. The inconsistent data metrics made it difficult to draw direct comparison between the employer data and university data. Nonetheless we were able to conclude that computational disciplines are more prominent on both sides.
+
