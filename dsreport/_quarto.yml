@@ -12,13 +12,27 @@ book:
   repo-actions: [source]
   chapters:
     - index.qmd
+    
     - "01-abstract.qmd"
     - "02-intro.qmd"
-    - "03-data.qmd"
-    - "04-textanalysis.qmd"
-    - "04_1-unitext.qmd"
-    - "04_2-jobtext.qmd"
-    - "05-text2vec.qmd"
+    
+    -  "03-data.qmd"
+    
+    - part: "04-textanalysis.qmd"
+      chapters:
+         - "04_1-unitext.qmd"
+         - "04_2-jobtext.qmd"
+    
+    - part: "05-text2vec.qmd"
+      chapters:
+         - "05_1-unilda.qmd"
+         - "05_2-joblda.qmd"
+    
+    - part: "Conclusion"
+      chapters:
+         - "06_1-limitation.qmd"
+         - "06_2-conclusion.qmd"
+         
     - references.qmd
 
 bibliography: references.bib
@@ -30,6 +44,3 @@ format:
         dark: darkly
   pdf:
     documentclass: scrreprt
-
-
-

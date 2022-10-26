@@ -6,7 +6,7 @@ In order to explore the Data Science degrees around Australia Universities, we c
 
 To start off the project, Professor Tanaka provided sample code for data scraping using Monash Handbook as an example. Libraries `rvest` and `rSelenium` are two of the main tools. Initially, we studied her code and then tried to replicate her code to be applied to other university's websites.
 
-The flow of the data scrapping is as follow:
+The flow of the data scraping is as follow:
 
 1.  Identify the main page (url) where the degree information is contained, which usually is the most updated version of the handbook.
 

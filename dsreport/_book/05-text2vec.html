@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Defining Data Science - 7&nbsp; text2vec</title>
+<title>Defining Data Science - text2vec</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -107,7 +107,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./05_1-unilda.html" rel="next">
 <link href="./04_2-jobtext.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -152,7 +152,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">text2vec</span></h1>
+      <h1 class="quarto-secondary-nav-title">text2vec</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -200,26 +200,66 @@ div.csl-indent {
   <a href="./03-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Collection</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./04-textanalysis.html" class="sidebar-item-text sidebar-link">Text Analysis</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-textanalysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Text Analysis</span></a>
+  <a href="./04_1-unitext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_1-unitext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></a>
+  <a href="./04_2-jobtext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./05-text2vec.html" class="sidebar-item-text sidebar-link active">text2vec</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_2-jobtext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></a>
+  <a href="./05_1-unilda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Collected University Data</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-text2vec.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">text2vec</span></a>
+  <a href="./05_2-joblda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Employer Data</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Conclusion</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_1-limitation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Limitations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_2-conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conclusion</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
@@ -234,9 +274,8 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#algorithm-and-model-fitting" id="toc-algorithm-and-model-fitting" class="nav-link active" data-scroll-target="#algorithm-and-model-fitting"> <span class="header-section-number">7.1</span> Algorithm and Model Fitting</a></li>
-  <li><a href="#model-adjustments" id="toc-model-adjustments" class="nav-link" data-scroll-target="#model-adjustments"> <span class="header-section-number">7.2</span> Model Adjustments</a></li>
-  <li><a href="#apply-the-selected-model-to-collected-university-data" id="toc-apply-the-selected-model-to-collected-university-data" class="nav-link" data-scroll-target="#apply-the-selected-model-to-collected-university-data"> <span class="header-section-number">7.3</span> Apply the Selected Model to Collected University Data</a></li>
+  <li><a href="#algorithm-and-model-fitting" id="toc-algorithm-and-model-fitting" class="nav-link active" data-scroll-target="#algorithm-and-model-fitting">Algorithm and Model Fitting</a></li>
+  <li><a href="#model-adjustments" id="toc-model-adjustments" class="nav-link" data-scroll-target="#model-adjustments">Model Adjustments</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/numbats/ds-report/blob/main/05-text2vec.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -245,7 +284,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">text2vec</span></h1>
+<h1 class="title d-none d-lg-block">text2vec</h1>
 </div>
 
 
@@ -259,11 +298,11 @@ div.csl-indent {
 
 </header>
 
-<p>As mentioned in Section <span class="quarto-unresolved-ref">?sec-unit-bigram</span>, since the collected university data is relatively small, to make more educated and meaningful interpretations, similar words shall be grouped together and counted by groups. This is usually computed using text corpus, which is a language resource consisting of a large and structured set of texts, since data science is a new term waiting to be defined, there is no available text corpus on this topic. Therefore, we adopted the concept of word2vec and tried to build our own text corpus.</p>
-<p>There are multiple publicly available models and packages to conduct similar computations, however, each model takes hours to fit. Due to time constrains, we have only fitted the Dirichlet Allocation (LDA) model with a few parameter adjustments using the <code>text2vec</code> package with the concepts illustrated by <span class="citation" data-cites="das2016data">Das (<a href="references.html#ref-das2016data" role="doc-biblioref">2016</a>)</span>.</p>
-<section id="algorithm-and-model-fitting" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="algorithm-and-model-fitting"><span class="header-section-number">7.1</span> Algorithm and Model Fitting</h2>
-<p>According to <span class="citation" data-cites="das2016data">Das (<a href="references.html#ref-das2016data" role="doc-biblioref">2016</a>)</span>, the algorithm behind the LDA model is to convert words to document-term matrix (DTM), where the rows, columns and entries correspond to documents, terms and counts respectively. LDA then fits a probabilistic model that assumes a mixture of latent topics, where each topic has a multinomial distribution for all words. The number of topics is a parameter that could be adjusted by needs.</p>
+<p>As mentioned in Section <a href="#sec-unit-bigram"><span class="quarto-unresolved-ref">sec-unit-bigram</span></a>, since the collected university data is relatively small, to make more educated and meaningful interpretations, similar words shall be grouped together and counted by groups. This is usually computed using text corpus, which is a language resource consisting of a large and structured set of texts, since data science is a new term waiting to be defined, there is no available text corpus on this topic. Therefore, we adopted the concept of word2vec and tried to build our own text corpus.</p>
+<p>There are multiple publicly available models and packages to conduct similar computations, however, each model takes hours to fit. Due to time constrains, we have only fitted the Dirichlet Allocation (LDA) model with a few parameter adjustments using the <code>text2vec</code> package with the concepts illustrated by <span class="citation" data-cites="das2016data">Das (<a href="#ref-das2016data" role="doc-biblioref">2016</a>)</span>.</p>
+<section id="algorithm-and-model-fitting" class="level2">
+<h2 class="anchored" data-anchor-id="algorithm-and-model-fitting">Algorithm and Model Fitting</h2>
+<p>According to <span class="citation" data-cites="das2016data">Das (<a href="#ref-das2016data" role="doc-biblioref">2016</a>)</span>, the algorithm behind the LDA model is to convert words to document-term matrix (DTM), where the rows, columns and entries correspond to documents, terms and counts respectively. LDA then fits a probabilistic model that assumes a mixture of latent topics, where each topic has a multinomial distribution for all words. The number of topics is a parameter that could be adjusted by needs.</p>
 <p>The initial code to build the LDA model was provided by Professor Tanaka, the major part of the code to build the first version of LDA model is also provided below.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(wiki_stats, <span class="fu">get_wiki_articles</span>(<span class="st">"https://en.wikipedia.org/wiki/List_of_statistics_articles"</span>)),</span>
@@ -299,12 +338,12 @@ div.csl-indent {
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(lda_model20_ssc, <span class="fu">model_lda</span>(dtm_ssc, <span class="at">ntopics =</span> <span class="dv">20</span>),</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>             <span class="at">format =</span> <span class="st">"rds"</span>, <span class="at">repository =</span> <span class="st">"local"</span>)</span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>             )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The model must be trained before it could be used, we web scrapped over 4448 Wikipedia articles as training data, including 2816 articles in statistics, 1005 articles in sociology and 627 in computing. The functions used in the codes above such as <code>get_wiki_articles</code>,<code>clean_wiki_article</code>, <code>get_clean_combined_wikis</code>, <code>model_lda</code>, <code>preprocess_text</code>, <code>stem_tokenizer</code>, <code>prune_vocab</code>, <code>model_glove</code> and <code>find_close_words</code> are constructed by Professor Tanaka for pre-processing purposes, the original scripts could be found from the <a href="https://github.com/numbats/datasci-courses">project repository</a>.</p>
+<p>The model must be trained before it could be used, we web scraped over 4448 Wikipedia articles as training data, including 2816 articles in statistics, 1005 articles in sociology and 627 in computing. The functions used in the codes above such as <code>get_wiki_articles</code>,<code>clean_wiki_article</code>, <code>get_clean_combined_wikis</code>, <code>model_lda</code>, <code>preprocess_text</code>, <code>stem_tokenizer</code>, <code>prune_vocab</code>, <code>model_glove</code> and <code>find_close_words</code> are constructed by Professor Tanaka for pre-processing purposes, the original scripts could be found from the <a href="https://github.com/numbats/datasci-courses">project repository</a>.</p>
 </section>
-<section id="model-adjustments" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="model-adjustments"><span class="header-section-number">7.2</span> Model Adjustments</h2>
+<section id="model-adjustments" class="level2">
+<h2 class="anchored" data-anchor-id="model-adjustments">Model Adjustments</h2>
 <p>We have tested using different values for parameter <code>ntopics</code> and tried out training the LDA models with different combinations of data.</p>
-<p>The results provided differs from models, <a href="#fig-ssc-cs">Figure&nbsp;<span>7.1</span></a> compares the results produced by the full model and model without sociology data on ten topics.</p>
+<p>The results provided differs from models, <a href="#fig-ssc-cs">Figure&nbsp;<span class="quarto-unresolved-ref">fig-ssc-cs</span></a> compares the results produced by the full model and model without sociology data on ten topics.</p>
 <div class="cell">
 
 </div>
@@ -313,13 +352,13 @@ div.csl-indent {
 <div id="fig-ssc-cs" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="05-text2vec_files/figure-html/fig-ssc-cs-1.png" class="img-fluid figure-img" width="960"></p>
-<p></p><figcaption class="figure-caption">Figure 7.1: Compare Results Between Full Model and Without Sociology Data</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure 1: Compare Results Between Full Model and Without Sociology Data</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>From the results computed by the full model, Topics 9, 10, 2 and 8 occupies relatively higher proportion compare with the others, but the order varies across universities, and their proportions are not significantly larger than the rest of other topics, makes it hard to draw meaningful interpretations. On the right hand side, results from the model without sociology data demonstrates a better picture: Topics 6, 8 and 9 in this case are the top 3 topics across all Go8 universities, however, proportions of Topic 10, 5, 7, 3 and 4 are also obvious higher in some of the universities, brings in difficulties to make justifications.</p>
-<p>As sociology data tends to brings in noises to the model, and is not closely relevant to the data science topic compare with statistics and computing, another two models are fitted using only statistics data and computing data respectively, the results of both models are shown in <a href="#fig-comp-stats">Figure&nbsp;<span>7.2</span></a>.</p>
+<p>As sociology data tends to brings in noises to the model, and is not closely relevant to the data science topic compare with statistics and computing, another two models are fitted using only statistics data and computing data respectively, the results of both models are shown in <a href="#fig-comp-stats">Figure&nbsp;<span class="quarto-unresolved-ref">fig-comp-stats</span></a>.</p>
 <div class="cell">
 
 </div>
@@ -328,7 +367,7 @@ div.csl-indent {
 <div id="fig-comp-stats" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="05-text2vec_files/figure-html/fig-comp-stats-1.png" class="img-fluid figure-img" width="960"></p>
-<p></p><figcaption class="figure-caption">Figure 7.2: Compare Results Between Full Model and Without Sociology Data</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure 2: Compare Results Between Full Model and Without Sociology Data</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -480,185 +519,9 @@ div.csl-indent {
 </div>
 <p>In terms of the model trained by only data in statistics, there are also dominating topics across all eight universities: Topics 6 and 1, besides, topics 5, 10, 2, 9 together took a relatively higher proportion compare with the rest of other topics. Both models using only computing or statistical data delivers better results, model trained by only statistical data provides more information than the other, hence is selected to use for further analysis on our university data.</p>
 <p>Note that it requires highly skilled linguists and huge efforts to establish a proper text corpus, the model we built is still fairly basic and could be further optimised by adjustments.</p>
-</section>
-<section id="apply-the-selected-model-to-collected-university-data" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="apply-the-selected-model-to-collected-university-data"><span class="header-section-number">7.3</span> Apply the Selected Model to Collected University Data</h2>
-<p>Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the <code>SnowballC</code> package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest probability, instead of counting the appearance of words, the new counts generated are based on topics.</p>
-<p>Similar with the university breakdown in Section <span class="quarto-unresolved-ref">?sec-unit-bigram</span>, to make more objective comparisons, counts are converted to proportions due to different number of units scrapped for the eight universities. <a href="#fig-unitopics">Figure&nbsp;<span>7.3</span></a> suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion.</p>
-<div class="cell">
-
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-unitopics" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="05-text2vec_files/figure-html/fig-unitopics-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 7.3: Topics Proportion by University</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The top ten words based on probabilities for each of the ten topics are provided below, colours of the columns are aligned with <a href="#fig-unitopics">Figure&nbsp;<span>7.3</span></a>. Topic 1 contains words like statist (statistics), data, popul (population), and we can see data, algorithm, analysi (analysis), model, cluster, comput (computation etc.) in topic 6, it is a reasonable interpretation that these two topics are both associated with computational aspects.</p>
-<div class="cell">
-<div class="cell-output-display">
-
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:1250px; "><table class="table table-condensed" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> Topic 1 </th>
-   <th style="text-align:left;"> Topic 2 </th>
-   <th style="text-align:left;"> Topic 3 </th>
-   <th style="text-align:left;"> Topic 4 </th>
-   <th style="text-align:left;"> Topic 5 </th>
-   <th style="text-align:left;"> Topic 6 </th>
-   <th style="text-align:left;"> Topic 7 </th>
-   <th style="text-align:left;"> Topic 8 </th>
-   <th style="text-align:left;"> Topic 9 </th>
-   <th style="text-align:left;"> Topic 10 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;"> studi </td>
-   <td style="text-align:left;color: white !important;background-color: #1F78B4 !important;"> model </td>
-   <td style="text-align:left;color: white !important;background-color: #B2DF8A !important;"> sampl </td>
-   <td style="text-align:left;color: white !important;background-color: #33A02C !important;"> theta </td>
-   <td style="text-align:left;color: white !important;background-color: #FB9A99 !important;"> probabl </td>
-   <td style="text-align:left;color: white !important;background-color: #E31A1C !important;"> data </td>
-   <td style="text-align:left;color: white !important;background-color: #FDBF6F !important;"> distribut </td>
-   <td style="text-align:left;color: white !important;background-color: #FF7F00 !important;"> x_ </td>
-   <td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;"> test </td>
-   <td style="text-align:left;color: white !important;background-color: #6A3D9A !important;"> process </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;"> use </td>
-   <td style="text-align:left;color: white !important;background-color: #1F78B4 !important;"> variabl </td>
-   <td style="text-align:left;color: white !important;background-color: #B2DF8A !important;"> estim </td>
-   <td style="text-align:left;color: white !important;background-color: #33A02C !important;"> function </td>
-   <td style="text-align:left;color: white !important;background-color: #FB9A99 !important;"> one </td>
-   <td style="text-align:left;color: white !important;background-color: #E31A1C !important;"> use </td>
-   <td style="text-align:left;color: white !important;background-color: #FDBF6F !important;"> frac </td>
-   <td style="text-align:left;color: white !important;background-color: #FF7F00 !important;"> frac </td>
-   <td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;"> statist </td>
-   <td style="text-align:left;color: white !important;background-color: #6A3D9A !important;"> time </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;"> statist </td>
-   <td style="text-align:left;color: white !important;background-color: #1F78B4 !important;"> regress </td>
-   <td style="text-align:left;color: white !important;background-color: #B2DF8A !important;"> mean </td>
-   <td style="text-align:left;color: white !important;background-color: #33A02C !important;"> probabl </td>
-   <td style="text-align:left;color: white !important;background-color: #FB9A99 !important;"> number </td>
-   <td style="text-align:left;color: white !important;background-color: #E31A1C !important;"> algorithm </td>
-   <td style="text-align:left;color: white !important;background-color: #FDBF6F !important;"> alpha </td>
-   <td style="text-align:left;color: white !important;background-color: #FF7F00 !important;"> left </td>
-   <td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;"> hypothesi </td>
-   <td style="text-align:left;color: white !important;background-color: #6A3D9A !important;"> point </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;"> research </td>
-   <td style="text-align:left;color: white !important;background-color: #1F78B4 !important;"> estim </td>
-   <td style="text-align:left;color: white !important;background-color: #B2DF8A !important;"> valu </td>
-   <td style="text-align:left;color: white !important;background-color: #33A02C !important;"> x_x </td>
-   <td style="text-align:left;color: white !important;background-color: #FB9A99 !important;"> theori </td>
-   <td style="text-align:left;color: white !important;background-color: #E31A1C !important;"> analysi </td>
-   <td style="text-align:left;color: white !important;background-color: #FDBF6F !important;"> mu </td>
-   <td style="text-align:left;color: white !important;background-color: #FF7F00 !important;"> right </td>
-   <td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;"> valu </td>
-   <td style="text-align:left;color: white !important;background-color: #6A3D9A !important;"> stochast </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;"> data </td>
-   <td style="text-align:left;color: white !important;background-color: #1F78B4 !important;"> beta </td>
-   <td style="text-align:left;color: white !important;background-color: #B2DF8A !important;"> distribut </td>
-   <td style="text-align:left;color: white !important;background-color: #33A02C !important;"> distribut </td>
-   <td style="text-align:left;color: white !important;background-color: #FB9A99 !important;"> bayesian </td>
-   <td style="text-align:left;color: white !important;background-color: #E31A1C !important;"> can </td>
-   <td style="text-align:left;color: white !important;background-color: #FDBF6F !important;"> beta </td>
-   <td style="text-align:left;color: white !important;background-color: #FF7F00 !important;"> sum </td>
-   <td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;"> two </td>
-   <td style="text-align:left;color: white !important;background-color: #6A3D9A !important;"> state </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;"> design </td>
-   <td style="text-align:left;color: white !important;background-color: #1F78B4 !important;"> linear </td>
-   <td style="text-align:left;color: white !important;background-color: #B2DF8A !important;"> varianc </td>
-   <td style="text-align:left;color: white !important;background-color: #33A02C !important;"> variabl </td>
-   <td style="text-align:left;color: white !important;background-color: #FB9A99 !important;"> event </td>
-   <td style="text-align:left;color: white !important;background-color: #E31A1C !important;"> method </td>
-   <td style="text-align:left;color: white !important;background-color: #FDBF6F !important;"> function </td>
-   <td style="text-align:left;color: white !important;background-color: #FF7F00 !important;"> operatornam </td>
-   <td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;"> number </td>
-   <td style="text-align:left;color: white !important;background-color: #6A3D9A !important;"> function </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;"> can </td>
-   <td style="text-align:left;color: white !important;background-color: #1F78B4 !important;"> use </td>
-   <td style="text-align:left;color: white !important;background-color: #B2DF8A !important;"> statist </td>
-   <td style="text-align:left;color: white !important;background-color: #33A02C !important;"> random </td>
-   <td style="text-align:left;color: white !important;background-color: #FB9A99 !important;"> can </td>
-   <td style="text-align:left;color: white !important;background-color: #E31A1C !important;"> model </td>
-   <td style="text-align:left;color: white !important;background-color: #FDBF6F !important;"> gamma </td>
-   <td style="text-align:left;color: white !important;background-color: #FF7F00 !important;"> sigma </td>
-   <td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;"> use </td>
-   <td style="text-align:left;color: white !important;background-color: #6A3D9A !important;"> can </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;"> effect </td>
-   <td style="text-align:left;color: white !important;background-color: #1F78B4 !important;"> y_ </td>
-   <td style="text-align:left;color: white !important;background-color: #B2DF8A !important;"> use </td>
-   <td style="text-align:left;color: white !important;background-color: #33A02C !important;"> x_ </td>
-   <td style="text-align:left;color: white !important;background-color: #FB9A99 !important;"> prior </td>
-   <td style="text-align:left;color: white !important;background-color: #E31A1C !important;"> set </td>
-   <td style="text-align:left;color: white !important;background-color: #FDBF6F !important;"> right </td>
-   <td style="text-align:left;color: white !important;background-color: #FF7F00 !important;"> y_ </td>
-   <td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;"> correl </td>
-   <td style="text-align:left;color: white !important;background-color: #6A3D9A !important;"> random </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;"> popul </td>
-   <td style="text-align:left;color: white !important;background-color: #1F78B4 !important;"> squar </td>
-   <td style="text-align:left;color: white !important;background-color: #B2DF8A !important;"> standard </td>
-   <td style="text-align:left;color: white !important;background-color: #33A02C !important;"> random_variabl </td>
-   <td style="text-align:left;color: white !important;background-color: #FB9A99 !important;"> infer </td>
-   <td style="text-align:left;color: white !important;background-color: #E31A1C !important;"> cluster </td>
-   <td style="text-align:left;color: white !important;background-color: #FDBF6F !important;"> left </td>
-   <td style="text-align:left;color: white !important;background-color: #FF7F00 !important;"> cdot </td>
-   <td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;"> rank </td>
-   <td style="text-align:left;color: white !important;background-color: #6A3D9A !important;"> markov </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;"> may </td>
-   <td style="text-align:left;color: white !important;background-color: #1F78B4 !important;"> can </td>
-   <td style="text-align:left;color: white !important;background-color: #B2DF8A !important;"> popul </td>
-   <td style="text-align:left;color: white !important;background-color: #33A02C !important;"> mathcal </td>
-   <td style="text-align:left;color: white !important;background-color: #FB9A99 !important;"> use </td>
-   <td style="text-align:left;color: white !important;background-color: #E31A1C !important;"> comput </td>
-   <td style="text-align:left;color: white !important;background-color: #FDBF6F !important;"> normal </td>
-   <td style="text-align:left;color: white !important;background-color: #FF7F00 !important;"> operatornam_e </td>
-   <td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;"> measur </td>
-   <td style="text-align:left;color: white !important;background-color: #6A3D9A !important;"> space </td>
-  </tr>
-</tbody>
-</table></div>
-
-</div>
-</div>
-<p>In addition, words under Topics 2,5,9 and 10 are model, regression, estim (estimate), linear, probabl (probability), bayesian, prior, infer, test, statist (statistics), hypothesi (hypothesis), correl (correlation), most of them are related to math and statistics, and also more on the computational side of them.</p>
-<p>The results above further proves the earlier findings discussed in Section <span class="quarto-unresolved-ref">?sec-unit-code</span> and Section <span class="quarto-unresolved-ref">?sec-unit-bigram</span>: Master of Data Science degrees offered at Go8 universities tend to be mainly IT based, the major components are computational as well as statistical/mathematical aspects.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-unitopics2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="05-text2vec_files/figure-html/fig-unitopics2-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 7.4: Proportion Breakdown by Topic</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-<p><a href="#fig-unitopics2">Figure&nbsp;<span>7.4</span></a> above demonstrates a breakdown by topics instead of universities, it is clear that compares with the results based on only faculty in <span class="quarto-unresolved-ref">?sec-unit-code</span>, the differences between Go8 are not as much here. The proportions occupied by the eight universities under each topic are fairly similar to each other, indicating the subjective choice made regarding the grouping method in Section <span class="quarto-unresolved-ref">?sec-unit-code</span> might have provided a slightly misleading information, but it would require further explorations to confirm whether it is truly the case.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-das2016data" class="csl-entry" role="doc-biblioentry">
 Das, Sanjiv Ranjan. 2016. <span>“Data Science: Theories, Models, Algorithms, and Analytics.”</span> <em>Learning</em> 143: 145.
 </div>
@@ -869,12 +732,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./04_2-jobtext.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./05_1-unilda.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Collected University Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
