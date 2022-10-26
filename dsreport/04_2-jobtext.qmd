@@ -1,5 +1,94 @@
 # Job Text Analysis
 
-This is a book created from markdown and executable code.
+To explore the skills and programming languages in demand from employers, we focused on the mobileAdTemplate and the 25 columns of programming languages. Similar to before, single word analysis, bigram, and trigram are all produced. 
 
-See @knuth84 for additional discussion of literate programming.
+```{r setup, include = FALSE}
+library(tidyverse)
+library(tidytext)
+library(SnowballC)
+library(wordcloud)
+
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message= FALSE)
+theme_set(theme_minimal())
+```
+
+```{r read-jobdata}
+jobdata <- read_csv("data/listings2019_2021.csv")
+```
+
+## Word Frequency {#sec-word-frequency}
+```{r fig-job-freqency, fig.cap = "Job Word Frequency (freq >200)"}
+emp_word <- jobdata %>%
+  select(c('jobId', 'jobTitle', 'jobClassification', 'advertiserName', 
+           'workType', 'mobileAdTemplate')) %>% 
+  unnest_tokens(word, mobileAdTemplate) %>% 
+  subset(!grepl("[0-9]", word)) %>% 
+  anti_join(stop_words,by = "word") %>% 
+  group_by(jobId, jobTitle, jobClassification, advertiserName, workType) %>% 
+  distinct(word) %>% 
+  ungroup() 
+
+cloud <- emp_word %>%
+  count(word, sort = TRUE) 
+
+wordcloud(words = cloud$word, 
+            freq = cloud$n, 
+            min.freq = 200,
+            max.words=100,
+            random.order=FALSE, 
+            rot.per=0.15,  
+            scale=c(2.5,0.15),
+            colors=brewer.pal(8, "Dark2"))
+```
+Word frequency was calculated using the same method as @sec-unit-bigram. Programming languages Python and SQL seems prominent. Potentially due to the amount of senior positions in the data, *experience* is mentioned a lot. In terms of other knowledge or skills, *statistics*, *modelling*,  *analysis* are some terms that seems to be standing out. To ensure frequency is meaningful, we looked at bigram and trigram.
+
+## Bigram
+```{r fig-employer-bigram, fig.cap = "Job Description - Bigram (n > 300"}
+emp_bigram <- jobdata%>%
+  select(c('jobId', 'jobTitle', 'jobClassification', 'advertiserName', 'workType', 'mobileAdTemplate')) %>% 
+  unnest_tokens(bigram, mobileAdTemplate, token = "ngrams",n=2) %>% 
+  separate(bigram, c("word1", "word2") , sep = " ") %>% 
+  filter(!word1 %in% stop_words$word & !word2 %in% stop_words$word) %>% 
+  subset(!grepl("[0-9]", word1)) %>% 
+  subset(!grepl("[0-9]", word2)) %>%  
+  mutate(stem1 = wordStem(word1, language = "english"),
+         stem2 = wordStem(word2, language = "english"),
+         bigram = paste(stem1, stem2)) %>% 
+  group_by(jobId, jobTitle, jobClassification, advertiserName, workType) %>% 
+  distinct(bigram) %>% 
+  ungroup() 
+
+emp_bigram %>%
+  count(bigram, sort = TRUE) %>% 
+  filter(n>300) %>% 
+  ggplot(aes(x = n,y= fct_reorder(bigram, n), fill = n))+
+  geom_col(fill = "#006DAE")+
+  theme(legend.position = "none")+
+  labs(title= "Jobs Bigram Overview (n > 300)", 
+       y = "Bigrams")
+```
+
+For @fig-employer-bigram, we stemmed the words before joining them into bigram in attempt to avoid under-counting. However, from the figure we can still see that some terms like *data analyt* and *data analysi* are still counted separately. From this bigram, the popular skills or knowledge mentioned are *machin learn*, *predict model*, *communic skill*,  *data analyt* and *data mine*. Mathematical skill, *mathemat statist* is also mentioned quite often.  Some of these terms on the list are vague and can mean be grouped together. Trigram yeilded similar results as the bigram. With the same problem of under-counting the n-grams due to insufficient groupings. 
+
+## Programming Languages
+
+```{r fig-languages, fig.cap="Programming Skills Mentioned by Employers"}
+jobdata %>% select(c(25:49)) %>% 
+  pivot_longer(everything(),
+               names_to = "Program", 
+               values_to = "sum") %>% 
+  group_by(Program) %>% 
+  summarise(sum = sum(sum)) %>%
+  arrange(-sum) %>% 
+  ggplot(aes(y = fct_reorder(Program, sum), 
+             x= sum,
+             fill = Program))+
+  geom_col(fill = "#006DAE")+
+  geom_text(aes(label = sum, hjust=0.1), color ="black")+
+  theme(legend.position = "none")+
+  labs(title = "Programming Languages Mentioned",
+       y = "Language", x = "Count")
+```
+@fig-languages shows the count of each language mentioned by employers. 89% of the jobs mentioned Python, 69% mentioned R and 68% mentioned SQL. Tableau's popularity is not a surprise given the high frequency for *data visualis* in the previous section.

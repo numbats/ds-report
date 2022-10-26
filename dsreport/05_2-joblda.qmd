@@ -1,1 +1,35 @@
 ## Apply the Selected Model to Employer Data
+
+```{r emp_stat_data, echo = FALSE, message=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(patchwork)
+emp_word_stat <- read.csv("data/emp_stat.csv")%>% 
+  select(-`X`)
+
+colors <- RColorBrewer::brewer.pal(10, "Paired")
+names(colors) <- levels(factor(1:10))
+my_scale <- scale_fill_manual(name = "topic", values = colors)
+```
+
+To remain consistent with the analysis, we also applied the LDA model trained by only data in statistics to the employer data with the same stemming and standardizing procedures. Unlike the university data with both Topic 6 and 1 as the most dominant topics, @fig-emp-lda suggests that Topic 1 is significantly more dominant than the rest of the topics across the different job sectors. While Topic 6 and 5 collectively takes up a large portion.
+
+```{r fig-emp-lda, fig.cap = "Topics Proportion by Job Classification", message=FALSE}
+emp_word_stat %>% 
+  group_by(jobClassification) %>% 
+  count(topic, sort = TRUE) %>% 
+  mutate(prop = round(n/sum(n),4)) %>% 
+  ungroup() %>% 
+  mutate(topic = fct_reorder(as.factor(topic), n, sum)) %>%
+  ggplot(aes(x = prop,
+             y = topic,
+             fill = topic))+
+  geom_col() +
+  my_scale +
+  facet_wrap(~jobClassification) +
+  theme(legend.position = "none") +
+  labs(title = "Topic Proportion by Job Classification",
+       x= "proportion")
+```
+
+Since the same LDA model is being applied, the breakdown of words in each topic can be found in @fig-topics. Topic 1 has data and statist in its top 10 words, which are also popular words found in @fig-job-freqency. Topics 1, 6, 5 are all computational and some statistical elements. Hence we can conclude that both the employers universities have a more computational approach to data science. However, the magnitude of effect for the difference in proportion of topics is not being measured here.

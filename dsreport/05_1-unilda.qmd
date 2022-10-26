@@ -2,7 +2,7 @@
 
 Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the `SnowballC` package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest probability, instead of counting the appearance of words, the new counts generated are based on topics.
 
-Similar with the university breakdown in Section @sec-unit-bigram, to make more objective comparisons, counts are converted to proportions due to different number of units scraped for the eight universities. @fig-unitopics suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion. 
+Similar with the university breakdown in @sec-unit-bigram, to make more objective comparisons, counts are converted to proportions due to different number of units scraped for the eight universities. @fig-unitopics suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion. 
 ```{r stats data, echo = FALSE, message=FALSE}
 library(tidyverse)
 library(kableExtra)
@@ -40,11 +40,11 @@ stats
 
 The top ten words based on probabilities for each of the ten topics are provided below, colours of the columns are aligned with @fig-unitopics. Topic 1 contains words like statist (statistics), data, popul (population), and we can see data, algorithm, analysi (analysis), model, cluster, comput (computation etc.) in topic 6, it is a reasonable interpretation that these two topics are both associated with computational aspects.
 
-```{r message=FALSE, echo=FALSE}
+```{r fig-topics, fig.cap = "Top 10 words of the Ten Topics",message=FALSE}
 read_csv("data/term_s.csv") %>% 
   select(-`...1`)%>% 
   kable() %>% 
-  kable_styling(bootstrap_options = "condensed") %>% 
+  kable_styling(bootstrap_options = "condensed", font_size = 12) %>% 
   column_spec(1, color = "white",
                background = "#A6CEE3") %>% 
   column_spec(2, color = "white",
@@ -64,14 +64,13 @@ read_csv("data/term_s.csv") %>%
   column_spec(9, color = "white",
                background = "#CAB2D6") %>%
   column_spec(10, color = "white",
-               background = "#6A3D9A") %>% 
-  scroll_box(width = "1250px")
+               background = "#6A3D9A")
 ```
 
 
 In addition, words under Topics 2,5,9 and 10 are model, regression, estim (estimate), linear, probabl (probability), bayesian, prior, infer, test, statist (statistics), hypothesi (hypothesis), correl (correlation), most of them are related to math and statistics, and also more on the computational side of them. 
 
-The results above further proves the earlier findings discussed in Section @sec-unit-code and Section @sec-unit-bigram: Master of Data Science degrees offered at Go8 universities tend to be mainly IT based, the major components are computational as well as statistical/mathematical aspects. 
+The results above further proves the earlier findings discussed in @sec-unit-code and @sec-unit-bigram: Master of Data Science degrees offered at Go8 universities tend to be mainly IT based, the major components are computational as well as statistical/mathematical aspects. 
 
 ```{r fig-unitopics2, fig.cap = "Proportion Breakdown by Topic", echo=FALSE}
 data_s %>% 
@@ -93,4 +92,4 @@ data_s %>%
 ```
 
 
-@fig-unitopics2 above demonstrates a breakdown by topics instead of universities, it is clear that compares with the results based on only faculty in @sec-unit-code, the differences between Go8 are not as much here. The proportions occupied by the eight universities under each topic are fairly similar to each other, indicating the subjective choice made regarding the grouping method in Section @sec-unit-code might have provided a slightly misleading information, but it would require further explorations to confirm whether it is truly the case.
+@fig-unitopics2 demonstrates a breakdown by topics instead of universities, it is clear that compares with the results based on only faculty in @sec-unit-code, the differences between Go8 are not as much here. The proportions occupied by the eight universities under each topic are fairly similar to each other, indicating the subjective choice made regarding the grouping method in @sec-unit-code might have provided a slightly misleading information, but it would require further explorations to confirm whether it is truly the case.

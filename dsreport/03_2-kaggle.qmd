@@ -1,0 +1,36 @@
+# Employer Data
+
+For employer's perception of Data Science, we decided to look at the job postings for Data Science relevant positions. We would have scraped career websites given more time. However, due to the circumstances, we found readily available data from [Exploring 2 years' of Data Scientist Job Listings](https://www.kaggle.com/code/nomilk/exploring-2-years-of-data-scientist-job-listings/data).
+
+## Data Science Job Postings
+The data was scraped from Seek.com by Steve Condylios. The collected data contains **2,857** job posts and  **52 variables**. 
+
+Exploratory data analysis was conducted exploring the salary and breakdown of Go8 emloyers. However they did not yield interesting results and thus put aside. For the purpose of this report, only 29 variables were looked at, including jobId, jobTitle, jobClassification, mobileAdTemplate, 25 programming languages. Of all the job posts, 535 are for senior or managerial positions, 25 for graduate positions, and the rest not specified in the job title. 
+
+Condylios also included Data Analyst job posting in the data set. 92 jobs are for Data Analyst and 82 jobs are labeled Data Analyst/Data Scientist. This is another interesting topic for comparison between Data Analyst and Data Scientist but for the scope of the project, we do not delve deeper into the data collection decisions. 
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(kableExtra)
+library(DT)
+
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message= FALSE)
+theme_set(theme_minimal())
+```
+
+```{r read-jobsdata, echo=FALSE, message=FALSE, warning=FALSE}
+jobdata <- read_csv("data/listings2019_2021.csv")
+```
+
+The a fraction of the data set is made available below for exploration.
+```{r employerdf}
+jobdata %>% 
+  select(jobId, jobTitle, jobClassification, mobileAdTemplate, 25:49) %>% 
+  head(.,5) %>% 
+  datatable(height = "400px",
+            options = list(scrollX = TRUE,
+            columnDefs = list(list(className = "dt-center", targets = 1:5)))) %>% 
+  formatStyle(columns = colnames(.), fontSize = '30%')
+```

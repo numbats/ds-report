@@ -1,11 +1,15 @@
 project:
   type: book
-
+  
+execute: 
+  echo: false
+  message: false
+  
 book:
   title: "Defining Data Science"
   subtitle: "A Case Study in Australia"
   author: "Xinrui WANG and Tsai-Chun TSOU"
-  date: "`r Sys.Date()`"
+  date: "28 October 2022"
   search: true
   downloads: [pdf]
   repo-url: https://github.com/numbats/ds-report
@@ -16,7 +20,10 @@ book:
     - "01-abstract.qmd"
     - "02-intro.qmd"
     
-    -  "03-data.qmd"
+    - part: "Data Collection"
+      chapters:
+        - "03_1-webscraping.qmd"
+        - "03_2-kaggle.qmd"
     
     - part: "04-textanalysis.qmd"
       chapters:
@@ -28,10 +35,7 @@ book:
          - "05_1-unilda.qmd"
          - "05_2-joblda.qmd"
     
-    - part: "Conclusion"
-      chapters:
-         - "06_1-limitation.qmd"
-         - "06_2-conclusion.qmd"
+    - "06-limitation_conclusion.qmd"
          
     - references.qmd
 
@@ -42,5 +46,5 @@ format:
     theme: 
         light: flatly
         dark: darkly
-  pdf:
-    documentclass: scrreport
+  # pdf:
+  #   documentclass: scrreport
