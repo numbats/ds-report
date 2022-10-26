@@ -43,4 +43,4 @@ format:
         light: flatly
         dark: darkly
   pdf:
-    documentclass: scrreprt
+    documentclass: scrreport

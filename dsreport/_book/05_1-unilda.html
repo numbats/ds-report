@@ -210,7 +210,7 @@ ul.task-list{list-style: none;}
 </header>
 
 <p>Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the <code>SnowballC</code> package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest probability, instead of counting the appearance of words, the new counts generated are based on topics.</p>
-<p>Similar with the university breakdown in Section <a href="04_1-unitext.html#sec-unit-bigram"><span>Section&nbsp;5.2</span></a>, to make more objective comparisons, counts are converted to proportions due to different number of units scraped for the eight universities. <a href="#fig-unitopics">Figure&nbsp;<span>6.1</span></a> suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion.</p>
+<p>Similar with the university breakdown in Section <a href="04_1-unitext.html#sec-unit-bigram"><span>Section&nbsp;4.2</span></a>, to make more objective comparisons, counts are converted to proportions due to different number of units scraped for the eight universities. <a href="#fig-unitopics">Figure&nbsp;<span>6.1</span></a> suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion.</p>
 <div class="cell">
 
 </div>
@@ -370,7 +370,7 @@ ul.task-list{list-style: none;}
 </div>
 </div>
 <p>In addition, words under Topics 2,5,9 and 10 are model, regression, estim (estimate), linear, probabl (probability), bayesian, prior, infer, test, statist (statistics), hypothesi (hypothesis), correl (correlation), most of them are related to math and statistics, and also more on the computational side of them.</p>
-<p>The results above further proves the earlier findings discussed in Section <a href="04_1-unitext.html#sec-unit-code"><span>Section&nbsp;5.1</span></a> and Section <a href="04_1-unitext.html#sec-unit-bigram"><span>Section&nbsp;5.2</span></a>: Master of Data Science degrees offered at Go8 universities tend to be mainly IT based, the major components are computational as well as statistical/mathematical aspects.</p>
+<p>The results above further proves the earlier findings discussed in Section <a href="04_1-unitext.html#sec-unit-code"><span>Section&nbsp;4.1</span></a> and Section <a href="04_1-unitext.html#sec-unit-bigram"><span>Section&nbsp;4.2</span></a>: Master of Data Science degrees offered at Go8 universities tend to be mainly IT based, the major components are computational as well as statistical/mathematical aspects.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-unitopics2" class="quarto-figure quarto-figure-center anchored">
@@ -381,7 +381,7 @@ ul.task-list{list-style: none;}
 </div>
 </div>
 </div>
-<p><a href="#fig-unitopics2">Figure&nbsp;<span>6.2</span></a> above demonstrates a breakdown by topics instead of universities, it is clear that compares with the results based on only faculty in <a href="04_1-unitext.html#sec-unit-code"><span>Section&nbsp;5.1</span></a>, the differences between Go8 are not as much here. The proportions occupied by the eight universities under each topic are fairly similar to each other, indicating the subjective choice made regarding the grouping method in Section <a href="04_1-unitext.html#sec-unit-code"><span>Section&nbsp;5.1</span></a> might have provided a slightly misleading information, but it would require further explorations to confirm whether it is truly the case.</p>
+<p><a href="#fig-unitopics2">Figure&nbsp;<span>6.2</span></a> above demonstrates a breakdown by topics instead of universities, it is clear that compares with the results based on only faculty in <a href="04_1-unitext.html#sec-unit-code"><span>Section&nbsp;4.1</span></a>, the differences between Go8 are not as much here. The proportions occupied by the eight universities under each topic are fairly similar to each other, indicating the subjective choice made regarding the grouping method in Section <a href="04_1-unitext.html#sec-unit-code"><span>Section&nbsp;4.1</span></a> might have provided a slightly misleading information, but it would require further explorations to confirm whether it is truly the case.</p>
 
 
 
