@@ -71,6 +71,10 @@ rmv_col <- function(x){
   select(-`...1`)
 }
 
+colors <- RColorBrewer::brewer.pal(10, "Paired")
+names(colors) <- levels(factor(1:10))
+my_scale <- scale_fill_manual(name = "topic", values = colors)  
+
 data_s <- rmv_col("data/stats.csv")
 data_ssc <- rmv_col("data/ssc.csv")
 data_cs <- rmv_col("data/cs.csv")
