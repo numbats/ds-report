@@ -2,7 +2,7 @@
 
 ## Web Scraping
 
-In order to explore the Data Science degrees around Australia Universities, we compiled a list of universities in Australia and the Data Science or related degrees they offered, then web scrapeed required information from each university's website using R. 
+In order to explore the Data Science degrees around Australia Universities, we compiled a list of universities in Australia and the Data Science or related degrees they offered, then web scraped required information from each university's website using R. In total, we collected 298 units from eight postgraduate courses in Data Science across all Group of Eight (Go8) universities.
 
 To start off the project, Professor Tanaka provided sample code for data scraping using Monash Handbook as an example. Libraries `rvest` and `rSelenium` are two of the main tools. Initially, we studied her code and then tried to replicate her code to be applied to other university's websites.
 
