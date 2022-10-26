@@ -40,6 +40,7 @@ unidata %>%
 ```
 
 The grouping was performed manually using the code listed below. It is a subjective choice made under careful considerations, we are aware that the grouping is not 100% accurate. For example, the code 'DATA' from University of Sydney is classified under IT, however, some of the units start with DATA are actually more related with statistics, which means 'DATA' belongs to multiple departments. Although there would be misclassifieds units, the results could still provide a meaningful guidance regarding the teaching components of Master of Data Science at Go8 universities. 
+
 ```{.r"}
 math <- c("STAT", "MATH", "MATHS", "STATS", "MAT", "MAST", "ACTL", "QBUS")
 it <- c("COMP", "FIT", "CITS", "INFS", "COSC", "CSSE", "CSYS", "EDPC", "INMT", "PHIL", "PHYS", "BUSN","DATA", "INFO", "INFS")
@@ -86,33 +87,80 @@ comp %>%
   labs(x = "",
        y = "",
        title = "Teaching Content by Faculty") +
-  theme(legend.position = "none") 
+  theme(legend.position = "none")
 ```
 
-```{r}
-dplyr::filter(unidata,
-              grepl("GEOM|ITLS", Unit_code)) %>% 
-  select(School, Course, Unit, Unit_code) %>% 
-  kable() %>% 
-  kable_styling(bootstrap_options = "condensed") %>% 
-  scroll_box(height = "220px",
-             width = "1250px")
+Similar findings could be observed from some but not all Go8 universities. @fig-unitcode-breakdown shows the faculty breakdown by university. Since the total number of units offered by each university is different, instead of showing the actual number, proportions are plotted to make better comparisons across universities. 
+
+```{r fig-unitcode-breakdown, fig.cap = "Faculty Breakdown by University (Proportion)"}
+comp %>% 
+  mutate(category = fct_reorder(category, n, sum)) %>% 
+  group_by(School) %>% 
+  mutate(prop = round(n/sum(n),3)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = prop,
+             y = category,
+             fill = category)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Dark2") +
+  labs(x = "",
+       y = "",
+       title = "Breakdown by Univeristy (Proportion)") +
+  facet_wrap(~School, scales = "free_y") +
+  theme(legend.position = "none")
 ```
 
+At Monash University (monash), University of Adelaide (Uuade), University of Sydney (usyd) and University of Western Australia (uwa), IT is apparently dominating the Master of Data Science degree, especially at Monash University. However, University of Melbourne (unimelb) and University of Queensland (uq) offers relatively higher proportion of statistical and mathematical (Stat/Math) units, whereas units offered at the Australian National University (anu) and UNSW Sydney (unsw) are more evenly distributed across IT, Stat/Math, Science/Social Science and Commerce respectively.
 
-```{r}
-dplyr::filter(unidata,
-              grepl("BINF|BMS|HTIN|PUBH", Unit_code)) %>% 
-  select(School, Course, Unit, Unit_code) %>% 
-  kable() %>% 
-  kable_styling(bootstrap_options = "condensed") %>% 
-  scroll_box(height = "220px",
-             width = "1250px")
-
-
-```
-
-
- Similar findings could be observed from some but not all Go8 universities,  
+Based on the findings above, it seems that there is a shared structure across Go8 that Master of Data Science is a IT based, computational degree, but the proportion it occupies varies by universities. Monash University tends to be heavily focused on IT and computational aspects, whereas the Master of Data Science degree at UNSW Sydney and ANU are more balanced across IT, statistics and math, as well as science and commerce.
 
 ## Unit Overview and Learning Outcome - Bigrams
+
+After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. Single word analysis, bigram and trigram are all produced in order to identify the frequently mentioned words and/or terms. `distinct` function is applied to unit and term, so that same terms are only counted once in a unit to avoid duplicated counting. Words and terms such as 'student', 'successful completion' add more noises than values to the results, are removed in the pre-processing step.
+
+The bigram, which is @fig-bigram below provides the most informative results among all. Machine learning appears quite often, as well as software development, linear models, statistical analysis, spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.
+
+```{r echo=FALSE, warning=FALSE}
+unidata_bigram <- unidata %>% 
+  unnest_tokens(bigram, description, token = "ngrams", n = 2) %>% 
+  separate(bigram,
+           into = c("word1", "word2"),
+           sep = " ") %>% 
+  filter(!word1 %in% stop_words$word & !word2 %in% stop_words$word) %>%  
+  filter(!word1 %in% c("content","topic", "unit", "subject", "final", "capstone", "involve", "project", "master", "practical", "programming") & 
+         !word2 %in% c("student", "skill", "set", "piece", "concept", "capstone", "delivery", "domain", "manner", "due", "range", "unit", "master")) %>% 
+  subset(!grepl("[0-9]", word1)) %>% 
+  subset(!grepl("[0-9]", word2)) %>% 
+  mutate(word = as_factor(paste(word1, word2, sep = " "))) %>%
+  #filter(!word == "data science") %>% 
+  distinct(School, Unit, word) %>% 
+  group_by(School) %>% 
+  count(word, sort = TRUE) %>% 
+  ungroup() %>% 
+  mutate(category = case_when(str_detect(word, "data") ~ "IT",
+                              str_detect(word, "regression") ~ "Math",
+                              str_detect(word, "software") ~ "IT",
+                              str_detect(word, "information") ~"IT",
+                              str_detect(word, "neural") ~ "IT",
+                              str_detect(word, "artificial") ~ "AI",
+                              str_detect(word, "machine") ~ "IT",
+                              str_detect(word, "debugging") ~ "IT")) %>% 
+  mutate(category = if_else(is.na(category), "Other", category))
+```
+
+```{r fig-bigram, fig.cap = "Unit Overview and Learning Outcome - Bigram (n > 4)"}
+unidata_bigram %>% 
+  filter(n > 4) %>% 
+  mutate(word = fct_reorder(word, n, sum))%>% 
+  ggplot(aes(x=n,
+             y = word))+
+  geom_col(fill = "#006DAE")+
+  #scale_fill_brewer(palette = "Dark2") +
+  theme(legend.position = "bottom") +
+  labs(y = "",
+       fill = "Category",
+       title = "Unit Overview and Learning Outcome - Bigram (n > 4)") +
+  scale_x_continuous(expand = c(0, 0.1))
+```
+
+Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the Word2vec technique for natural language processing, which will be discussed in the next chapter.

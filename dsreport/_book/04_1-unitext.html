@@ -2001,7 +2001,7 @@ commerce &lt;- c("ECON", "FINS", "MARK", "ACCT", "FINM", "MGMT", "MKTG")
 spatial &lt;- c("GEOM", "ITLS")
 science &lt;- c("EDUC", "SCIE", "SOCR")
 health &lt;- c("BINF", "BMS", "HTIN", "PUBH")</code></pre>
-<p>It is clear from <a href="#fig-unitcode">Figure&nbsp;<span>5.1</span></a> that</p>
+<p>It is clear from <a href="#fig-unitcode">Figure&nbsp;<span>5.1</span></a> that IT and Stat/Math are the two dominating components in the Master of Data Science degrees at Go8. Most units (165 out of 298) fall under the IT faculty, followed by Math and Stats, which has 79 units.</p>
 <div class="cell">
 
 </div>
@@ -2010,14 +2010,43 @@ health &lt;- c("BINF", "BMS", "HTIN", "PUBH")</code></pre>
 <div id="fig-unitcode" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="04_1-unitext_files/figure-html/fig-unitcode-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;5.1: <strong>?(caption)</strong></figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.1: Teaching Content by Faculty</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Similar findings could be observed from some but not all Go8 universities. <a href="#fig-unitcode-breakdown">Figure&nbsp;<span>5.2</span></a> shows the faculty breakdown by university. Since the total number of units offered by each university is different, instead of showing the actual number, proportions are plotted to make better comparisons across universities.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-unitcode-breakdown" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="04_1-unitext_files/figure-html/fig-unitcode-breakdown-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.2: Faculty Breakdown by University (Proportion)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>At Monash University (monash), University of Adelaide (Uuade), University of Sydney (usyd) and University of Western Australia (uwa), IT is apparently dominating the Master of Data Science degree, especially at Monash University. However, University of Melbourne (unimelb) and University of Queensland (uq) offers relatively higher proportion of statistical and mathematical (Stat/Math) units, whereas units offered at the Australian National University (anu) and UNSW Sydney (unsw) are more evenly distributed across IT, Stat/Math, Science/Social Science and Commerce respectively.</p>
+<p>Based on the findings above, it seems that there is a shared structure across Go8 that Master of Data Science is a IT based, computational degree, but the proportion it occupies varies by universities. Monash University tends to be heavily focused on IT and computational aspects, whereas the Master of Data Science degree at UNSW Sydney and ANU are more balanced across IT, statistics and math, as well as science and commerce.</p>
 </section>
 <section id="unit-overview-and-learning-outcome---bigrams" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="unit-overview-and-learning-outcome---bigrams"><span class="header-section-number">5.2</span> Unit Overview and Learning Outcome - Bigrams</h2>
+<p>After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. Single word analysis, bigram and trigram are all produced in order to identify the frequently mentioned words and/or terms. <code>distinct</code> function is applied to unit and term, so that same terms are only counted once in a unit to avoid duplicated counting. Words and terms such as ‘student’, ‘successful completion’ add more noises than values to the results, are removed in the pre-processing step.</p>
+<p>The bigram, which is <a href="#fig-bigram">Figure&nbsp;<span>5.3</span></a> below provides the most informative results among all. Machine learning appears quite often, as well as software development, linear models, statistical analysis, spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-bigram" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="04_1-unitext_files/figure-html/fig-bigram-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5.3: Unit Overview and Learning Outcome - Bigram (n &gt; 4)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the Word2vec technique for natural language processing, which will be discussed in the next chapter.</p>
 
 
 </section>
