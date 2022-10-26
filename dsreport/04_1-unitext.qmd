@@ -114,7 +114,7 @@ At Monash University (monash), University of Adelaide (Uuade), University of Syd
 
 Based on the findings above, it seems that there is a shared structure across Go8 that Master of Data Science is a IT based, computational degree, but the proportion it occupies varies by universities. Monash University tends to be heavily focused on IT and computational aspects, whereas the Master of Data Science degree at UNSW Sydney and ANU are more balanced across IT, statistics and math, as well as science and commerce.
 
-## Unit Overview and Learning Outcome - Bigrams
+## Unit Overview and Learning Outcome - Bigram {#sec-unit-bigram}
 
 After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. Single word analysis, bigram and trigram are all produced in order to identify the frequently mentioned words and/or terms. `distinct` function is applied to unit and term, so that same terms are only counted once in a unit to avoid duplicated counting. Words and terms such as 'student', 'successful completion' add more noises than values to the results, are removed in the pre-processing step.
 
