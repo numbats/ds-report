@@ -49,17 +49,22 @@ list(
 
 The model must be trained before it could be used, we web scrapped over 4448 Wikipedia articles as training data, including 2816 articles in statistics, 1005 articles in sociology and 627 in computing. The functions used in the codes above such as `get_wiki_articles`,`clean_wiki_article`, `get_clean_combined_wikis`,  `model_lda`, `preprocess_text`, `stem_tokenizer`, `prune_vocab`, `model_glove` and `find_close_words` are constructed by Professor Tanaka for pre-processing purposes, the original scripts could be found from the [project repository](https://github.com/numbats/datasci-courses).
 
-We have later adjusted the parameter `ntopics` and tried out training the LDA models with different combination of data, upon checking, the sociology data does not help improve model performances, instead it brings in noises. The most informative results are provided by the LDA model using only the statistics data on 10 topics. It requires highly skilled linguists and huge efforts to establish a proper text corpus, the model we built is still fairly basic and could be further optimised by adjustments.
 
-## Apply Fitted Model to Collected University Data
+## Model Adjustments
 
-Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the `SnowballC` package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest probability, instead of counting the appearance of words, the new counts generated are based on topics.
+We have tested using different values for parameter `ntopics` and tried out training the LDA models with different combinations of data. 
 
-Similar with the university breakdown in Section @sec-unit-bigram, to make more objective comparisons, counts are converted to proportions due to different number of units scrapped for the eight universities. @fig-unitopics suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion. 
+The results provided differs from models, @fig-ssc-cs compares the results produced by the full model and model without sociology data on ten topics.
 
-```{r message=FALSE, echo=FALSE}
+```{r setup, include = FALSE}
 library(tidyverse)
 library(kableExtra)
+library(patchwork)
+
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message= FALSE)
+theme_set(theme_minimal())
 
 rmv_col <- function(x){
   read_csv(x) %>% 
@@ -67,17 +72,14 @@ rmv_col <- function(x){
 }
 
 data_s <- rmv_col("data/stats.csv")
-
-colors <- RColorBrewer::brewer.pal(10, "Paired")
-names(colors) <- levels(factor(1:10))
-my_scale <- scale_fill_manual(name = "topic", values = colors)   
-
+data_ssc <- rmv_col("data/ssc.csv")
+data_cs <- rmv_col("data/cs.csv")
+data_comp <- rmv_col("data/comp.csv")
 ```
 
-```{r fig-unitopics, fig.cap = "Topics Proportion by University", echo=FALSE}
-data_s %>% 
+```{r}
+ssc <- data_ssc %>% 
   mutate(topic = as_factor(topic)) %>% 
-  #distinct(School, Unit, topic) %>% 
   group_by(School) %>% 
   count(topic, sort = TRUE) %>%
   mutate(prop = round(n/sum(n),4)) %>% 
@@ -88,11 +90,107 @@ data_s %>%
              fill = topic))+
   geom_col() +
   my_scale +
-  #scale_y_reordered() +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
   labs(x = "proportion",
-       title = "Topics Proportion by University")
+       title = "Results of the Full Model")
+
+cs <- data_cs %>% 
+  mutate(topic = as_factor(topic)) %>% 
+  group_by(School) %>% 
+  count(topic, sort = TRUE) %>%
+  mutate(prop = round(n/sum(n),4)) %>% 
+  ungroup() %>% 
+  mutate(topic = fct_reorder(topic, prop, sum))%>% 
+  ggplot(aes(x = prop,
+             y = topic,
+             fill = topic))+
+  geom_col() +
+  my_scale +
+  facet_wrap(~School, scales = "free_y") +
+  theme(legend.position = "none") +
+  labs(x = "proportion",
+       y = "",
+       title = "Results of Model Without Sociology Data")
+```
+
+```{r fig-ssc-cs, fig.cap = "Compare Results Between Full Model and Without Sociology Data", fig.width=10}
+ssc + cs
+```
+
+From the results computed by the full model, Topics 9, 10, 2 and 8 occupies relatively higher proportion compare with the others, but the order varies across universities, and their proportions are not significantly larger than the rest of other topics, makes it hard to draw meaningful interpretations. On the right hand side, results from the model without sociology data demonstrates a better picture: Topics 6, 8 and 9 in this case are the top 3 topics across all Go8 universities, however, proportions of Topic 10, 5, 7, 3 and 4 are also obvious higher in some of the universities, brings in difficulties to make justifications.     
+
+As sociology data tends to brings in noises to the model, and is not closely relevant to the data science topic compare with statistics and computing, another two models are fitted using only statistics data and computing data respectively, the results of both models are shown in @fig-comp-stats.
+
+```{r fig.width=10}
+comp <- data_comp %>% 
+  mutate(topic = as_factor(topic)) %>% 
+  group_by(School) %>% 
+  count(topic, sort = TRUE) %>%
+  mutate(prop = round(n/sum(n),4)) %>% 
+  ungroup() %>% 
+  mutate(topic = fct_reorder(topic, prop, sum))%>% 
+  ggplot(aes(x = prop,
+             y = topic,
+             fill = topic))+
+  geom_col() +
+  my_scale +
+  facet_wrap(~School, scales = "free_y") +
+  theme(legend.position = "none") +
+  labs(x = "proportion",
+       title = "Results of Model Using Only Comp Data")
+
+stats <- data_s %>% 
+  mutate(topic = as_factor(topic)) %>% 
+  group_by(School) %>% 
+  count(topic, sort = TRUE) %>%
+  mutate(prop = round(n/sum(n),4)) %>% 
+  ungroup() %>% 
+  mutate(topic = fct_reorder(topic, prop, sum))%>% 
+  ggplot(aes(x = prop,
+             y = topic,
+             fill = topic))+
+  geom_col() +
+  my_scale +
+  facet_wrap(~School, scales = "free_y") +
+  theme(legend.position = "none") +
+  labs(x = "proportion",
+       y = "",
+       title = "Results of Model Using Only Stats Data")
+```
+
+```{r fig-comp-stats, fig.cap = "Compare Results Between Full Model and Without Sociology Data", fig.width=10}
+comp + stats
+```
+
+Topic 2 is the only dominating topic based on the results provided by the model using only computing data, which provides a clearer picture than the previous models. The table below listed the top ten words for each topics, it turns out Topic 2 contains words like comput (computation etc.), system, program, softwar (software), which are associated with computational aspects, especially software. This model provides a more meaningful results than the prior ones, however, there is not much interpretations could be made for the other topics, the information it offers is still not very satisfying.
+
+```{r}
+rmv_col("data/term_comp.csv") %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = "condensed") %>% 
+  scroll_box(width = "1250px")
+```
+
+In terms of the model trained by only data in statistics, there are also dominating topics across all eight universities: Topics 6 and 1, besides, topics 5, 10, 2, 9 together took a relatively higher proportion compare with the rest of other topics. Both models using only computing or statistical data delivers better results, model trained by only statistical data provides more information than the other, hence is selected to use for further analysis on our university data.
+
+Note that it requires highly skilled linguists and huge efforts to establish a proper text corpus, the model we built is still fairly basic and could be further optimised by adjustments.
+
+## Apply the Selected Model to Collected University Data
+
+Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the `SnowballC` package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest probability, instead of counting the appearance of words, the new counts generated are based on topics.
+
+Similar with the university breakdown in Section @sec-unit-bigram, to make more objective comparisons, counts are converted to proportions due to different number of units scrapped for the eight universities. @fig-unitopics suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion. 
+
+```{r message=FALSE, echo=FALSE}
+colors <- RColorBrewer::brewer.pal(10, "Paired")
+names(colors) <- levels(factor(1:10))
+my_scale <- scale_fill_manual(name = "topic", values = colors)   
+
+```
+
+```{r fig-unitopics, fig.cap = "Topics Proportion by University", echo=FALSE}
+stats
 ```
 
 The top ten words based on probabilities for each of the ten topics are provided below, colours of the columns are aligned with @fig-unitopics. Topic 1 contains words like statist (statistics), data, popul (population), and we can see data, algorithm, analysi (analysis), model, cluster, comput (computation etc.) in topic 6, it is a reasonable interpretation that these two topics are both associated with computational aspects.
@@ -132,7 +230,6 @@ The results above further proves the earlier findings discussed in Section @sec-
 ```{r fig-unitopics2, fig.cap = "Proportion Breakdown by Topic", echo=FALSE}
 data_s %>% 
   mutate(topic = as_factor(topic)) %>% 
-  #distinct(School, Unit, topic) %>% 
   group_by(School) %>% 
   count(topic, sort = TRUE) %>%
   mutate(prop = round(n/sum(n),4)) %>% 
@@ -143,7 +240,6 @@ data_s %>%
              fill = School))+
   geom_col() +
   scale_fill_brewer(palette = "Paired") +
-  #scale_y_reordered() +
   facet_wrap(~topic, scales = "free_y") +
   theme(legend.position = "none") +
   labs(x = "proportion",
