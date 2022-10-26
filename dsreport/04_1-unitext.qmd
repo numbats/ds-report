@@ -1,5 +1,28 @@
 # Unit Text Analysis
 
-This is a book created from markdown and executable code.
+```{r setup, include = FALSE}
+library(tidyverse)
+library(tidytext)
+library(SnowballC)
+library(kableExtra)
 
-See @knuth84 for additional discussion of literate programming.
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message= FALSE)
+theme_set(theme_minimal())
+```
+
+```{r read-data, echo=FALSE, message=FALSE, warning=FALSE}
+rmv_col <- function(x){
+  read_csv(x) %>% 
+  select(-`...1`)
+}
+unidata <- rmv_col("data/unidata.csv")
+data_s <- rmv_col("data/stats.csv")
+```
+
+## Unit Code Analysis
+
+
+
+## Unit Overview and Learning Outcome - Bigrams

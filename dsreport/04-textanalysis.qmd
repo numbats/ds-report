@@ -1,5 +1,5 @@
 # Text Analysis
 
-This is a book created from markdown and executable code.
+To find out what is data science from universities' and employers' perspectives, whether there is a shared structure or common skill set of Master of Data Science degrees offered at Go8, what employers expect from a data scientist in the workplace, an exploratory data analysis, in particular text analysis has been conducted.
 
-See @knuth84 for additional discussion of literate programming.
+For universities, the main purpose is to identify shared skills or concepts offered by Master of Data Science degrees through exploring faculty of the units, detailed teaching contents etc. Whereas for employer data, the focus is to extract information regarding skills and programming languages in demand.

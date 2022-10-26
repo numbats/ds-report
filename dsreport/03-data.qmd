@@ -49,3 +49,37 @@ However, instead of having just one page with all the unit information, the link
 I tried bypassing the pages by directly looking at the url of the final unit information page I want to be on. Unfortunately, the url is not designed or structured in a way which I am able to predict the url based on my unit code. With that said, my only option was to code the function to jump from pages to pages before landing on the right unit information page.
 
 It is also often found that the unit overview and learning outcomes for each unit within the same university could vary slightly in format. For example, unit overview may appears before or after campus location at University of Western Australia, empty spaces could be found after section title at the University of Melbourne, which would break the chain of extracting corresponding information. 
+
+### Collected Data
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(kableExtra)
+library(DT)
+
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message= FALSE)
+theme_set(theme_minimal())
+```
+
+```{r read-data, echo=FALSE, message=FALSE, warning=FALSE}
+rmv_col <- function(x){
+  read_csv(x) %>% 
+  select(-`...1`)
+}
+unidata <- rmv_col("data/unidata.csv")
+```
+
+The collected data contains **`r nrow(unidata)` units** from 8 universities, and **`r ncol(unidata)` variables** including School, Course, Course_code, Unit, Unit_code, Outcomes, Overview and Description. The full data set is made available below for exploration.
+
+```{r}
+unidata %>% 
+  mutate(across(c(Outcomes, Overview, description), 
+                ~ str_replace_all(.x, "\\\\", ""))) %>% 
+  select(-description) %>% 
+  datatable(height = "400px",
+            options = list(scrollX = TRUE,
+            columnDefs = list(list(className = "dt-center", targets = 1:7)))) %>% 
+  formatStyle(columns = colnames(.), fontSize = '30%')
+```
