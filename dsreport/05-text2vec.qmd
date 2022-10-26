@@ -1,0 +1,132 @@
+# text2vec
+
+As mentioned in @sec-unit-bigram, since the collected university data is relatively small, to make more educated and meaningful interpretations, similar words shall be grouped together and counted by groups. This is usually computed using text corpus, which is a language resource consisting of a large and structured set of texts, since data science is a new term waiting to be defined, there is no available text corpus on this topic. Therefore, we adopted the concept of word2vec and tried to build our own text corpus.
+
+There are multiple publicly available models and packages to conduct similar computations, however, each model takes hours to fit. Due to time constrains, we have only fitted the Dirichlet Allocation (LDA) model with a few parameter adjustments using the `text2vec` package with the concepts illustrated by @das2016data. 
+
+## Algorithm and Model Fitting
+
+According to @das2016data, the algorithm behind the LDA model is to convert words to document-term matrix (DTM), where the rows, columns and entries correspond to documents, terms and counts respectively. LDA then fits a probabilistic model that assumes a mixture of latent topics, where each topic has a multinomial distribution for all words. The number of topics is a parameter that could be adjusted by needs.
+
+The initial code to build the LDA model was provided by Professor Tanaka, the major part of the code to build the first version of LDA model is also provided below.
+
+```{.r}
+list(
+  tar_target(wiki_stats, get_wiki_articles("https://en.wikipedia.org/wiki/List_of_statistics_articles")),
+  tar_target(wiki_sociology, get_wiki_articles("https://en.wikipedia.org/wiki/Index_of_sociology_articles")),
+  tar_target(wiki_computing, get_wiki_articles("https://en.wikipedia.org/wiki/Index_of_computing_articles")),
+  tar_target(clean_wiki_stats, map(wiki_stats, clean_wiki_article), format = "rds", repository = "local"),
+  tar_target(clean_wiki_sociology, map(wiki_sociology, clean_wiki_article), format = "rds", repository = "local"),
+  tar_target(clean_wiki_computing, map(wiki_computing, clean_wiki_article), format = "rds", repository = "local"),
+  tar_target(clean_stats, preprocess_text(clean_wiki_stats)),
+  
+  tar_target(clean_ssc, preprocess_text(c(clean_wiki_stats, clean_wiki_sociology, clean_wiki_computing))),
+  
+  tar_target(itoken_ssc, itoken(clean_ssc, tokenizer = stem_tokenizer),
+             cue = tar_cue(mode = "thorough")),
+ 
+  tar_target(vocab_ssc, create_vocabulary(itoken_ssc, ngram = c(1, 3), stopwords = stopwords::stopwords()),
+             cue = tar_cue(mode = "thorough")),
+  tar_target(vocab_ssc_prune, prune_vocab(vocab_ssc, n_min = 40),
+             cue = tar_cue(mode = "thorough")),
+  tar_target(dtm_ssc, create_dtm(itoken_ssc, vocab_vectorizer(vocab_ssc_prune)),
+             cue = tar_cue(mode = "thorough")),
+  tar_target(tcm_ssc, create_tcm(itoken_ssc, vocab_vectorizer(vocab_ssc_prune), 
+                                 skip_grams_window = 5L),
+             cue = tar_cue(mode = "thorough")),
+  tar_target(word2vec_model_ssc, model_glove(vocab_ssc_prune, tcm_ssc),
+             cue = tar_cue(mode = "thorough")),
+  tar_target(word2vec_dist_ssc, dist2(t(word2vec_model_ssc$components), method = "cosine"),
+             cue = tar_cue(mode = "thorough"), format = "rds", repository = "local"),
+  tar_target(word2vec_res, find_close_words("statistics", word2vec_dist_ssc, 10),
+             cue = tar_cue(mode = "thorough")),
+  tar_target(lda_model03_ssc, model_lda(dtm_ssc, ntopics = 3),
+             format = "rds", repository = "local"),
+  tar_target(lda_model20_ssc, model_lda(dtm_ssc, ntopics = 20),
+             format = "rds", repository = "local")
+             )
+```
+
+The model must be trained before it could be used, we web scrapped over 4448 Wikipedia articles as training data, including 2816 articles in statistics, 1005 articles in sociology and 627 in computing. The functions used in the codes above such as `get_wiki_articles`,`clean_wiki_article`, `get_clean_combined_wikis`,  `model_lda`, `preprocess_text`, `stem_tokenizer`, `prune_vocab`, `model_glove` and `find_close_words` are constructed by Professor Tanaka for pre-processing purposes, the original scripts could be found from the [project repository](https://github.com/numbats/datasci-courses).
+
+We have later adjusted the parameter `ntopics` and tried out training the LDA models with different combination of data, upon checking, the sociology data does not help improve model performances, instead it brings in noises. The most informative results are provided by the LDA model using only the statistics data on 10 topics.
+
+## Apply Fitted Model to Collected University Data
+
+Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the `SnowballC` package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest probability, instead of counting the appearance of words, the new counts generated are based on topics.
+
+Similar with the university breakdown in @sec-unit-bigram, to make more objective comparisons, counts are converted to proportions due to different number of units scrapped for the eight universities. @fig-unitopics 
+
+```{r message=FALSE}
+library(tidyverse)
+
+rmv_col <- function(x){
+  read_csv(x) %>% 
+  select(-`...1`)
+}
+
+data_s <- rmv_col("data/stats.csv")
+
+colors <- RColorBrewer::brewer.pal(10, "Paired")
+names(colors) <- levels(factor(1:10))
+my_scale <- scale_fill_manual(name = "topic", values = colors)   
+
+```
+
+```{r fig-unitopics, fig.cap = "Topics Proportion by University"}
+data_s %>% 
+  mutate(topic = as_factor(topic)) %>% 
+  #distinct(School, Unit, topic) %>% 
+  group_by(School) %>% 
+  count(topic, sort = TRUE) %>%
+  mutate(prop = round(n/sum(n),4)) %>% 
+  ungroup() %>% 
+  mutate(topic = fct_reorder(topic, prop, sum))%>% 
+  ggplot(aes(x = prop,
+             y = topic,
+             fill = topic))+
+  geom_col() +
+  my_scale +
+  #scale_y_reordered() +
+  facet_wrap(~School, scales = "free_y") +
+  theme(legend.position = "none") +
+  labs(x = "proportion",
+       title = "Topics Proportion by University")
+```
+
+red and skyblue
+
+```{r message=FALSE}
+rmv_col("data/term_s.csv") %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = "condensed") %>% 
+  column_spec(1, color = "white",
+               background = "#A6CEE3") %>% 
+  column_spec(2, color = "white",
+               background = "#1F78B4") %>% 
+  column_spec(3, color = "white",
+               background = "#B2DF8A")%>% 
+  column_spec(4, color = "white",
+               background = "#33A02C")%>% 
+  column_spec(5, color = "white",
+               background = "#FB9A99")%>% 
+  column_spec(6, color = "white",
+               background = "#E31A1C") %>% 
+  column_spec(7, color = "white",
+               background = "#FDBF6F")%>% 
+  column_spec(8, color = "white",
+               background = "#FF7F00")%>% 
+  column_spec(9, color = "white",
+               background = "#CAB2D6") %>%
+  column_spec(10, color = "white",
+               background = "#6A3D9A") %>% 
+  scroll_box(width = "1250px")
+```
+
+
+
+
+
+
+
+It requires highly skilled linguists and huge efforts to establish a proper text corpus, the model we built is fairly basic and would be . 

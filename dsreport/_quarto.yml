@@ -17,8 +17,8 @@ book:
     - "03-data.qmd"
     - "04-textanalysis.qmd"
     - "04_1-unitext.qmd"
-    - "04_2 jobtext.qmd"
-    - "05-word2vec.qmd"
+    - "04_2-jobtext.qmd"
+    - "05-text2vec.qmd"
     - references.qmd
 
 bibliography: references.bib
