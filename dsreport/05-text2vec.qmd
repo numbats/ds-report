@@ -1,6 +1,6 @@
 # text2vec
 
-As mentioned in @sec-unit-bigram, since the collected university data is relatively small, to make more educated and meaningful interpretations, similar words shall be grouped together and counted by groups. This is usually computed using text corpus, which is a language resource consisting of a large and structured set of texts, since data science is a new term waiting to be defined, there is no available text corpus on this topic. Therefore, we adopted the concept of word2vec and tried to build our own text corpus.
+As mentioned in Section @sec-unit-bigram, since the collected university data is relatively small, to make more educated and meaningful interpretations, similar words shall be grouped together and counted by groups. This is usually computed using text corpus, which is a language resource consisting of a large and structured set of texts, since data science is a new term waiting to be defined, there is no available text corpus on this topic. Therefore, we adopted the concept of word2vec and tried to build our own text corpus.
 
 There are multiple publicly available models and packages to conduct similar computations, however, each model takes hours to fit. Due to time constrains, we have only fitted the Dirichlet Allocation (LDA) model with a few parameter adjustments using the `text2vec` package with the concepts illustrated by @das2016data. 
 
@@ -49,16 +49,17 @@ list(
 
 The model must be trained before it could be used, we web scrapped over 4448 Wikipedia articles as training data, including 2816 articles in statistics, 1005 articles in sociology and 627 in computing. The functions used in the codes above such as `get_wiki_articles`,`clean_wiki_article`, `get_clean_combined_wikis`,  `model_lda`, `preprocess_text`, `stem_tokenizer`, `prune_vocab`, `model_glove` and `find_close_words` are constructed by Professor Tanaka for pre-processing purposes, the original scripts could be found from the [project repository](https://github.com/numbats/datasci-courses).
 
-We have later adjusted the parameter `ntopics` and tried out training the LDA models with different combination of data, upon checking, the sociology data does not help improve model performances, instead it brings in noises. The most informative results are provided by the LDA model using only the statistics data on 10 topics.
+We have later adjusted the parameter `ntopics` and tried out training the LDA models with different combination of data, upon checking, the sociology data does not help improve model performances, instead it brings in noises. The most informative results are provided by the LDA model using only the statistics data on 10 topics. It requires highly skilled linguists and huge efforts to establish a proper text corpus, the model we built is still fairly basic and could be further optimised by adjustments.
 
 ## Apply Fitted Model to Collected University Data
 
 Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the `SnowballC` package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest probability, instead of counting the appearance of words, the new counts generated are based on topics.
 
-Similar with the university breakdown in @sec-unit-bigram, to make more objective comparisons, counts are converted to proportions due to different number of units scrapped for the eight universities. @fig-unitopics 
+Similar with the university breakdown in Section @sec-unit-bigram, to make more objective comparisons, counts are converted to proportions due to different number of units scrapped for the eight universities. @fig-unitopics suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion. 
 
-```{r message=FALSE}
+```{r message=FALSE, echo=FALSE}
 library(tidyverse)
+library(kableExtra)
 
 rmv_col <- function(x){
   read_csv(x) %>% 
@@ -73,7 +74,7 @@ my_scale <- scale_fill_manual(name = "topic", values = colors)
 
 ```
 
-```{r fig-unitopics, fig.cap = "Topics Proportion by University"}
+```{r fig-unitopics, fig.cap = "Topics Proportion by University", echo=FALSE}
 data_s %>% 
   mutate(topic = as_factor(topic)) %>% 
   #distinct(School, Unit, topic) %>% 
@@ -94,9 +95,9 @@ data_s %>%
        title = "Topics Proportion by University")
 ```
 
-red and skyblue
+The top ten words based on probabilities for each of the ten topics are provided below, colours of the columns are aligned with @fig-unitopics. Topic 1 contains words like statist (statistics), data, popul (population), and we can see data, algorithm, analysi (analysis), model, cluster, comput (computation etc.) in topic 6, it is a reasonable interpretation that these two topics are both associated with computational aspects.
 
-```{r message=FALSE}
+```{r message=FALSE, echo=FALSE}
 rmv_col("data/term_s.csv") %>% 
   kable() %>% 
   kable_styling(bootstrap_options = "condensed") %>% 
@@ -124,9 +125,32 @@ rmv_col("data/term_s.csv") %>%
 ```
 
 
+In addition, words under Topics 2,5,9 and 10 are model, regression, estim (estimate), linear, probabl (probability), bayesian, prior, infer, test, statist (statistics), hypothesi (hypothesis), correl (correlation), most of them are related to math and statistics, and also more on the computational side of them. 
+
+The results above further proves the earlier findings discussed in Section @sec-unit-code and Section @sec-unit-bigram: Master of Data Science degrees offered at Go8 universities tend to be mainly IT based, the major components are computational as well as statistical/mathematical aspects. 
+
+```{r fig-unitopics2, fig.cap = "Proportion Breakdown by Topic", echo=FALSE}
+data_s %>% 
+  mutate(topic = as_factor(topic)) %>% 
+  #distinct(School, Unit, topic) %>% 
+  group_by(School) %>% 
+  count(topic, sort = TRUE) %>%
+  mutate(prop = round(n/sum(n),4)) %>% 
+  ungroup() %>% 
+  mutate(topic = fct_reorder(topic, prop, sum))%>% 
+  ggplot(aes(x = prop,
+             y = School,
+             fill = School))+
+  geom_col() +
+  scale_fill_brewer(palette = "Paired") +
+  #scale_y_reordered() +
+  facet_wrap(~topic, scales = "free_y") +
+  theme(legend.position = "none") +
+  labs(x = "proportion",
+       title = "Breakdown by Topic")
+```
 
 
+@fig-unitopics2 above demonstrates a breakdown by topics instead of universities, it is clear that compares with the results based on only faculty in @sec-unit-code, the differences between Go8 are not as much here. The proportions occupied by the eight universities under each topic are fairly similar to each other, indicating the subjective choice made regarding the grouping method in Section @sec-unit-code might have provided a slightly misleading information, but it would require further explorations to confirm whether it is truly the case.
 
-
-
-It requires highly skilled linguists and huge efforts to establish a proper text corpus, the model we built is fairly basic and would be . 
+ 
