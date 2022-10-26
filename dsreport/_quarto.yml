@@ -17,25 +17,24 @@ book:
   chapters:
     - index.qmd
     
-    - "01-abstract.qmd"
-    - "02-intro.qmd"
+    - "01-intro.qmd"
     
     - part: "Data Collection"
       chapters:
-        - "03_1-webscraping.qmd"
-        - "03_2-kaggle.qmd"
+        - "02_1-webscraping.qmd"
+        - "02_2-kaggle.qmd"
     
-    - part: "04-textanalysis.qmd"
+    - part: "03-textanalysis.qmd"
       chapters:
-         - "04_1-unitext.qmd"
-         - "04_2-jobtext.qmd"
+         - "03_1-unitext.qmd"
+         - "03_2-jobtext.qmd"
     
-    - part: "05-text2vec.qmd"
+    - part: "04-text2vec.qmd"
       chapters:
-         - "05_1-unilda.qmd"
-         - "05_2-joblda.qmd"
+         - "04_1-unilda.qmd"
+         - "04_2-joblda.qmd"
     
-    - "06-limitation_conclusion.qmd"
+    - "05-limitation_conclusion.qmd"
          
     - references.qmd
 

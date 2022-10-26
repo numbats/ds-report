@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Xinrui WANG and Tsai-Chun TSOU">
-<meta name="dcterms.date" content="2022-10-28">
 
-<title>Defining Data Science</title>
+<title>Defining Data Science - 5&nbsp; Job Text Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -27,7 +25,8 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01-abstract.html" rel="next">
+<link href="./04-text2vec.html" rel="next">
+<link href="./03_1-unitext.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,7 +67,7 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Defining Data Science</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -98,17 +97,12 @@ ul.task-list{list-style: none;}
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Abstract</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-abstract.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abstract</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./02-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -121,19 +115,19 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_1-webscraping.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">University Data</span></a>
+  <a href="./02_1-webscraping.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">University Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_2-kaggle.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Employer Data</span></a>
+  <a href="./02_2-kaggle.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Employer Data</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./04-textanalysis.html" class="sidebar-item-text sidebar-link">Text Analysis</a>
+            <a href="./03-textanalysis.html" class="sidebar-item-text sidebar-link">Text Analysis</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -141,19 +135,19 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_1-unitext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></a>
+  <a href="./03_1-unitext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_2-jobtext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></a>
+  <a href="./03_2-jobtext.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./05-text2vec.html" class="sidebar-item-text sidebar-link">text2vec</a>
+            <a href="./04-text2vec.html" class="sidebar-item-text sidebar-link">text2vec</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -161,19 +155,19 @@ ul.task-list{list-style: none;}
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_1-unilda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Collected University Data</span></a>
+  <a href="./04_1-unilda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Collected University Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_2-joblda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Employer Data</span></a>
+  <a href="./04_2-joblda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Employer Data</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-limitation_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conclusion</span></a>
+  <a href="./05-limitation_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Conclusion</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -190,54 +184,78 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#sec-word-frequency" id="toc-sec-word-frequency" class="nav-link active" data-scroll-target="#sec-word-frequency"> <span class="header-section-number">5.1</span> Word Frequency</a></li>
+  <li><a href="#bigram" id="toc-bigram" class="nav-link" data-scroll-target="#bigram"> <span class="header-section-number">5.2</span> Bigram</a></li>
+  <li><a href="#programming-languages" id="toc-programming-languages" class="nav-link" data-scroll-target="#programming-languages"> <span class="header-section-number">5.3</span> Programming Languages</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/numbats/ds-report/blob/main/index.qmd" class="toc-action">View source</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/numbats/ds-report/blob/main/03_2-jobtext.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Defining Data Science</h1>
-<p class="subtitle lead">A Case Study in Australia</p>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Xinrui WANG and Tsai-Chun TSOU </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 28, 2022</p>
-    </div>
-  </div>
     
   </div>
   
 
 </header>
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>What is Data Science? What do you learn in Data Science? What kind of jobs do Data Scientists do? These are the type of questions we’ve encountered during social occasions and despite spending almost two years studying Business Analytics, we still struggle to give a definite answer. Data Science, Business Analysis, and Data Analysis are new degrees that are created only in recent years thanks to the advance in technology and increasing demand for talent to work with data. The sudden rise of these degrees gave authorities little time to regulate them. Even the Australian and New Zealand Standard Classification of Occupations (ANZSCO), the Australian Bureau of Statistics (ABS) and the Department of Home Affair are slow to catch up with their <a href="https://www.hannantew.com.au/blogs/australian-visas/employer-sponsored/tss/the-classification-challenge-in-immigration-what-is-a-data-scientist-as-defined-in-anzsco/">description</a> of this occupation.</p>
-<p>After four months of gathering data, conducting analysis, and running models, we have attempted to define Data Science in Australia. Special thanks to Professor Di Cook and Professor Rob Hyndman for their support. A huge thank you to Dr.&nbsp;Emi Tanaka for the opportunity to work on such a special project and for her guidance throughout the semester<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>To explore the skills and programming languages in demand from employers, we focused on the mobileAdTemplate and the 25 columns of programming languages. Similar to before, single word analysis, bigram, and trigram are all produced.</p>
+<div class="cell">
 
-
+</div>
+<section id="sec-word-frequency" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-word-frequency"><span class="header-section-number">5.1</span> Word Frequency</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-job-freqency" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_2-jobtext_files/figure-html/fig-job-freqency-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 5.1: Job Word Frequency (freq &gt;200)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Word frequency was calculated using the same method as <a href="03_1-unitext.html#sec-unit-bigram"><span>Section&nbsp;4.2</span></a>. Programming languages Python and SQL seems prominent. Potentially due to the amount of senior positions in the data, <em>experience</em> is mentioned a lot. In terms of other knowledge or skills, <em>statistics</em>, <em>modelling</em>, <em>analysis</em> are some terms that seems to be standing out. To ensure frequency is meaningful, we looked at bigram and trigram.</p>
 </section>
-<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1" role="doc-endnote"><p>This report is written jointly by Tsai-Chun Tsou and Xinrui Wang as part of the ETC5543 research project supervised by Dr.&nbsp;Emi Tanaka.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
+<section id="bigram" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="bigram"><span class="header-section-number">5.2</span> Bigram</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-employer-bigram" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_2-jobtext_files/figure-html/fig-employer-bigram-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 5.2: Job Description - Bigram (n &gt; 300</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For <a href="#fig-employer-bigram">Figure&nbsp;<span>5.2</span></a>, we stemmed the words before joining them into bigram in attempt to avoid under-counting. However, from the figure we can still see that some terms like <em>data analyt</em> and <em>data analysi</em> are still counted separately. From this bigram, the popular skills or knowledge mentioned are <em>machin learn</em>, <em>predict model</em>, <em>communic skill</em>, <em>data analyt</em> and <em>data mine</em>. Mathematical skill, <em>mathemat statist</em> is also mentioned quite often. Some of these terms on the list are vague and can mean be grouped together. Trigram yeilded similar results as the bigram. With the same problem of under-counting the n-grams due to insufficient groupings.</p>
+</section>
+<section id="programming-languages" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="programming-languages"><span class="header-section-number">5.3</span> Programming Languages</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-languages" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_2-jobtext_files/figure-html/fig-languages-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 5.3: Programming Skills Mentioned by Employers</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-languages">Figure&nbsp;<span>5.3</span></a> shows the count of each language mentioned by employers. 89% of the jobs mentioned Python, 69% mentioned R and 68% mentioned SQL. Tableau’s popularity is not a surprise given the high frequency for <em>data visualis</em> in the previous section.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -443,10 +461,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./03_1-unitext.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01-abstract.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Abstract</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04-text2vec.html" class="pagination-link">
+        <span class="nav-page-text">text2vec</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
