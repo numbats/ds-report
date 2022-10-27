@@ -1,4 +1,4 @@
-# Topic Modelling {#sec-topicmod}
+# Topic Modelling 
 
 As mentioned in Section @sec-unit-bigram, since the collected university data is relatively small, to make more educated and meaningful interpretations, similar words shall be grouped together and counted by groups. This is usually computed using text corpus, which is a language resource consisting of a large and structured set of texts, since data science is a new term waiting to be defined, there is no available text corpus on this topic. Therefore, we adopted the concept of word embedding models and tried to build our own text corpus.
 

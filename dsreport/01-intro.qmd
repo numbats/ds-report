@@ -6,6 +6,14 @@ There is no readily available data from Australian universities, so we had to co
 
 By exploring the current situation and potentially a definition of Data Science in Australia from both the university and employer perspectives, the findings would help students and recruiters have a clearer picture of what to expect, as well as raising attentions and awareness to potential gaps between employer demands and university offerings.
 
+::: {.content-visible unless-format="pdf"}
 The project was conducted in three main phases. The first phase is data collection (@sec-unidata & @sec-empdata). Phase two is exploratory data analysis on the university data (@sec-unit-analysis) and on employer data (@sec-job-analysis). Details of some pre-processing procedures are included in @sec-preprocess. Phase three is topic modelling (@sec-unitopic & @sec-emptopic) where we built our own text corpus and group words from the data sets in attempt to find more meaningful results.
 
 Our concluding summary and thoughts on the future direction of this project is in @sec-conclude.
+:::
+
+::: {.content-hidden unless-format="pdf"}
+The project was conducted in three main phases. The first phase is data collection (Chapter 2 & Chapter 3). Phase two is exploratory data analysis on the university data (Chapter 5) and on employer data (Chapter 6). Details of some pre-processing procedures are included in Chapter 4. Phase three is topic modelling (Chapter 7 & Chapter 8) where we built our own text corpus and group words from the data sets in attempt to find more meaningful results.
+
+Our concluding summary and thoughts on the future direction of this project is in Chapter 9.
+:::

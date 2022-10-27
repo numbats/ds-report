@@ -41,14 +41,4 @@ jobdata %>%
 ```
 :::
 
-::: {.content-hidden unless-format="pdf"}
-Here is an example of the data with selected variables for the analysis.
-```{r}
-jobdata %>% 
-  select(jobId, jobTitle, jobClassification, mobileAdTemplate, 25:49) %>% 
-  head(.,2) %>%
-  kable() %>% 
-  kable_styling(latex_options = c("striped", "scale_down"), font_size = 12)
-```
-:::
 

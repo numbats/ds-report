@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>unilda</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="sec-unitopic" class="level2">
+<h2 class="anchored" data-anchor-id="sec-unitopic">Apply the Selected Model to Collected University Data</h2>
+<p>Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the <code>SnowballC</code> package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest beta score, as explained in Section <strong>?@sec-model</strong>. Instead of counting the appearance of words, the new counts generated are based on topics.</p>
+<p>Similar with the university breakdown in <strong>?@sec-unit-bigram</strong>, to make more objective comparisons, counts are converted to proportions due to different number of units scraped for the eight universities. <a href="#fig-unitopics">Figure&nbsp;1</a> suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-unitopics" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="04_1-unilda_files/figure-html/fig-unitopics-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 1: Topics Proportion by University</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The top 30 words based on probabilities for each of the ten topics are provided below, colours of the columns are aligned with <a href="#fig-unitopics">Figure&nbsp;1</a>. Topic 1 contains words like statist (statistics), data, popul (population), system, bias, experiment, and we can see data, algorithm, analysi (analysis), model, cluster, comput (computation, computer, computational), function, spatial in topic 6, it is a reasonable interpretation that these two topics are both associated with computational aspects.</p>
+<div class="cell">
+<div id="fig-topics" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+
+<table class="table table-condensed" style="font-size: 12px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Topic 1
+</th>
+<th style="text-align:left;">
+Topic 2
+</th>
+<th style="text-align:left;">
+Topic 3
+</th>
+<th style="text-align:left;">
+Topic 4
+</th>
+<th style="text-align:left;">
+Topic 5
+</th>
+<th style="text-align:left;">
+Topic 6
+</th>
+<th style="text-align:left;">
+Topic 7
+</th>
+<th style="text-align:left;">
+Topic 8
+</th>
+<th style="text-align:left;">
+Topic 9
+</th>
+<th style="text-align:left;">
+Topic 10
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+studi
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+model
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+sampl
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+theta
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+probabl
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+data
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+distribut
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+x_
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+test
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+process
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+use
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+variabl
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+estim
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+function
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+one
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+use
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+frac
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+frac
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+statist
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+time
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+statist
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+regress
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+mean
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+probabl
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+number
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+algorithm
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+alpha
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+left
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+hypothesi
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+point
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+research
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+estim
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+valu
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+x_x
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+theori
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+analysi
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+mu
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+right
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+valu
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+stochast
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+data
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+beta
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+distribut
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+distribut
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+bayesian
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+can
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+beta
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+sum
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+two
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+state
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+design
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+linear
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+varianc
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+variabl
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+event
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+method
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+function
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+operatornam
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+number
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+function
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+can
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+use
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+statist
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+random
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+can
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+model
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+gamma
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+sigma
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+use
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+can
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+effect
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+y_
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+use
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+x_
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+prior
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+set
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+right
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+y_
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+correl
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+random
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+popul
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+squar
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+standard
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+random_variabl
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+infer
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+cluster
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+left
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+cdot
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+rank
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+markov
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+may
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+can
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+popul
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+mathcal
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+use
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+comput
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+normal
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+operatornam_e
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+measur
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+space
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+control
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+depend
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+deviat
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+p_x
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+exampl
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+point
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+lambda
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+matrix
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+differ
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+system
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+experi
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+data
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+data
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+mid
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+random
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+function
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+paramet
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+xi
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+signific
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+textstyl
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+analysi
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+valu
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+error
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+likelihood
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+given
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+learn
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+sigma
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+e⁡
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+posit
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+use
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+also
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+error
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+interv
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+f_x
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+statist
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+also
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+nu
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+mu
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+one
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+signal
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+differ
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+effect
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+can
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+valu
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+problem
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+base
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+sqrt
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+hat
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+score
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+measur
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+measur
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+independ
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+median
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+f_
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+valu
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+distanc
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+normal_distribut
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+end
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+null
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+t_t
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+group
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+fit
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+measur
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+measur
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+decis
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+problem
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+log
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+begin
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+ratio
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+one
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+exampl
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+paramet
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+normal
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+leq
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+expect
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+one
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+ln
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+align
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+group
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+number
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+treatment
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+observ
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+bar
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+log
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+two
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+factor
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+probabl
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+covari
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+can
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+lambda
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+result
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+analysi
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+size
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+set
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+observ
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+map
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+sim
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+var
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+null_hypothesi
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+equat
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+time
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+least
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+one
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+x_y
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+case
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+network
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+left_frac
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+varianc
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+coeffici
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+also
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+includ
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+function
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+standard_deviat
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+can
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+model
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+matrix
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+moment
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+c_
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+negat
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+set
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+rate
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+seri
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+random
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+xn
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+law
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+applic
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+cumul
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+xy
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+result
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+poisson
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+level
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+equat
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+exampl
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+condit
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+possibl
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+compon
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+densiti
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+vector
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+true
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+call
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+individu
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+predict
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+confid
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+converg
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+outcom
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+similar
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+pi
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+x_x
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+type
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+theori
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+system
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+statist
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+weight
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+paramet
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+rule
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+two
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+variabl
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+n_
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+item
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+frequenc
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+bias
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+least_squar
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+observ
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+mathbb
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+onli
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+optim
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+kappa
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+text
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+data
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+mathemat
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+experiment
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+one
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+number
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+space
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+also
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+techniqu
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+case
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+a_
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+observ
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+continu
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+factor
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+term
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+squar
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+entropi
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+bay
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+number
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+exponenti
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+n_n
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+exampl
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+theorem
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #A6CEE3 !important;">
+method
+</td>
+<td style="text-align:left;color: white !important;background-color: #1F78B4 !important;">
+independ_variabl
+</td>
+<td style="text-align:left;color: white !important;background-color: #B2DF8A !important;">
+differ
+</td>
+<td style="text-align:left;color: white !important;background-color: #33A02C !important;">
+pr
+</td>
+<td style="text-align:left;color: white !important;background-color: #FB9A99 !important;">
+first
+</td>
+<td style="text-align:left;color: white !important;background-color: #E31A1C !important;">
+spatial
+</td>
+<td style="text-align:left;color: white !important;background-color: #FDBF6F !important;">
+random
+</td>
+<td style="text-align:left;color: white !important;background-color: #FF7F00 !important;">
+w_
+</td>
+<td style="text-align:left;color: white !important;background-color: #CAB2D6 !important;">
+fals
+</td>
+<td style="text-align:left;color: white !important;background-color: #6A3D9A !important;">
+t_
+</td>
+</tr>
+</tbody>
+
+</table>
+<p></p><figcaption class="figure-caption">Figure 2: Top 30 words of the Ten Topics</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p>In addition, words under Topics 2,5,9 and 10 are model, regression, estim (estimate, estimation), linear, least_squar (least_square), probabl (probability), bayesian, prior, infer, test, statist (statistics), hypothesi (hypothesis), correl (correlation), null, null_hypothesi (null_hypothesis), poisson, mathemat (mathematics, mathematical), most of them are related to math and statistics, and also more on the computational side of them, such as hypothesis testing and probability.</p>
+<p>The results above further proves the earlier findings discussed in <strong>?@sec-unit-code</strong> and <strong>?@sec-unit-bigram</strong>: Master of Data Science degrees offered at Go8 universities tend to be mainly IT based, the major components are computational as well as statistical/mathematical aspects.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-unitopics2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="04_1-unilda_files/figure-html/fig-unitopics2-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 3: Proportion Breakdown by Topic</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-unitopics2">Figure&nbsp;3</a> demonstrates a breakdown by topics instead of universities, it is clear that compares with the results based on only faculty in <strong>?@sec-unit-code</strong>, the differences between Go8 are not as much here. The proportions occupied by the eight universities under each topic are fairly similar to each other, indicating the subjective choice made regarding the grouping method in <strong>?@sec-unit-code</strong> might have provided a slightly misleading information, but it would require further explorations to confirm whether it is truly the case.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

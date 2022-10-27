@@ -147,9 +147,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Defining Data Science</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/numbats/ds-report" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="./Defining-Data-Science.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -286,6 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="5.1" class="anchored" data-anchor-id="sec-unit-code"><span class="header-section-number">5.1</span> Faculty Unit Code Analysis</h2>
 <p>To explore the teaching contents of Master of Data Science at Go8, an analysis based on faculty of units offered is conducted to see what components are included in this degree.</p>
 <p>Unfortunately faculty information is not directly available on the unit handbooks, in this case, unit code is taken as a surrogate identification. As shown in the sample data below, unit code is a combination of letters and numbers, the first few characters such as FIT, MAT, usually represents the faculty this unit belongs to, we could then make relatively educated assumptions on the content of the unit.</p>
+<div>
 <div class="cell">
 <div class="cell-output-display">
 
@@ -2092,6 +2092,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 </div>
+</div>
 <p>The grouping was performed manually using the code listed below. We made certain choices though it should be noted that the grouping is not 100% accurate. For example, the code ‘DATA’ from the University of Sydney is all classified under IT, however, some of the units that start with DATA are taught by the faculty in the School of Mathematics and Statistics (based on personal knowledge), which means ‘DATA’ belongs to multiple departments. Although there would be misclassified units, the results could still provide a meaningful guidance regarding the teaching components of Master of Data Science at Go8 universities.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>math <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"STAT"</span>, <span class="st">"MATH"</span>, <span class="st">"MATHS"</span>, <span class="st">"STATS"</span>, <span class="st">"MAT"</span>, <span class="st">"MAST"</span>, <span class="st">"ACTL"</span>, <span class="st">"QBUS"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>it <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"COMP"</span>, <span class="st">"FIT"</span>, <span class="st">"CITS"</span>, <span class="st">"INFS"</span>, <span class="st">"COSC"</span>, <span class="st">"CSSE"</span>, <span class="st">"CSYS"</span>, <span class="st">"EDPC"</span>, <span class="st">"INMT"</span>, <span class="st">"PHIL"</span>, <span class="st">"PHYS"</span>, <span class="st">"BUSN"</span>,<span class="st">"DATA"</span>, <span class="st">"INFO"</span>, <span class="st">"INFS"</span>)</span>
@@ -2146,7 +2147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the topic modeling technique for natural language processing, which will be discussed in <span class="quarto-unresolved-ref">?sec-topicmod</span>.</p>
+<p>Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the topic modeling technique for natural language processing, which will be discussed in Topic Modelling section.</p>
 
 
 </section>

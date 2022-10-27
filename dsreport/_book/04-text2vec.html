@@ -103,9 +103,8 @@ div.csl-indent {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Defining Data Science</a> 
-        <div class="sidebar-tools-main tools-wide">
+        <div class="sidebar-tools-main">
     <a href="https://github.com/numbats/ds-report" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="./Defining-Data-Science.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -221,7 +220,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-topicmod" class="quarto-section-identifier d-none d-lg-block">Topic Modelling</span></h1>
+<h1 class="title d-none d-lg-block">Topic Modelling</h1>
 </div>
 
 
@@ -242,6 +241,7 @@ div.csl-indent {
 <p>According to <span class="citation" data-cites="das2016data">Das (<a href="references.html#ref-das2016data" role="doc-biblioref">2016</a>)</span>, the algorithm behind the LDA model is to convert words to document-term matrix (DTM), where the rows, columns and entries correspond to documents, terms and counts respectively. LDA then fits a probabilistic model that assumes a mixture of latent topics, where each topic has a multinomial distribution for all words. The number of topics is a parameter that could be adjusted by needs.</p>
 <p>The model must be trained before it could be used, we web scraped 4448 Wikipedia articles as training data, including 2816 articles in statistics, 1005 articles in sociology and 627 in computing. The initial codes and functions to build the LDA model was provided by Dr Tanaka, we have tested model outputs using different number of topics and tried out training the LDA models with different combinations of data.</p>
 <p>The table below shows a glimpse of the model output of the initial LDA model, after training by data collected from all 4448 Wikipedia articles on 12 topics.</p>
+<div>
 <div class="cell">
 <div class="cell-output-display">
 
@@ -859,6 +859,7 @@ div.csl-indent {
 
 </div>
 </div>
+</div>
 <p>Term shows all the word extracted from the training data (Wikipedia articles), as each latent topic has a multinomial distribution for all words, beta value of a term is the score / probability computed for that particular topic. Highest beta value indicates highest probability, which means the term is most likely belongs to the corresponding topic.</p>
 <p>Beta values for the same word would differ from model to model, and also subject to change by adjusting the number of latent topics. To acquire the most satisfactory results for our university data, we have fitted and tested multiple LDA models with different subset of training data, as well as various number of topics.</p>
 </section>
@@ -881,6 +882,7 @@ div.csl-indent {
 <p>For Model A, Topics A9, A10, A2 and A8 occupies relatively higher proportion compare with the others, but the order varies across universities, and their proportions are not significantly larger than the rest of other topics, makes it hard to draw meaningful interpretations. On the top right, Model B demonstrates a better picture: Topics B6, B8 and B9 are the top 3 topics across all Go8 universities, however, proportions of Topics B10, B5, B7, B3 and B4 are also obvious higher in some of the universities, brings in difficulties to make justifications.</p>
 <p>As sociology data tends to brings in noises to the model, and is not closely relevant to the data science topic compare with statistics and computing, Model C and D are fitted using only statistics data and computing data respectively. Topic C2 is the only dominating topic in Model C, where as Topics D6 and D1 occupy significantly large proportion in Model D. Besides, cccccc together took a relatively higher proportion compare with the rest of other topics in Model D.</p>
 <p>The table below listed the top 30 words of each topics in Model C, it turns out Topic C2 contains words like comput (computation, computational, computer), system, program, machin (machine), softwar (software), model, test, calcul (calculate, calculation) and data, which seems to be associated with mainly computational aspects.</p>
+<div>
 <div class="cell">
 <div class="cell-output-display">
 
@@ -1263,6 +1265,7 @@ div.csl-indent {
 </tbody>
 </table></div>
 
+</div>
 </div>
 </div>
 <p>Although Model D provides a reasonably meaningful result, there is not much interpretations could be made for the other topics, the information it offers is still not very satisfying. Compares with Model C, Model D has two domination topics D6 and D1, topics D5, D10, D2, D9 also accounts for a large proportion, which together provides more information. Therefore, Model D, which is trained by only statistics data on ten topics, is selected to use for further analysis on our university data.</p>
