@@ -4,7 +4,7 @@
 
 In order to explore the Data Science degrees in Australian Universities, we compiled a list of universities in Australia and the Data Science or related degrees they offered, then web scraped required information from each university's website using the R programming language [@Rstats]. In total, we collected 298 units from eight postgraduate courses in Data Science across all Group of Eight (Go8) universities.
 
-To start off the project, Dr Tanaka provided sample code for data scraping using Monash Handbook as an example. Libraries `rvest` and `RSelenium` are two of the main tools. Initially, we studied her code and then tried to replicate her code to be applied to other university's websites.
+To start off the project, Dr. Tanaka provided sample code for data scraping using Monash Handbook as an example. Libraries `rvest` and `RSelenium` are two of the main tools. Initially, we studied her code and then tried to replicate her code to be applied to other university's websites.
 
 The flow of the data scraping is as follow (example code from `uom-master-datasci.qmd`):
 
