@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: e0bb8f05-a2e9-44b4-b75f-bea6b0ca5e51
+      url: 'https://quartopub.com/sites/tinatt/etc5543-defining-data-science'
