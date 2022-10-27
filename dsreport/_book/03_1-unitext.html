@@ -249,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-unit-code" id="toc-sec-unit-code" class="nav-link active" data-scroll-target="#sec-unit-code"> <span class="header-section-number">4.1</span> Unit Code Analysis</a></li>
+  <li><a href="#sec-unit-code" id="toc-sec-unit-code" class="nav-link active" data-scroll-target="#sec-unit-code"> <span class="header-section-number">4.1</span> Faculty Unit Code Analysis</a></li>
   <li><a href="#sec-unit-bigram" id="toc-sec-unit-bigram" class="nav-link" data-scroll-target="#sec-unit-bigram"> <span class="header-section-number">4.2</span> Unit Overview and Learning Outcome - Bigram</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/numbats/ds-report/blob/main/03_1-unitext.qmd" class="toc-action">View source</a></p></div></div></nav>
@@ -277,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 <section id="sec-unit-code" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="sec-unit-code"><span class="header-section-number">4.1</span> Unit Code Analysis</h2>
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-unit-code"><span class="header-section-number">4.1</span> Faculty Unit Code Analysis</h2>
 <p>To explore the teaching contents of Master of Data Science at Go8, an analysis based on faculty of units offered is conducted to see what components are included in this degree.</p>
 <p>Unfortunately faculty information is not directly available on the unit handbooks, in this case, unit code is taken as a surrogate identification. As shown in the sample data below, unit code is a combination of letters and numbers, the first few characters such as FIT, MAT, usually represents the faculty this unit belongs to, we could then make relatively educated assumptions on the content of the unit.</p>
 <div class="cell">
@@ -2086,7 +2086,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 </div>
-<p>The grouping was performed manually using the code listed below. It is a subjective choice made under careful considerations, we are aware that the grouping is not 100% accurate. For example, the code ‘DATA’ from University of Sydney is classified under IT, however, some of the units start with DATA are actually more related with statistics, which means ‘DATA’ belongs to multiple departments. Although there would be misclassifieds units, the results could still provide a meaningful guidance regarding the teaching components of Master of Data Science at Go8 universities.</p>
+<p>The grouping was performed manually using the code listed below. We made certain choices though it should be noted that the grouping is not 100% accurate. For example, the code ‘DATA’ from the University of Sydney is all classified under IT, however, some of the units that start with DATA are taught by the faculty in the School of Mathematics and Statistics (based on personal knowledge), which means ‘DATA’ belongs to multiple departments. Although there would be misclassified units, the results could still provide a meaningful guidance regarding the teaching components of Master of Data Science at Go8 universities.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>math <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"STAT"</span>, <span class="st">"MATH"</span>, <span class="st">"MATHS"</span>, <span class="st">"STATS"</span>, <span class="st">"MAT"</span>, <span class="st">"MAST"</span>, <span class="st">"ACTL"</span>, <span class="st">"QBUS"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>it <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"COMP"</span>, <span class="st">"FIT"</span>, <span class="st">"CITS"</span>, <span class="st">"INFS"</span>, <span class="st">"COSC"</span>, <span class="st">"CSSE"</span>, <span class="st">"CSYS"</span>, <span class="st">"EDPC"</span>, <span class="st">"INMT"</span>, <span class="st">"PHIL"</span>, <span class="st">"PHYS"</span>, <span class="st">"BUSN"</span>,<span class="st">"DATA"</span>, <span class="st">"INFO"</span>, <span class="st">"INFS"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>commerce <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ECON"</span>, <span class="st">"FINS"</span>, <span class="st">"MARK"</span>, <span class="st">"ACCT"</span>, <span class="st">"FINM"</span>, <span class="st">"MGMT"</span>, <span class="st">"MKTG"</span>)</span>
@@ -2124,7 +2124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="sec-unit-bigram" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="sec-unit-bigram"><span class="header-section-number">4.2</span> Unit Overview and Learning Outcome - Bigram</h2>
 <p>After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. Single word analysis, bigram and trigram are all produced in order to identify the frequently mentioned words and/or terms. <code>distinct</code> function is applied to unit and term, so that same terms are only counted once in a unit to avoid duplicated counting. Words and terms such as ‘student’, ‘successful completion’ add more noises than values to the results, are removed in the pre-processing step.</p>
-<p>The bigram, which is <a href="#fig-bigram">Figure&nbsp;<span>4.3</span></a> below provides the most informative results among all. Machine learning appears quite often, as well as software development, linear models, statistical analysis, spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.</p>
+<p>The bigram, shown in <a href="#fig-bigram">Figure&nbsp;<span>4.3</span></a> below provides the most informative results among the n-gram analysis. Machine learning appears quite often, as well as software development, linear models, statistical analysis, spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.</p>
 <div class="cell">
 
 </div>
@@ -2138,7 +2138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the text2vec technique for natural language processing, which will be discussed in the next chapter.</p>
+<p>Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the text2vec technique for natural language processing, which will be discussed in the next chapter [ET: next next chapter no?].</p>
 
 
 </section>
