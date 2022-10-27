@@ -1,3 +1,25 @@
 # Text Pre-Processing {#sec-preprocess}
 
-Words are first stemmed in the pre-processing stage, `distinct` function is then applied to units and terms, so that same words or terms are only counted once in a unit to avoid duplicated counting. Words and terms such as 'student', 'successful completion' add more noises than values to the results, are removed in the pre-processing step.
+Before any analysis can be done with the text, the target content needs to go through a series of pre-processing. For this project, we relied on functions in libraries `tidytext`, `pluralize`, and `SnowballC` to automate the process. The work flow is as follow:
+
+  1. Tokenize raw text into words
+  2. Remove stop words (eg. "the", "is", "a")
+  3. Remove any "words" that are simply numbers
+  4. Singularize or stem the words
+  5. Limit the number of times words from the same unit or job posting is counted
+
+ 
+Tokenization takes the original text and breaks it up into words. Of all the words, many of them will just be stop words which offers no insight. Hence, it is important to remove those stop words. We inspect the words after this step and realized that many of the "words" that were tokenized were actually just numbers. Therefore we filter the data to remove them. If we stop at this stage, we will see that many words are being under counted. For example "student" and "students" will be seen as two different words an counted separately, when in reality they are the same. The `singularize()` function singularizes words to fix this problem. However, we also noticed that this is not enough. Thus we used` wordStem()`to stem the words in attempt to get the root form. This does not necessarily mean to reduce the word into the dictionary root. Instead, we want to stem it only so much to remove the tenses of the word. For example "work", "works", and "worked" will al be stemmed to "work." 
+
+Each unit and job description has raw text of varying lengths. If we just take the count of words directly, sometimes a word can be falsely inflated to occur a number of times due to the topic under which it is discussed. Therefore, we only allow the unique words of each unit /job description to included in the final count. 
+
+We check the words after each processes and sometimes manually remove words when we find it bring more noise than actual insight. Here is an example code of the pre-processing for unit outcomes.
+
+```{.r}
+singlewords <- unidata %>% 
+  unnest_tokens(word, Outcomes)%>% 
+  filter(!(word1 %in% stop_words$word)) %>% 
+  subset(!grepl("[0-9]", word1)) %>% 
+  mutate(word = wordStem(word, language = "english")) %>%
+  distinct(School, Unit, word)
+```
