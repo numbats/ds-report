@@ -3,10 +3,13 @@
 Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the `SnowballC` package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest beta score, as explained in Section @sec-model. Instead of counting the appearance of words, the new counts generated are based on topics.
 
 Similar with the university breakdown in @sec-unit-bigram, to make more objective comparisons, counts are converted to proportions due to different number of units scraped for the eight universities. @fig-unitopics suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion. 
+
 ```{r stats data, echo = FALSE, message=FALSE}
 library(tidyverse)
 library(kableExtra)
-library(patchwork)
+
+theme_set(theme_minimal())
+
 data_s <- read_csv("data/stats.csv") %>% 
   select(-`...1`)
 
@@ -38,10 +41,10 @@ stats <- data_s %>%
 stats
 ```
 
-The top ten words based on probabilities for each of the ten topics are provided below, colours of the columns are aligned with @fig-unitopics. Topic 1 contains words like statist (statistics), data, popul (population), and we can see data, algorithm, analysi (analysis), model, cluster, comput (computation etc.) in topic 6, it is a reasonable interpretation that these two topics are both associated with computational aspects.
+The top 30 words based on probabilities for each of the ten topics are provided below, colours of the columns are aligned with @fig-unitopics. Topic 1 contains words like statist (statistics), data, popul (population), system, bias, experiment, and we can see data, algorithm, analysi (analysis), model, cluster, comput (computation, computer, computational), function, spatial in topic 6, it is a reasonable interpretation that these two topics are both associated with computational aspects.
 
-```{r fig-topics, fig.cap = "Top 10 words of the Ten Topics",message=FALSE}
-read_csv("data/term_s.csv") %>% 
+```{r fig-topics, fig.cap = "Top 30 words of the Ten Topics",message=FALSE}
+read_csv("data/term_s30.csv") %>% 
   select(-`...1`)%>% 
   kable() %>% 
   kable_styling(bootstrap_options = "condensed", font_size = 12) %>% 
@@ -68,7 +71,7 @@ read_csv("data/term_s.csv") %>%
 ```
 
 
-In addition, words under Topics 2,5,9 and 10 are model, regression, estim (estimate), linear, probabl (probability), bayesian, prior, infer, test, statist (statistics), hypothesi (hypothesis), correl (correlation), most of them are related to math and statistics, and also more on the computational side of them. 
+In addition, words under Topics 2,5,9 and 10 are model, regression, estim (estimate, estimation), linear, least_squar (least_square), probabl (probability), bayesian, prior, infer, test, statist (statistics), hypothesi (hypothesis), correl (correlation), null, null_hypothesi (null_hypothesis), poisson, mathemat (mathematics, mathematical), most of them are related to math and statistics, and also more on the computational side of them, such as hypothesis testing and probability. 
 
 The results above further proves the earlier findings discussed in @sec-unit-code and @sec-unit-bigram: Master of Data Science degrees offered at Go8 universities tend to be mainly IT based, the major components are computational as well as statistical/mathematical aspects. 
 

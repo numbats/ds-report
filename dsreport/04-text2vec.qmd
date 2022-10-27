@@ -79,7 +79,7 @@ ssc <- data_ssc %>%
              y = topic))+
   geom_col(fill = "#1F78B4",
            colour = "white") +
-  my_scale +
+  #my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
   labs(x = "",
@@ -109,7 +109,7 @@ cs <- data_cs %>%
              fill = topic))+
   geom_col(fill = "#33A02C",
            colour = "white") +
-  my_scale +
+  #my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
   labs(x = "",
@@ -139,7 +139,7 @@ comp <- data_comp %>%
              fill = topic))+
   geom_col(fill = "#CAB2D6",
            colour = "white") +
-  my_scale +
+  #my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
   labs(x = "proportion",
@@ -169,7 +169,7 @@ stats <- data_s %>%
              fill = topic))+
   geom_col(fill = "#FF7F00",
            colour = "white") +
-  my_scale +
+  #my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
   labs(x = "proportion",
