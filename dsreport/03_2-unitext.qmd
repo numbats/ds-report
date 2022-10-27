@@ -28,6 +28,7 @@ To explore the teaching contents of Master of Data Science at Go8, an analysis b
 
 Unfortunately faculty information is not directly available on the unit handbooks, in this case, unit code is taken as a surrogate identification. As shown in the sample data below, unit code is a combination of letters and numbers, the first few characters such as FIT, MAT, usually represents the faculty this unit belongs to, we could then make relatively educated assumptions on the content of the unit. 
 
+::: {.content-visible unless-format="pdf"}
 ```{r}
 unidata %>% 
   mutate(across(c(Outcomes, Overview, description), 
@@ -38,6 +39,20 @@ unidata %>%
   scroll_box(height = "350px",
              width = "1250px")
 ```
+:::
+
+::: {.content-hidden unless-format="pdf"}
+```{r}
+unidata %>% 
+  mutate(across(c(Outcomes, Overview, description), 
+                ~ str_replace_all(.x, "\\\\", ""))) %>% 
+  select(School, Course, Unit, Unit_code) %>% 
+  head(5) %>% 
+  kable() %>% 
+  kable_styling(latex_options = c("striped", "scale_down"))
+
+```
+:::
 
 The grouping was performed manually using the code listed below. We made certain choices though it should be noted that the grouping is not 100% accurate. For example, the code 'DATA' from the University of Sydney is all classified under IT, however, some of the units that start with DATA are taught by the faculty in the School of Mathematics and Statistics (based on personal knowledge), which means 'DATA' belongs to multiple departments. Although there would be misclassified units, the results could still provide a meaningful guidance regarding the teaching components of Master of Data Science at Go8 universities. 
 

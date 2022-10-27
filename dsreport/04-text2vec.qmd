@@ -38,6 +38,7 @@ mod_sum <- rmv_col("data/modelsum_ssc.csv")
 
 The table below shows a glimpse of the model output of the initial LDA model, after training by data collected from all 4448 Wikipedia articles on 12 topics.
 
+::: {.content-visible unless-format="pdf"}
 ```{r}
 mod_sum %>% 
   head(120) %>% 
@@ -46,6 +47,17 @@ mod_sum %>%
                 position = "center") %>% 
   scroll_box(height = "420px")
 ```
+:::
+
+::: {.content-hidden unless-format="pdf"}
+```{r}
+mod_sum %>% 
+  head(5) %>% 
+  kable(align = "c") %>% 
+  kable_styling(latex_options = c("striped", "scale_down"),
+                position = "center")
+```
+:::
 
 Term shows all the word extracted from the training data (Wikipedia articles), as each latent topic has a multinomial distribution for all words, beta value of a term is the score / probability computed for that particular topic. Highest beta value indicates highest probability, which means the term is most likely belongs to the corresponding topic. 
 
@@ -191,6 +203,7 @@ As sociology data tends to brings in noises to the model, and is not closely rel
 
 The table below listed the top 30 words of each topics in Model C, it turns out Topic C2 contains words like comput (computation, computational, computer), system, program, machin (machine), softwar (software), model, test, calcul (calculate, calculation) and data, which seems to be associated with mainly computational aspects. 
 
+::: {.content-visible unless-format="pdf"}
 ```{r}
 rmv_col("data/term_comp30.csv") %>% 
   rename("Topic C1" = `Topic 1`,
@@ -208,6 +221,25 @@ rmv_col("data/term_comp30.csv") %>%
   scroll_box(width = "1250px",
              height = "350px")
 ```
+:::
+
+::: {.content-hidden unless-format="pdf"}
+```{r}
+rmv_col("data/term_comp30.csv") %>% 
+  rename("Topic C1" = `Topic 1`,
+         "Topic C2" = `Topic 2`,
+         "Topic C3" = `Topic 3`,
+         "Topic C4" = `Topic 4`,
+         "Topic C5" = `Topic 5`,
+         "Topic C6" = `Topic 6`,
+         "Topic C7" = `Topic 7`,
+         "Topic C8" = `Topic 8`,
+         "Topic C9" = `Topic 9`,
+         "Topic C10" = `Topic 10`) %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", "scale_down")) 
+```
+:::
 
 Although Model D provides a reasonably meaningful result, there is not much interpretations could be made for the other topics, the information it offers is still not very satisfying. Compares with Model C, Model D has two domination topics D6 and D1, topics D5, D10, D2, D9 also accounts for a large proportion, which together provides more information. Therefore, Model D, which is trained by only statistics data on ten topics, is selected to use for further analysis on our university data.
 
