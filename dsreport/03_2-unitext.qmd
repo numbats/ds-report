@@ -121,7 +121,7 @@ Based on the findings above, it seems that there is a shared structure across Go
 
 ## Unit Overview and Learning Outcome - Bigram {#sec-unit-bigram}
 
-After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. Single word analysis, bigram and trigram are all produced in order to identify the frequently mentioned words and/or terms. Words are first stemmed in the pre-processing stage, `distinct` function is then applied to units and terms, so that same words or terms are only counted once in a unit to avoid duplicated counting. Words and terms such as 'student', 'successful completion' add more noises than values to the results, are removed in the pre-processing step.
+After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. We pre-processed text from learning outcome and unit overview to produce single word analysis, bigram, and tirgram.
 
 The bigram, shown in @fig-bigram below provides the most informative results among the n-gram analysis. Machine learning (machin learn) appears quite often, as well as software development (softwar develop), linear model, statistical analysis (statist analysi), spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.
 
@@ -161,4 +161,4 @@ unidata_bigram %>%
   scale_x_continuous(expand = c(0, 0.1))
 ```
 
-Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the topic modeling technique for natural language processing, which will be discussed in Section @sec-topicmod.
+Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the topic modeling technique for natural language processing, which will be discussed in @sec-topicmod.

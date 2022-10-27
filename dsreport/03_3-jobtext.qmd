@@ -1,8 +1,6 @@
 # Job Text Analysis {#sec-job-analysis}
 
-To explore the skills and programming languages in demand from employers, we focused on the mobileAdTemplate [ET: describe this] and the 25 columns of programming languages. Similar to before, single word analysis, bigram, and trigram are all produced [ET: based on ?]. 
-
-[ET: include a brief description of stemming]
+To explore the skills and programming languages in demand from employers, we focused on the mobileAdTemplate and the 25 columns of programming languages. The variable mobileAdtemplate contains the job description for the position. Using this variable, we conducted text analysis and produced plots for single word frequencies, bigram, and trigram. 
 
 ```{r setup, include = FALSE}
 library(tidyverse)
@@ -44,6 +42,7 @@ wordcloud(words = cloud$word,
             scale=c(2.5,0.15),
             colors=brewer.pal(8, "Dark2"))
 ```
+
 Word frequency was calculated using the same method as @sec-unit-bigram. Programming languages Python and SQL seems prominent. Potentially due to the amount of senior positions in the data, *experience* is mentioned a lot. In terms of other knowledge or skills, *statistics*, *modelling*,  *analysis* are some terms that seems to be standing out. To ensure frequency is meaningful, we looked at bigram and trigram.
 
 ## Bigram
@@ -93,4 +92,5 @@ jobdata %>% select(c(25:49)) %>%
   labs(title = "Programming Languages Mentioned",
        y = "Language", x = "Count")
 ```
+
 @fig-languages shows the count of each language mentioned by employers. 89% of the jobs mentioned Python, 69% mentioned R and 68% mentioned SQL. Tableau's popularity is not a surprise given the high frequency for *data visualis* in the previous section.

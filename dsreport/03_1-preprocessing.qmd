@@ -1,0 +1,3 @@
+# Text Pre-Processing {#sec-preprocess}
+
+Words are first stemmed in the pre-processing stage, `distinct` function is then applied to units and terms, so that same words or terms are only counted once in a unit to avoid duplicated counting. Words and terms such as 'student', 'successful completion' add more noises than values to the results, are removed in the pre-processing step.
