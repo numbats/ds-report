@@ -11,7 +11,6 @@ book:
   author: "Xinrui WANG and Tsai-Chun TSOU"
   date: "28 October 2022"
   search: true
-  downloads: [pdf]
   repo-url: https://github.com/numbats/ds-report
   repo-actions: [source]
   chapters:
@@ -45,5 +44,3 @@ format:
     theme: 
         light: flatly
         dark: darkly
-  # pdf:
-  #   documentclass: scrreport
