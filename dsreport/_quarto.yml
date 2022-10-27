@@ -26,8 +26,9 @@ book:
     
     - part: "03-textanalysis.qmd"
       chapters:
-         - "03_1-unitext.qmd"
-         - "03_2-jobtext.qmd"
+         - "03_1-preprocessing.qmd"
+         - "03_2-unitext.qmd"
+         - "03_3-jobtext.qmd"
     
     - part: "04-text2vec.qmd"
       chapters:
