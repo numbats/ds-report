@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Defining Data Science - text2vec</title>
+<title>Defining Data Science - Topic Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -15,69 +15,6 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
@@ -108,7 +45,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./04_1-unilda.html" rel="next">
-<link href="./03_2-jobtext.html" rel="prev">
+<link href="./03_3-jobtext.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -152,7 +89,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">text2vec</h1>
+      <h1 class="quarto-secondary-nav-title">Topic Modelling</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -166,8 +103,9 @@ div.csl-indent {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Defining Data Science</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/numbats/ds-report" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="./Defining-Data-Science.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -219,19 +157,24 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_1-unitext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></a>
+  <a href="./03_1-preprocessing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Text Pre-Processing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_2-jobtext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></a>
+  <a href="./03_2-unitext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_3-jobtext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./04-text2vec.html" class="sidebar-item-text sidebar-link active">text2vec</a>
+            <a href="./04-text2vec.html" class="sidebar-item-text sidebar-link active">Topic Modelling</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -239,19 +182,19 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_1-unilda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Collected University Data</span></a>
+  <a href="./04_1-unilda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Collected University Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_2-joblda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Employer Data</span></a>
+  <a href="./04_2-joblda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Employer Data</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-limitation_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Conclusion</span></a>
+  <a href="./05-limitation_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conclusion</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -268,7 +211,7 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#algorithm-and-model-fitting" id="toc-algorithm-and-model-fitting" class="nav-link active" data-scroll-target="#algorithm-and-model-fitting">Algorithm and Model Fitting</a></li>
+  <li><a href="#sec-model" id="toc-sec-model" class="nav-link active" data-scroll-target="#sec-model">Algorithm and Model Fitting</a></li>
   <li><a href="#model-adjustments" id="toc-model-adjustments" class="nav-link" data-scroll-target="#model-adjustments">Model Adjustments</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/numbats/ds-report/blob/main/04-text2vec.qmd" class="toc-action">View source</a></p></div></div></nav>
@@ -278,7 +221,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">text2vec</h1>
+<h1 class="title"><span id="sec-topicmod" class="quarto-section-identifier d-none d-lg-block">Topic Modelling</span></h1>
 </div>
 
 
@@ -292,97 +235,668 @@ div.csl-indent {
 
 </header>
 
-<p>As mentioned in Section <a href="03_1-unitext.html#sec-unit-bigram"><span>Section&nbsp;4.2</span></a>, since the collected university data is relatively small, to make more educated and meaningful interpretations, similar words shall be grouped together and counted by groups. This is usually computed using text corpus, which is a language resource consisting of a large and structured set of texts, since data science is a new term waiting to be defined, there is no available text corpus on this topic. Therefore, we adopted the concept of word2vec and tried to build our own text corpus.</p>
-<p>There are multiple publicly available models and packages to conduct similar computations, however, each model takes hours to fit. Due to time constrains, we have only fitted the Dirichlet Allocation (LDA) model with a few parameter adjustments using the <code>text2vec</code> package with the concepts illustrated by <span class="citation" data-cites="das2016data">Das (<a href="references.html#ref-das2016data" role="doc-biblioref">2016</a>)</span>.</p>
-<section id="algorithm-and-model-fitting" class="level2">
-<h2 class="anchored" data-anchor-id="algorithm-and-model-fitting">Algorithm and Model Fitting</h2>
+<p>As mentioned in Section <a href="03_2-unitext.html#sec-unit-bigram"><span>Section&nbsp;5.2</span></a>, since the collected university data is relatively small, to make more educated and meaningful interpretations, similar words shall be grouped together and counted by groups. This is usually computed using text corpus, which is a language resource consisting of a large and structured set of texts, since data science is a new term waiting to be defined, there is no available text corpus on this topic. Therefore, we adopted the concept of word embedding models and tried to build our own text corpus.</p>
+<p>There are multiple publicly available models and packages to conduct similar computations, such as <code>word2vec</code> and <code>text2vec</code>, however, each model takes hours to fit. Due to time constrains, we have only fitted the Dirichlet Allocation (LDA) model with a few parameter adjustments using the <code>text2vec</code> package with the concepts illustrated by <span class="citation" data-cites="das2016data">Das (<a href="references.html#ref-das2016data" role="doc-biblioref">2016</a>)</span>.</p>
+<section id="sec-model" class="level2">
+<h2 class="anchored" data-anchor-id="sec-model">Algorithm and Model Fitting</h2>
 <p>According to <span class="citation" data-cites="das2016data">Das (<a href="references.html#ref-das2016data" role="doc-biblioref">2016</a>)</span>, the algorithm behind the LDA model is to convert words to document-term matrix (DTM), where the rows, columns and entries correspond to documents, terms and counts respectively. LDA then fits a probabilistic model that assumes a mixture of latent topics, where each topic has a multinomial distribution for all words. The number of topics is a parameter that could be adjusted by needs.</p>
-<p>The initial code to build the LDA model was provided by Professor Tanaka, the major part of the code to build the first version of LDA model is also provided below.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(wiki_stats, <span class="fu">get_wiki_articles</span>(<span class="st">"https://en.wikipedia.org/wiki/List_of_statistics_articles"</span>)),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(wiki_sociology, <span class="fu">get_wiki_articles</span>(<span class="st">"https://en.wikipedia.org/wiki/Index_of_sociology_articles"</span>)),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(wiki_computing, <span class="fu">get_wiki_articles</span>(<span class="st">"https://en.wikipedia.org/wiki/Index_of_computing_articles"</span>)),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(clean_wiki_stats, <span class="fu">map</span>(wiki_stats, clean_wiki_article), <span class="at">format =</span> <span class="st">"rds"</span>, <span class="at">repository =</span> <span class="st">"local"</span>),</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(clean_wiki_sociology, <span class="fu">map</span>(wiki_sociology, clean_wiki_article), <span class="at">format =</span> <span class="st">"rds"</span>, <span class="at">repository =</span> <span class="st">"local"</span>),</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(clean_wiki_computing, <span class="fu">map</span>(wiki_computing, clean_wiki_article), <span class="at">format =</span> <span class="st">"rds"</span>, <span class="at">repository =</span> <span class="st">"local"</span>),</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(clean_stats, <span class="fu">preprocess_text</span>(clean_wiki_stats)),</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(clean_ssc, <span class="fu">preprocess_text</span>(<span class="fu">c</span>(clean_wiki_stats, clean_wiki_sociology, clean_wiki_computing))),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(itoken_ssc, <span class="fu">itoken</span>(clean_ssc, <span class="at">tokenizer =</span> stem_tokenizer),</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">cue =</span> <span class="fu">tar_cue</span>(<span class="at">mode =</span> <span class="st">"thorough"</span>)),</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(vocab_ssc, <span class="fu">create_vocabulary</span>(itoken_ssc, <span class="at">ngram =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="at">stopwords =</span> stopwords<span class="sc">::</span><span class="fu">stopwords</span>()),</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">cue =</span> <span class="fu">tar_cue</span>(<span class="at">mode =</span> <span class="st">"thorough"</span>)),</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(vocab_ssc_prune, <span class="fu">prune_vocab</span>(vocab_ssc, <span class="at">n_min =</span> <span class="dv">40</span>),</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">cue =</span> <span class="fu">tar_cue</span>(<span class="at">mode =</span> <span class="st">"thorough"</span>)),</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(dtm_ssc, <span class="fu">create_dtm</span>(itoken_ssc, <span class="fu">vocab_vectorizer</span>(vocab_ssc_prune)),</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">cue =</span> <span class="fu">tar_cue</span>(<span class="at">mode =</span> <span class="st">"thorough"</span>)),</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(tcm_ssc, <span class="fu">create_tcm</span>(itoken_ssc, <span class="fu">vocab_vectorizer</span>(vocab_ssc_prune), </span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">skip_grams_window =</span> 5L),</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">cue =</span> <span class="fu">tar_cue</span>(<span class="at">mode =</span> <span class="st">"thorough"</span>)),</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(word2vec_model_ssc, <span class="fu">model_glove</span>(vocab_ssc_prune, tcm_ssc),</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>             <span class="at">cue =</span> <span class="fu">tar_cue</span>(<span class="at">mode =</span> <span class="st">"thorough"</span>)),</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(word2vec_dist_ssc, <span class="fu">dist2</span>(<span class="fu">t</span>(word2vec_model_ssc<span class="sc">$</span>components), <span class="at">method =</span> <span class="st">"cosine"</span>),</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>             <span class="at">cue =</span> <span class="fu">tar_cue</span>(<span class="at">mode =</span> <span class="st">"thorough"</span>), <span class="at">format =</span> <span class="st">"rds"</span>, <span class="at">repository =</span> <span class="st">"local"</span>),</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(word2vec_res, <span class="fu">find_close_words</span>(<span class="st">"statistics"</span>, word2vec_dist_ssc, <span class="dv">10</span>),</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">cue =</span> <span class="fu">tar_cue</span>(<span class="at">mode =</span> <span class="st">"thorough"</span>)),</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(lda_model03_ssc, <span class="fu">model_lda</span>(dtm_ssc, <span class="at">ntopics =</span> <span class="dv">3</span>),</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">format =</span> <span class="st">"rds"</span>, <span class="at">repository =</span> <span class="st">"local"</span>),</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tar_target</span>(lda_model20_ssc, <span class="fu">model_lda</span>(dtm_ssc, <span class="at">ntopics =</span> <span class="dv">20</span>),</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>             <span class="at">format =</span> <span class="st">"rds"</span>, <span class="at">repository =</span> <span class="st">"local"</span>)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>             )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The model must be trained before it could be used, we web scraped over 4448 Wikipedia articles as training data, including 2816 articles in statistics, 1005 articles in sociology and 627 in computing. The functions used in the codes above such as <code>get_wiki_articles</code>,<code>clean_wiki_article</code>, <code>get_clean_combined_wikis</code>, <code>model_lda</code>, <code>preprocess_text</code>, <code>stem_tokenizer</code>, <code>prune_vocab</code>, <code>model_glove</code> and <code>find_close_words</code> are constructed by Professor Tanaka for pre-processing purposes, the original scripts could be found from the <a href="https://github.com/numbats/datasci-courses">project repository</a>.</p>
+<p>The model must be trained before it could be used, we web scraped 4448 Wikipedia articles as training data, including 2816 articles in statistics, 1005 articles in sociology and 627 in computing. The initial codes and functions to build the LDA model was provided by Dr Tanaka, we have tested model outputs using different number of topics and tried out training the LDA models with different combinations of data.</p>
+<p>The table below shows a glimpse of the model output of the initial LDA model, after training by data collected from all 4448 Wikipedia articles on 12 topics.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:420px; "><table class="table table-condensed" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> topic </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> term </th>
+   <th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;"> beta </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 3.30e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 2.30e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 8.70e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 1.79e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 8.50e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 5.00e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 9.30e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 2.08e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> abov_mention </td>
+   <td style="text-align:center;"> 5.70e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 1.20e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 5.30e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 2.57e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 1.05e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 2.13e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> abrupt </td>
+   <td style="text-align:center;"> 9.30e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 1.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 2.50e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 1.64e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> across_globe </td>
+   <td style="text-align:center;"> 3.31e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 2.05e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 1.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 5.60e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> act_violenc </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 1.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 7.87e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> acycl_graph </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 2.21e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 1.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 2.00e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 1.80e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 2.20e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 4.57e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 1.80e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> afflict </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 9.90e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 3.25e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 2.00e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 1.67e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 1.80e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> aim_provid </td>
+   <td style="text-align:center;"> 3.80e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 1.42e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 1.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 1.04e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 1.80e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> airplan </td>
+   <td style="text-align:center;"> 4.41e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 1.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 8.29e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> alcohol_consumpt </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 1.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 7.87e-05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 8 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 10 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> algorithm_work </td>
+   <td style="text-align:center;"> 2.00e-07 </td>
+  </tr>
+</tbody>
+</table></div>
+
+</div>
+</div>
+<p>Term shows all the word extracted from the training data (Wikipedia articles), as each latent topic has a multinomial distribution for all words, beta value of a term is the score / probability computed for that particular topic. Highest beta value indicates highest probability, which means the term is most likely belongs to the corresponding topic.</p>
+<p>Beta values for the same word would differ from model to model, and also subject to change by adjusting the number of latent topics. To acquire the most satisfactory results for our university data, we have fitted and tested multiple LDA models with different subset of training data, as well as various number of topics.</p>
 </section>
 <section id="model-adjustments" class="level2">
 <h2 class="anchored" data-anchor-id="model-adjustments">Model Adjustments</h2>
-<p>We have tested using different values for parameter <code>ntopics</code> and tried out training the LDA models with different combinations of data.</p>
-<p>The results provided differs from models, <a href="#fig-ssc-cs">Figure&nbsp;<span>1</span></a> compares the results produced by the full model and model without sociology data on ten topics.</p>
+<p>After applying the fitted LDA models to our university data set, the results delivered by the models are quite different. <a href="#fig-com">Figure&nbsp;<span>1</span></a> compares the results produced by the four fitted models using different training data on ten topics.</p>
 <div class="cell">
 
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-ssc-cs" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-com" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="04-text2vec_files/figure-html/fig-ssc-cs-1.png" class="img-fluid figure-img" width="960"></p>
-<p></p><figcaption class="figure-caption">Figure 1: Compare Results Between Full Model and Without Sociology Data</figcaption><p></p>
+<p><img src="04-text2vec_files/figure-html/fig-com-1.png" class="img-fluid figure-img" width="1152"></p>
+<p></p><figcaption class="figure-caption">Figure 1: Model D Delivers the Most Informative Results on University Data</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>From the results computed by the full model, Topics 9, 10, 2 and 8 occupies relatively higher proportion compare with the others, but the order varies across universities, and their proportions are not significantly larger than the rest of other topics, makes it hard to draw meaningful interpretations. On the right hand side, results from the model without sociology data demonstrates a better picture: Topics 6, 8 and 9 in this case are the top 3 topics across all Go8 universities, however, proportions of Topic 10, 5, 7, 3 and 4 are also obvious higher in some of the universities, brings in difficulties to make justifications.</p>
-<p>As sociology data tends to brings in noises to the model, and is not closely relevant to the data science topic compare with statistics and computing, another two models are fitted using only statistics data and computing data respectively, the results of both models are shown in <a href="#fig-comp-stats">Figure&nbsp;<span>2</span></a>.</p>
-<div class="cell">
-
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-comp-stats" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="04-text2vec_files/figure-html/fig-comp-stats-1.png" class="img-fluid figure-img" width="960"></p>
-<p></p><figcaption class="figure-caption">Figure 2: Compare Results Between Full Model and Without Sociology Data</figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Topic 2 is the only dominating topic based on the results provided by the model using only computing data, which provides a clearer picture than the previous models. The table below listed the top ten words for each topics, it turns out Topic 2 contains words like comput (computation etc.), system, program, softwar (software), which are associated with computational aspects, especially software. This model provides a more meaningful results than the prior ones, however, there is not much interpretations could be made for the other topics, the information it offers is still not very satisfying.</p>
+<p>For Model A, Topics A9, A10, A2 and A8 occupies relatively higher proportion compare with the others, but the order varies across universities, and their proportions are not significantly larger than the rest of other topics, makes it hard to draw meaningful interpretations. On the top right, Model B demonstrates a better picture: Topics B6, B8 and B9 are the top 3 topics across all Go8 universities, however, proportions of Topics B10, B5, B7, B3 and B4 are also obvious higher in some of the universities, brings in difficulties to make justifications.</p>
+<p>As sociology data tends to brings in noises to the model, and is not closely relevant to the data science topic compare with statistics and computing, Model C and D are fitted using only statistics data and computing data respectively. Topic C2 is the only dominating topic in Model C, where as Topics D6 and D1 occupy significantly large proportion in Model D. Besides, cccccc together took a relatively higher proportion compare with the rest of other topics in Model D.</p>
+<p>The table below listed the top 30 words of each topics in Model C, it turns out Topic C2 contains words like comput (computation, computational, computer), system, program, machin (machine), softwar (software), model, test, calcul (calculate, calculation) and data, which seems to be associated with mainly computational aspects.</p>
 <div class="cell">
 <div class="cell-output-display">
 
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:1250px; "><table class="table table-condensed" style="margin-left: auto; margin-right: auto;">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:350px; overflow-x: scroll; width:1250px; "><table class="table table-condensed" style="margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
-   <th style="text-align:left;"> Topic 1 </th>
-   <th style="text-align:left;"> Topic 2 </th>
-   <th style="text-align:left;"> Topic 3 </th>
-   <th style="text-align:left;"> Topic 4 </th>
-   <th style="text-align:left;"> Topic 5 </th>
-   <th style="text-align:left;"> Topic 6 </th>
-   <th style="text-align:left;"> Topic 7 </th>
-   <th style="text-align:left;"> Topic 8 </th>
-   <th style="text-align:left;"> Topic 9 </th>
-   <th style="text-align:left;"> Topic 10 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Topic C1 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Topic C2 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Topic C3 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Topic C4 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Topic C5 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Topic C6 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Topic C7 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Topic C8 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Topic C9 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Topic C10 </th>
   </tr>
  </thead>
 <tbody>
@@ -506,12 +1020,252 @@ div.csl-indent {
    <td style="text-align:left;"> user </td>
    <td style="text-align:left;"> implement </td>
   </tr>
+  <tr>
+   <td style="text-align:left;"> microsoft </td>
+   <td style="text-align:left;"> engin </td>
+   <td style="text-align:left;"> amiga </td>
+   <td style="text-align:left;"> grammar </td>
+   <td style="text-align:left;"> connect </td>
+   <td style="text-align:left;"> system </td>
+   <td style="text-align:left;"> encod </td>
+   <td style="text-align:left;"> technolog </td>
+   <td style="text-align:left;"> aol </td>
+   <td style="text-align:left;"> program_languag </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> use </td>
+   <td style="text-align:left;"> first </td>
+   <td style="text-align:left;"> pc </td>
+   <td style="text-align:left;"> rule </td>
+   <td style="text-align:left;"> server </td>
+   <td style="text-align:left;"> page </td>
+   <td style="text-align:left;"> dvd </td>
+   <td style="text-align:left;"> motorola </td>
+   <td style="text-align:left;"> public </td>
+   <td style="text-align:left;"> standard </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> applic </td>
+   <td style="text-align:left;"> time </td>
+   <td style="text-align:left;"> model </td>
+   <td style="text-align:left;"> parser </td>
+   <td style="text-align:left;"> servic </td>
+   <td style="text-align:left;"> mode </td>
+   <td style="text-align:left;"> edit </td>
+   <td style="text-align:left;"> clock </td>
+   <td style="text-align:left;"> state </td>
+   <td style="text-align:left;"> charact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> includ </td>
+   <td style="text-align:left;"> research </td>
+   <td style="text-align:left;"> storag </td>
+   <td style="text-align:left;"> recurs </td>
+   <td style="text-align:left;"> standard </td>
+   <td style="text-align:left;"> architectur </td>
+   <td style="text-align:left;"> pdf </td>
+   <td style="text-align:left;"> power </td>
+   <td style="text-align:left;"> new </td>
+   <td style="text-align:left;"> exampl </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> develop </td>
+   <td style="text-align:left;"> can </td>
+   <td style="text-align:left;"> data </td>
+   <td style="text-align:left;"> one </td>
+   <td style="text-align:left;"> devic </td>
+   <td style="text-align:left;"> also </td>
+   <td style="text-align:left;"> code </td>
+   <td style="text-align:left;"> ghz </td>
+   <td style="text-align:left;"> hacker </td>
+   <td style="text-align:left;"> class </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unix </td>
+   <td style="text-align:left;"> logic </td>
+   <td style="text-align:left;"> commodor </td>
+   <td style="text-align:left;"> input </td>
+   <td style="text-align:left;"> node </td>
+   <td style="text-align:left;"> set </td>
+   <td style="text-align:left;"> cd </td>
+   <td style="text-align:left;"> bus </td>
+   <td style="text-align:left;"> project </td>
+   <td style="text-align:left;"> also </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> mac </td>
+   <td style="text-align:left;"> scienc </td>
+   <td style="text-align:left;"> home </td>
+   <td style="text-align:left;"> exampl </td>
+   <td style="text-align:left;"> communic </td>
+   <td style="text-align:left;"> one </td>
+   <td style="text-align:left;"> camera </td>
+   <td style="text-align:left;"> cpu </td>
+   <td style="text-align:left;"> includ </td>
+   <td style="text-align:left;"> name </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> command </td>
+   <td style="text-align:left;"> work </td>
+   <td style="text-align:left;"> hardwar </td>
+   <td style="text-align:left;"> machin </td>
+   <td style="text-align:left;"> provid </td>
+   <td style="text-align:left;"> code </td>
+   <td style="text-align:left;"> audio </td>
+   <td style="text-align:left;"> generat </td>
+   <td style="text-align:left;"> year </td>
+   <td style="text-align:left;"> call </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> interfac </td>
+   <td style="text-align:left;"> model </td>
+   <td style="text-align:left;"> game </td>
+   <td style="text-align:left;"> ture </td>
+   <td style="text-align:left;"> attack </td>
+   <td style="text-align:left;"> access </td>
+   <td style="text-align:left;"> compress </td>
+   <td style="text-align:left;"> perform </td>
+   <td style="text-align:left;"> licens </td>
+   <td style="text-align:left;"> line </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> also </td>
+   <td style="text-align:left;"> oper </td>
+   <td style="text-align:left;"> one </td>
+   <td style="text-align:left;"> comput </td>
+   <td style="text-align:left;"> may </td>
+   <td style="text-align:left;"> byte </td>
+   <td style="text-align:left;"> ray </td>
+   <td style="text-align:left;"> support </td>
+   <td style="text-align:left;"> law </td>
+   <td style="text-align:left;"> variabl </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> dos </td>
+   <td style="text-align:left;"> perform </td>
+   <td style="text-align:left;"> oper </td>
+   <td style="text-align:left;"> two </td>
+   <td style="text-align:left;"> key </td>
+   <td style="text-align:left;"> onli </td>
+   <td style="text-align:left;"> also </td>
+   <td style="text-align:left;"> seri </td>
+   <td style="text-align:left;"> product </td>
+   <td style="text-align:left;"> data </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> server </td>
+   <td style="text-align:left;"> one </td>
+   <td style="text-align:left;"> time </td>
+   <td style="text-align:left;"> follow </td>
+   <td style="text-align:left;"> also </td>
+   <td style="text-align:left;"> program </td>
+   <td style="text-align:left;"> includ </td>
+   <td style="text-align:left;"> base </td>
+   <td style="text-align:left;"> us </td>
+   <td style="text-align:left;"> list </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> featur </td>
+   <td style="text-align:left;"> test </td>
+   <td style="text-align:left;"> atari </td>
+   <td style="text-align:left;"> ani </td>
+   <td style="text-align:left;"> client </td>
+   <td style="text-align:left;"> comput </td>
+   <td style="text-align:left;"> blu </td>
+   <td style="text-align:left;"> product </td>
+   <td style="text-align:left;"> open_sourc </td>
+   <td style="text-align:left;"> includ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> appl </td>
+   <td style="text-align:left;"> calcul </td>
+   <td style="text-align:left;"> ii </td>
+   <td style="text-align:left;"> pars </td>
+   <td style="text-align:left;"> system </td>
+   <td style="text-align:left;"> execut </td>
+   <td style="text-align:left;"> blu_ray </td>
+   <td style="text-align:left;"> model </td>
+   <td style="text-align:left;"> free_softwar </td>
+   <td style="text-align:left;"> java </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> run </td>
+   <td style="text-align:left;"> data </td>
+   <td style="text-align:left;"> tape </td>
+   <td style="text-align:left;"> context </td>
+   <td style="text-align:left;"> browser </td>
+   <td style="text-align:left;"> cpu </td>
+   <td style="text-align:left;"> graphic </td>
+   <td style="text-align:left;"> first </td>
+   <td style="text-align:left;"> game </td>
+   <td style="text-align:left;"> statement </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> base </td>
+   <td style="text-align:left;"> univers </td>
+   <td style="text-align:left;"> graphic </td>
+   <td style="text-align:left;"> time </td>
+   <td style="text-align:left;"> user </td>
+   <td style="text-align:left;"> store </td>
+   <td style="text-align:left;"> allow </td>
+   <td style="text-align:left;"> cach </td>
+   <td style="text-align:left;"> servic </td>
+   <td style="text-align:left;"> valu </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> shell </td>
+   <td style="text-align:left;"> mani </td>
+   <td style="text-align:left;"> market </td>
+   <td style="text-align:left;"> defin </td>
+   <td style="text-align:left;"> page </td>
+   <td style="text-align:left;"> point </td>
+   <td style="text-align:left;"> print </td>
+   <td style="text-align:left;"> market </td>
+   <td style="text-align:left;"> busi </td>
+   <td style="text-align:left;"> develop </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> linux </td>
+   <td style="text-align:left;"> human </td>
+   <td style="text-align:left;"> product </td>
+   <td style="text-align:left;"> express </td>
+   <td style="text-align:left;"> messag </td>
+   <td style="text-align:left;"> number </td>
+   <td style="text-align:left;"> media </td>
+   <td style="text-align:left;"> two </td>
+   <td style="text-align:left;"> technolog </td>
+   <td style="text-align:left;"> interpret </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> manag </td>
+   <td style="text-align:left;"> electron </td>
+   <td style="text-align:left;"> display </td>
+   <td style="text-align:left;"> string </td>
+   <td style="text-align:left;"> applic </td>
+   <td style="text-align:left;"> unit </td>
+   <td style="text-align:left;"> store </td>
+   <td style="text-align:left;"> famili </td>
+   <td style="text-align:left;"> announc </td>
+   <td style="text-align:left;"> structur </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> new </td>
+   <td style="text-align:left;"> method </td>
+   <td style="text-align:left;"> cp </td>
+   <td style="text-align:left;"> onli </td>
+   <td style="text-align:left;"> ethernet </td>
+   <td style="text-align:left;"> perform </td>
+   <td style="text-align:left;"> record </td>
+   <td style="text-align:left;"> mb </td>
+   <td style="text-align:left;"> work </td>
+   <td style="text-align:left;"> support </td>
+  </tr>
 </tbody>
 </table></div>
 
 </div>
 </div>
-<p>In terms of the model trained by only data in statistics, there are also dominating topics across all eight universities: Topics 6 and 1, besides, topics 5, 10, 2, 9 together took a relatively higher proportion compare with the rest of other topics. Both models using only computing or statistical data delivers better results, model trained by only statistical data provides more information than the other, hence is selected to use for further analysis on our university data.</p>
+<p>Although Model D provides a reasonably meaningful result, there is not much interpretations could be made for the other topics, the information it offers is still not very satisfying. Compares with Model C, Model D has two domination topics D6 and D1, topics D5, D10, D2, D9 also accounts for a large proportion, which together provides more information. Therefore, Model D, which is trained by only statistics data on ten topics, is selected to use for further analysis on our university data.</p>
 <p>Note that it requires highly skilled linguists and huge efforts to establish a proper text corpus, the model we built is still fairly basic and could be further optimised by adjustments.</p>
 
 
@@ -725,13 +1479,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./03_2-jobtext.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></span>
+      <a href="./03_3-jobtext.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./04_1-unilda.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Collected University Data</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Collected University Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

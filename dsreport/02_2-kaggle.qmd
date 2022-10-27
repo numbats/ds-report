@@ -24,13 +24,31 @@ theme_set(theme_minimal())
 jobdata <- read_csv("data/listings2019_2021.csv")
 ```
 
-The a fraction of the data set is made available below for exploration.
+::: {.content-visible unless-format="pdf"}
+The full data set is made available below for exploration.
 ```{r employerdf}
 jobdata %>% 
   select(jobId, jobTitle, jobClassification, mobileAdTemplate, 25:49) %>% 
-  head(.,2) %>% 
-  datatable(height = "400px",
+   datatable(height = "400px",
             options = list(scrollX = TRUE,
-            columnDefs = list(list(className = "dt-center", targets = 1:5)))) %>% 
-  formatStyle(columns = colnames(.), fontSize = '30%')
+                           autoWidth = TRUE,
+                           columnDefs = list(list(className = "dt-center", 
+                                                  targets = 1:3),
+                                             list(width = '450px',
+                                                  targets = 4)),
+                           pageLength = 3))%>% 
+  formatStyle(columns = 4, fontSize = '50%')
 ```
+:::
+
+::: {.content-hidden unless-format="pdf"}
+Here is an example of the data with selected variables for the analysis.
+```{r}
+jobdata %>% 
+  select(jobId, jobTitle, jobClassification, mobileAdTemplate, 25:49) %>% 
+  head(.,2) %>%
+  kable() %>% 
+  kable_styling(latex_options = c("striped", "scale_down"), font_size = 12)
+```
+:::
+

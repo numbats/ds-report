@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Defining Data Science - 5&nbsp; Unit Text Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03_3-jobtext.html" rel="next">
+<link href="./03_1-preprocessing.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Defining Data Science</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/numbats/ds-report" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="./Defining-Data-Science.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Abstract</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Data Collection</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_1-webscraping.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">University Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_2-kaggle.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Employer Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./03-textanalysis.html" class="sidebar-item-text sidebar-link">Text Analysis</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_1-preprocessing.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Text Pre-Processing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_2-unitext.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_3-jobtext.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./04-text2vec.html" class="sidebar-item-text sidebar-link">Topic Modelling</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_1-unilda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Collected University Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_2-joblda.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Apply the Selected Model to Employer Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-limitation_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conclusion</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-unit-code" id="toc-sec-unit-code" class="nav-link active" data-scroll-target="#sec-unit-code"> <span class="header-section-number">5.1</span> Faculty Unit Code Analysis</a></li>
+  <li><a href="#sec-unit-bigram" id="toc-sec-unit-bigram" class="nav-link" data-scroll-target="#sec-unit-bigram"> <span class="header-section-number">5.2</span> Unit Overview and Learning Outcome - Bigram</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/numbats/ds-report/blob/main/03_2-unitext.qmd" class="toc-action">View source</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-unit-analysis" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Unit Text Analysis</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<section id="sec-unit-code" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-unit-code"><span class="header-section-number">5.1</span> Faculty Unit Code Analysis</h2>
+<p>To explore the teaching contents of Master of Data Science at Go8, an analysis based on faculty of units offered is conducted to see what components are included in this degree.</p>
+<p>Unfortunately faculty information is not directly available on the unit handbooks, in this case, unit code is taken as a surrogate identification. As shown in the sample data below, unit code is a combination of letters and numbers, the first few characters such as FIT, MAT, usually represents the faculty this unit belongs to, we could then make relatively educated assumptions on the content of the unit.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:350px; overflow-x: scroll; width:1250px; "><table class="table table-condensed" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> School </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Course </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Unit </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Unit_code </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT9132 - Introduction to databases </td>
+   <td style="text-align:left;"> FIT9132 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT9136 - Algorithms and programming foundations in Python </td>
+   <td style="text-align:left;"> FIT9136 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT9137 - Introduction to computer architecture and networks </td>
+   <td style="text-align:left;"> FIT9137 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> MAT9004 - Mathematical foundations for data science and AI </td>
+   <td style="text-align:left;"> MAT9004 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5125 - IT research methods </td>
+   <td style="text-align:left;"> FIT5125 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5145 - Introduction to data science </td>
+   <td style="text-align:left;"> FIT5145 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5147 - Data exploration and visualisation </td>
+   <td style="text-align:left;"> FIT5147 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5196 - Data wrangling </td>
+   <td style="text-align:left;"> FIT5196 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5197 - Statistical data modelling </td>
+   <td style="text-align:left;"> FIT5197 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5149 - Applied data analysis </td>
+   <td style="text-align:left;"> FIT5149 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5201 - Machine learning </td>
+   <td style="text-align:left;"> FIT5201 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5202 - Data processing for big data </td>
+   <td style="text-align:left;"> FIT5202 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5205 - Data in society </td>
+   <td style="text-align:left;"> FIT5205 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5212 - Data analysis for semi-structured data </td>
+   <td style="text-align:left;"> FIT5212 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5230 - Malicious AI </td>
+   <td style="text-align:left;"> FIT5230 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> BMS5021 - Introduction to Bioinformatics </td>
+   <td style="text-align:left;"> BMS5021 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> BMS5022 - Advanced bioinformatics: efficient genome, transcriptome and proteome analysis </td>
+   <td style="text-align:left;"> BMS5022 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5126 - Masters thesis part 1 </td>
+   <td style="text-align:left;"> FIT5126 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5127 - Masters thesis part 2 </td>
+   <td style="text-align:left;"> FIT5127 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5228 - Masters thesis part 3 </td>
+   <td style="text-align:left;"> FIT5228 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5229 - Masters thesis final </td>
+   <td style="text-align:left;"> FIT5229 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5120 - Industry experience studio project </td>
+   <td style="text-align:left;"> FIT5120 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> monash </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> FIT5122 - Professional practice </td>
+   <td style="text-align:left;"> FIT5122 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Methods of Mathematical Statistics </td>
+   <td style="text-align:left;"> MAST90105 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> A First Course In Statistical Learning </td>
+   <td style="text-align:left;"> MAST90104 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Programming and Software Development </td>
+   <td style="text-align:left;"> COMP90041 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Algorithms and Complexity </td>
+   <td style="text-align:left;"> COMP90038 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Elements of Data Processing </td>
+   <td style="text-align:left;"> COMP20008 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Database Systems &amp; Information Modelling </td>
+   <td style="text-align:left;"> INFO90002 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Statistical Modelling for Data Science </td>
+   <td style="text-align:left;"> MAST90139 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Multivariate Statistics for Data Science </td>
+   <td style="text-align:left;"> MAST90138 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Computational Statistics &amp; Data Science </td>
+   <td style="text-align:left;"> MAST90083 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Cluster and Cloud Computing </td>
+   <td style="text-align:left;"> COMP90024 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Database Systems </td>
+   <td style="text-align:left;"> COMP90050 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Statistical Machine Learning </td>
+   <td style="text-align:left;"> COMP90051 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Project Pt1 </td>
+   <td style="text-align:left;"> MAST90106 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Project Pt2 </td>
+   <td style="text-align:left;"> MAST90107 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Research Project Pt1 </td>
+   <td style="text-align:left;"> MAST90108 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Research Project Pt2 </td>
+   <td style="text-align:left;"> MAST90109 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Foundations of Spatial Information </td>
+   <td style="text-align:left;"> GEOM90008 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Spatial Databases </td>
+   <td style="text-align:left;"> GEOM90018 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Spatial Analysis </td>
+   <td style="text-align:left;"> GEOM90006 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Information Visualisation </td>
+   <td style="text-align:left;"> GEOM90007 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Analysis of High-Dimensional Data </td>
+   <td style="text-align:left;"> MAST90110 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Statistical Modelling </td>
+   <td style="text-align:left;"> MAST90111 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Mathematics of Risk </td>
+   <td style="text-align:left;"> MAST90051 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Optimisation for Industry </td>
+   <td style="text-align:left;"> MAST90014 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Practice of Statistics &amp; Data Science </td>
+   <td style="text-align:left;"> MAST90027 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Stochastic Calculus with Applications </td>
+   <td style="text-align:left;"> MAST90059 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Probability </td>
+   <td style="text-align:left;"> MAST90081 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Random Processes </td>
+   <td style="text-align:left;"> MAST90019 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Bayesian Statistical Learning </td>
+   <td style="text-align:left;"> MAST90125 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Mathematical Statistics </td>
+   <td style="text-align:left;"> MAST90082 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> AI Planning for Autonomy </td>
+   <td style="text-align:left;"> COMP90054 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Theoretical Computer Science </td>
+   <td style="text-align:left;"> COMP90057 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Algorithms for Bioinformatics </td>
+   <td style="text-align:left;"> COMP90014 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Computational Genomics </td>
+   <td style="text-align:left;"> COMP90016 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Constraint Programming </td>
+   <td style="text-align:left;"> COMP90046 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Cryptography and Security </td>
+   <td style="text-align:left;"> COMP90043 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Declarative Programming </td>
+   <td style="text-align:left;"> COMP90048 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Distributed Algorithms </td>
+   <td style="text-align:left;"> COMP90020 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Distributed Systems </td>
+   <td style="text-align:left;"> COMP90015 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Internet Technologies </td>
+   <td style="text-align:left;"> COMP90007 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Mobile Computing Systems Programming </td>
+   <td style="text-align:left;"> COMP90018 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Parallel and Multicore Computing </td>
+   <td style="text-align:left;"> COMP90025 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Programming Language Implementation </td>
+   <td style="text-align:left;"> COMP90045 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Natural Language Processing </td>
+   <td style="text-align:left;"> COMP90042 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Stream Computing and Applications </td>
+   <td style="text-align:left;"> COMP90056 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Knowledge Management Systems </td>
+   <td style="text-align:left;"> ISYS90035 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Security Analytics </td>
+   <td style="text-align:left;"> COMP90073 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Computer Vision </td>
+   <td style="text-align:left;"> COMP90086 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> The Ethics of Artificial Intelligence </td>
+   <td style="text-align:left;"> COMP90087 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Science in Schools </td>
+   <td style="text-align:left;"> EDUC90839 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Science and Technology Internship </td>
+   <td style="text-align:left;"> SCIE90017 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unimelb </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Communicating Science at Work </td>
+   <td style="text-align:left;"> SCIE90034 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Visual Analytics </td>
+   <td style="text-align:left;"> COMP5048 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Principles of Data Science </td>
+   <td style="text-align:left;"> COMP5310 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Machine Learning and Data Mining </td>
+   <td style="text-align:left;"> COMP5318 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Computational Statistical Methods </td>
+   <td style="text-align:left;"> STAT5003 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Capstone Project </td>
+   <td style="text-align:left;"> DATA5703 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Capstone A </td>
+   <td style="text-align:left;"> DATA5707 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Capstone B </td>
+   <td style="text-align:left;"> DATA5708 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Capstone Project - Individual </td>
+   <td style="text-align:left;"> DATA5709 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Natural Language Processing </td>
+   <td style="text-align:left;"> COMP5046 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Machine Learning </td>
+   <td style="text-align:left;"> COMP5328 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Deep Learning </td>
+   <td style="text-align:left;"> COMP5329 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Data Models </td>
+   <td style="text-align:left;"> COMP5338 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Cloud Computing </td>
+   <td style="text-align:left;"> COMP5349 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Multimedia Retrieval </td>
+   <td style="text-align:left;"> COMP5425 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Analytics and Business Intelligence </td>
+   <td style="text-align:left;"> INFO5060 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Information Security Management </td>
+   <td style="text-align:left;"> INFO5301 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Statistical Learning and Data Mining </td>
+   <td style="text-align:left;"> QBUS6810 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Predictive Analytics </td>
+   <td style="text-align:left;"> QBUS6840 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Introduction to Complex Systems </td>
+   <td style="text-align:left;"> CSYS5010 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Analysis in the Social Sciences </td>
+   <td style="text-align:left;"> DATA5207 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Evaluating Learning Tech. Innovation </td>
+   <td style="text-align:left;"> EDPC5012 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Learning Technology Research Frontiers </td>
+   <td style="text-align:left;"> EDPC5025 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Applied Healthcare Data Science </td>
+   <td style="text-align:left;"> HTIN5005 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Applied GIS and Spatial Data Analytics </td>
+   <td style="text-align:left;"> ITLS6107 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> usyd </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Environmental Footprints and IO Analysis </td>
+   <td style="text-align:left;"> PHYS5033 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Introduction to Data Science </td>
+   <td style="text-align:left;"> DATA7001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Responsible Data Science </td>
+   <td style="text-align:left;"> DATA7002 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Analytics at Scale </td>
+   <td style="text-align:left;"> DATA7201 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Statistical Methods for Data Science </td>
+   <td style="text-align:left;"> DATA7202 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Machine Learning for Data Scientists </td>
+   <td style="text-align:left;"> DATA7703 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Machine Learning </td>
+   <td style="text-align:left;"> COMP7703 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Capstone Project 1 </td>
+   <td style="text-align:left;"> DATA7901 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Capstone Project 2 </td>
+   <td style="text-align:left;"> DATA7902 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Capstone Project 2B </td>
+   <td style="text-align:left;"> DATA7903 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Introduction to Software Engineering </td>
+   <td style="text-align:left;"> CSSE7030 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Database Systems </td>
+   <td style="text-align:left;"> INFS3200 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Database Principles </td>
+   <td style="text-align:left;"> INFS7901 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Mathematics for Data Science 1 </td>
+   <td style="text-align:left;"> MATH7501 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Mathematics for Data Science 2 </td>
+   <td style="text-align:left;"> MATH7502 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Probability Models &amp; Data Analysis </td>
+   <td style="text-align:left;"> STAT7203 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Mining </td>
+   <td style="text-align:left;"> INFS7203 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Techniques for High Dimensional Data </td>
+   <td style="text-align:left;"> INFS7205 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Information Retrieval and Web Search </td>
+   <td style="text-align:left;"> INFS7410 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Social Media Analytics </td>
+   <td style="text-align:left;"> INFS7450 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Numerical Linear Algebra &amp; Optimisation </td>
+   <td style="text-align:left;"> MATH3204 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Further Topics in Operations Research </td>
+   <td style="text-align:left;"> MATH7202 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Operations Research &amp; Mathematical Planning </td>
+   <td style="text-align:left;"> MATH7232 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Statistical Learning </td>
+   <td style="text-align:left;"> STAT3006 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Accounting </td>
+   <td style="text-align:left;"> ACCT7101 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Bioinformatics 1: Introduction </td>
+   <td style="text-align:left;"> BINF6000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Introduction to Proteins &amp; Nucleic Acids </td>
+   <td style="text-align:left;"> BINF6001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Bioinformatics 2: Development &amp; Research </td>
+   <td style="text-align:left;"> BINF7000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Genome Informatics </td>
+   <td style="text-align:left;"> BINF7001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Artificial Intelligence </td>
+   <td style="text-align:left;"> COMP3702 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Pattern Recognition and Analysis </td>
+   <td style="text-align:left;"> COMP3710 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Digital Health Software Project </td>
+   <td style="text-align:left;"> COMP3820 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Algorithms &amp; Data Structures </td>
+   <td style="text-align:left;"> COMP7500 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Algorithms &amp; Data Structures </td>
+   <td style="text-align:left;"> COMP7505 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Numerical Methods in Computational Science </td>
+   <td style="text-align:left;"> COSC7500 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> High-Performance Computing </td>
+   <td style="text-align:left;"> COSC7502 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Software Engineering </td>
+   <td style="text-align:left;"> CSSE7023 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Design Thinking </td>
+   <td style="text-align:left;"> DECO7110 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Elements of Econometrics </td>
+   <td style="text-align:left;"> ECON7310 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Applied Econometrics for Macroeconomics and Finance </td>
+   <td style="text-align:left;"> ECON7350 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Financial Econometrics </td>
+   <td style="text-align:left;"> ECON7390 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Finance </td>
+   <td style="text-align:left;"> FINM7401 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Portfolio Management </td>
+   <td style="text-align:left;"> FINM7403 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Financial Mathematics </td>
+   <td style="text-align:left;"> MATH7039 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Computation in Financial Mathematics </td>
+   <td style="text-align:left;"> MATH7049 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Financial Calculus </td>
+   <td style="text-align:left;"> MATH7091 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Fundamentals of Marketing </td>
+   <td style="text-align:left;"> MKTG7501 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Consumer &amp; Buyer Behaviour </td>
+   <td style="text-align:left;"> MKTG7503 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Market &amp; Consumer Research </td>
+   <td style="text-align:left;"> MKTG7510 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Introduction to Epidemiology </td>
+   <td style="text-align:left;"> PUBH7600 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Deep Learning </td>
+   <td style="text-align:left;"> STAT3007 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Mathematical Statistics </td>
+   <td style="text-align:left;"> STAT7301 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Probability Models &amp; Stochastic Processes </td>
+   <td style="text-align:left;"> STAT7304 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Statistical Analysis of Genetic Data </td>
+   <td style="text-align:left;"> STAT7306 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Probability &amp; Stochastic Processes I </td>
+   <td style="text-align:left;"> STAT7504 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Probability &amp; Stochastic Processes II </td>
+   <td style="text-align:left;"> STAT7505 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uq </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Longitudinal &amp; Correlated Data </td>
+   <td style="text-align:left;"> STAT7610 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Foundations of Computer Science A </td>
+   <td style="text-align:left;"> COMP SCI 7210 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Foundations of Computer Science B </td>
+   <td style="text-align:left;"> COMP SCI 7211 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Mathematical Foundations of Data Science </td>
+   <td style="text-align:left;"> MATHS 7027 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Data Taming </td>
+   <td style="text-align:left;"> MATHS 7107 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Data Science PG </td>
+   <td style="text-align:left;"> STATS 7022 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Decision Science PG </td>
+   <td style="text-align:left;"> APP MTH 7124 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Human and Ethical Factors in Computer Science </td>
+   <td style="text-align:left;"> COMP SCI 7212 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Introduction to Statistical Machine Learning </td>
+   <td style="text-align:left;"> COMP SCI 7314 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Deep Learning Fundamentals </td>
+   <td style="text-align:left;"> COMP SCI 7318 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Applied Machine Learning </td>
+   <td style="text-align:left;"> COMP SCI 7416 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Internship </td>
+   <td style="text-align:left;"> ENG 7111 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Probability &amp; Statistics PG </td>
+   <td style="text-align:left;"> MATHS 7103 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Data Literacy </td>
+   <td style="text-align:left;"> MATHS 7105 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Specialised Programming </td>
+   <td style="text-align:left;"> COMP SCI 7007 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Artificial Intelligence </td>
+   <td style="text-align:left;"> COMP SCI 7059 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Distributed Systems </td>
+   <td style="text-align:left;"> COMP SCI 7076 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Systems Programming </td>
+   <td style="text-align:left;"> COMP SCI 7088 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Algorithm &amp; Data Structure Analysis </td>
+   <td style="text-align:left;"> COMP SCI 7201 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Programming and Computational Thinking for Data Science </td>
+   <td style="text-align:left;"> COMP SCI 7208 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Big Data Analysis and Project </td>
+   <td style="text-align:left;"> COMP SCI 7209 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Parallel and Distributed Computing </td>
+   <td style="text-align:left;"> COMP SCI 7305 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Mining Big Data </td>
+   <td style="text-align:left;"> COMP SCI 7306 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Using Machine Learning Tools PG </td>
+   <td style="text-align:left;"> COMP SCI 7317 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Advanced Algorithms </td>
+   <td style="text-align:left;"> COMP SCI 7407 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Applied Natural Language Processing </td>
+   <td style="text-align:left;"> COMP SCI 7417 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Machine Learning and Artificial Intelligence </td>
+   <td style="text-align:left;"> PHIL 7005 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Statistical Modelling </td>
+   <td style="text-align:left;"> STATS 7054 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Statistical Modelling and Inference </td>
+   <td style="text-align:left;"> STATS 7107 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Data Science Research Project Part A </td>
+   <td style="text-align:left;"> MATHS 7097A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Data Science Research Project Part B </td>
+   <td style="text-align:left;"> MATHS 7097B </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Data Science Industry Project Part A </td>
+   <td style="text-align:left;"> MATHS 7098A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (MDS) </td>
+   <td style="text-align:left;"> Data Science Industry Project Part B </td>
+   <td style="text-align:left;"> MATHS 7098B </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Foundations of Computer Science - Python A </td>
+   <td style="text-align:left;"> COMP SCI 7210OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Foundations of Computer Science - Python B </td>
+   <td style="text-align:left;"> COMP SCI 7211OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Decision Sciences </td>
+   <td style="text-align:left;"> APP MTH 7201OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Business Data &amp; Cyber Security (M) </td>
+   <td style="text-align:left;"> COMMGMT 7023OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Human and Ethical Factors in Computer Science </td>
+   <td style="text-align:left;"> COMP SCI 7212OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Using Machine Learning Tools PG </td>
+   <td style="text-align:left;"> COMP SCI 7317OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Big Data Analysis &amp; Industry Project </td>
+   <td style="text-align:left;"> COMP SCI 7319OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Research Methods </td>
+   <td style="text-align:left;"> COMP SCI 7415OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Data Taming, Modelling and Visualisation </td>
+   <td style="text-align:left;"> DATA 7201OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Applied Data Science </td>
+   <td style="text-align:left;"> DATA 7202OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Working with Big Data </td>
+   <td style="text-align:left;"> DATA 7203OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Applications of Data Science </td>
+   <td style="text-align:left;"> DATA 7301OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Real Data: Modern Methods for Finding Hidden Patterns </td>
+   <td style="text-align:left;"> DATA 7302OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Mathematical Foundations of Data Science </td>
+   <td style="text-align:left;"> MATHS 7027OL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Data Science Research Project </td>
+   <td style="text-align:left;"> DATA 7303AOL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uade </td>
+   <td style="text-align:left;"> Master of Data Science (Applied) [Online] (MDS(App)) </td>
+   <td style="text-align:left;"> Data Science Research Project B </td>
+   <td style="text-align:left;"> DATA 7303BOL </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Data Mining </td>
+   <td style="text-align:left;"> COMP8410 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Data Wrangling </td>
+   <td style="text-align:left;"> COMP8430 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Introduction to Social Science Methods and Types of Data </td>
+   <td style="text-align:left;"> SOCR8201 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Using Data to Answer Policy Questions and Evaluate Policy </td>
+   <td style="text-align:left;"> SOCR8202 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Regression Modelling </td>
+   <td style="text-align:left;"> STAT6038 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Generalised Linear Models </td>
+   <td style="text-align:left;"> STAT7030 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Graphical Data Analysis </td>
+   <td style="text-align:left;"> STAT7026 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Introductory Statistics for Business and Finance </td>
+   <td style="text-align:left;"> STAT7055 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Relational Databases </td>
+   <td style="text-align:left;"> COMP6240 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Introduction to Database Concepts </td>
+   <td style="text-align:left;"> COMP7240 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Programming for Scientists </td>
+   <td style="text-align:left;"> COMP6730 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Introduction to Programming for Data Scientists </td>
+   <td style="text-align:left;"> COMP7230 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Document Analysis </td>
+   <td style="text-align:left;"> COMP6490 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Neural Networks, Deep Learning and Bio-inspired Computing </td>
+   <td style="text-align:left;"> COMP8420 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Statistical Machine Learning </td>
+   <td style="text-align:left;"> COMP8600 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Social Research Practice </td>
+   <td style="text-align:left;"> SOCR8082 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Online Research Methods </td>
+   <td style="text-align:left;"> SOCR8006 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Advanced Techniques in the Creation of Social Science Data </td>
+   <td style="text-align:left;"> SOCR8203 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Advanced Social Science Approaches to Inform Policy Development and Service Delivery </td>
+   <td style="text-align:left;"> SOCR8204 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Introduction to Bayesian Data Analysis </td>
+   <td style="text-align:left;"> STAT7016 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Principles of Mathematical Statistics </td>
+   <td style="text-align:left;"> STAT6039 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Statistical Learning </td>
+   <td style="text-align:left;"> STAT7040 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> anu </td>
+   <td style="text-align:left;"> Master of Applied Data Analytics </td>
+   <td style="text-align:left;"> Applied Time Series Analysis </td>
+   <td style="text-align:left;"> STAT8002 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Computational Thinking with Python </td>
+   <td style="text-align:left;"> CITS1401 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Relational Database Management Systems </td>
+   <td style="text-align:left;"> CITS1402 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Analysis of Experiments </td>
+   <td style="text-align:left;"> STAT2401 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Analysis of Observations </td>
+   <td style="text-align:left;"> STAT2402 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Computational Data Analysis </td>
+   <td style="text-align:left;"> CITS4009 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Natural Language Processing </td>
+   <td style="text-align:left;"> CITS4012 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Open Source Tools and Scripting </td>
+   <td style="text-align:left;"> CITS4407 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Warehousing </td>
+   <td style="text-align:left;"> CITS5504 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Machine Learning </td>
+   <td style="text-align:left;"> CITS5508 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Capstone Project </td>
+   <td style="text-align:left;"> CITS5553 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Applied Predictive Modelling </td>
+   <td style="text-align:left;"> STAT4064 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Bayesian Computing and Statistics </td>
+   <td style="text-align:left;"> STAT4066 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Storytelling </td>
+   <td style="text-align:left;"> BUSN5003 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Computer Vision </td>
+   <td style="text-align:left;"> CITS4402 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Computational Modelling </td>
+   <td style="text-align:left;"> CITS4403 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Artificial Intelligence and Adaptive Systems </td>
+   <td style="text-align:left;"> CITS4404 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Mobile and Wireless Computing </td>
+   <td style="text-align:left;"> CITS4419 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Research Project Part 1 </td>
+   <td style="text-align:left;"> CITS5011 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Research Project Part 2 </td>
+   <td style="text-align:left;"> CITS5012 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Research Project Part 1 </td>
+   <td style="text-align:left;"> CITS5014 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Science Research Project Part 2 </td>
+   <td style="text-align:left;"> CITS5015 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Cloud Computing </td>
+   <td style="text-align:left;"> CITS5503 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Agile Web Development </td>
+   <td style="text-align:left;"> CITS5505 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> The Internet of Things </td>
+   <td style="text-align:left;"> CITS5506 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> High Performance Computing </td>
+   <td style="text-align:left;"> CITS5507 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Project Management and Engineering Practice </td>
+   <td style="text-align:left;"> GENG5505 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Business Intelligence </td>
+   <td style="text-align:left;"> INMT5526 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Data Analysis and Decision Making </td>
+   <td style="text-align:left;"> MGMT5504 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Quantum Information and Computing </td>
+   <td style="text-align:left;"> PHYS4021 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Biostatistics I </td>
+   <td style="text-align:left;"> PUBH4401 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Biostatistics II </td>
+   <td style="text-align:left;"> PUBH5769 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Analysis of Linked Health Data </td>
+   <td style="text-align:left;"> PUBH5785 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Advanced Analysis of Linked Health Data </td>
+   <td style="text-align:left;"> PUBH5802 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Computationally Intensive Methods in Statistics </td>
+   <td style="text-align:left;"> STAT4063 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Multilevel and Mixed-Effects Modelling </td>
+   <td style="text-align:left;"> STAT4065 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> uwa </td>
+   <td style="text-align:left;"> Master of Data Science </td>
+   <td style="text-align:left;"> Statistical Data Science </td>
+   <td style="text-align:left;"> STAT5061 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Foundations of Computer Science </td>
+   <td style="text-align:left;"> COMP9020 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Principles of Programming </td>
+   <td style="text-align:left;"> COMP9021 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Machine Learning and Data Mining </td>
+   <td style="text-align:left;"> COMP9417 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Information Retrieval and Web Search </td>
+   <td style="text-align:left;"> COMP6714 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Big Data Management </td>
+   <td style="text-align:left;"> COMP9313 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Statistical Machine Learning for Risk and Actuarial Applications </td>
+   <td style="text-align:left;"> ACTL3142 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Financial Econometrics </td>
+   <td style="text-align:left;"> ECON5206 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Industrial Organisation </td>
+   <td style="text-align:left;"> ECON5321 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Behavioural Economics </td>
+   <td style="text-align:left;"> ECON5324 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Policy Evaluation Methods </td>
+   <td style="text-align:left;"> ECON6202 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Health Economics </td>
+   <td style="text-align:left;"> ECON6307 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Financial Technology </td>
+   <td style="text-align:left;"> FINS5548 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Introduction to Business Analytics </td>
+   <td style="text-align:left;"> INFS5700 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Information Systems Consulting </td>
+   <td style="text-align:left;"> INFS5831 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Marketing Analytics Tools </td>
+   <td style="text-align:left;"> MARK5822 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Optimization </td>
+   <td style="text-align:left;"> MATH5165 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Linear and Discrete Optimization Modelling </td>
+   <td style="text-align:left;"> MATH5171 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Graph Theory </td>
+   <td style="text-align:left;"> MATH5425 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Applied Regression Analysis </td>
+   <td style="text-align:left;"> MATH5806 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Data Mining and its Business Applications </td>
+   <td style="text-align:left;"> MATH5836 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Time Series </td>
+   <td style="text-align:left;"> MATH5845 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Nonparametric Statistics </td>
+   <td style="text-align:left;"> MATH5895 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Categorical Data Analysis </td>
+   <td style="text-align:left;"> MATH5945 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Bayesian Inference and Computation </td>
+   <td style="text-align:left;"> MATH5960 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Policy Applications of Behavioural Economics </td>
+   <td style="text-align:left;"> ECON6312 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Public Economics and Regulation </td>
+   <td style="text-align:left;"> ECON6313 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Database Systems </td>
+   <td style="text-align:left;"> COMP9311 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Data Visualisation </td>
+   <td style="text-align:left;"> DATA5002 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Data Science and Decisions Project A </td>
+   <td style="text-align:left;"> DATA5011 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Data Science and Decisions Project B </td>
+   <td style="text-align:left;"> DATA5012 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Fundamentals of Data Science </td>
+   <td style="text-align:left;"> DATA9001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Business Economics </td>
+   <td style="text-align:left;"> ECON5103 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Economics of Strategy </td>
+   <td style="text-align:left;"> ECON5111 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Multivariate Analysis </td>
+   <td style="text-align:left;"> MATH5855 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> unsw </td>
+   <td style="text-align:left;"> Master of Data Science and Decisions </td>
+   <td style="text-align:left;"> Statistical Inference </td>
+   <td style="text-align:left;"> MATH5905 </td>
+  </tr>
+</tbody>
+</table></div>
+
+</div>
+</div>
+<p>The grouping was performed manually using the code listed below. We made certain choices though it should be noted that the grouping is not 100% accurate. For example, the code ‘DATA’ from the University of Sydney is all classified under IT, however, some of the units that start with DATA are taught by the faculty in the School of Mathematics and Statistics (based on personal knowledge), which means ‘DATA’ belongs to multiple departments. Although there would be misclassified units, the results could still provide a meaningful guidance regarding the teaching components of Master of Data Science at Go8 universities.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>math <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"STAT"</span>, <span class="st">"MATH"</span>, <span class="st">"MATHS"</span>, <span class="st">"STATS"</span>, <span class="st">"MAT"</span>, <span class="st">"MAST"</span>, <span class="st">"ACTL"</span>, <span class="st">"QBUS"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>it <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"COMP"</span>, <span class="st">"FIT"</span>, <span class="st">"CITS"</span>, <span class="st">"INFS"</span>, <span class="st">"COSC"</span>, <span class="st">"CSSE"</span>, <span class="st">"CSYS"</span>, <span class="st">"EDPC"</span>, <span class="st">"INMT"</span>, <span class="st">"PHIL"</span>, <span class="st">"PHYS"</span>, <span class="st">"BUSN"</span>,<span class="st">"DATA"</span>, <span class="st">"INFO"</span>, <span class="st">"INFS"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>commerce <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ECON"</span>, <span class="st">"FINS"</span>, <span class="st">"MARK"</span>, <span class="st">"ACCT"</span>, <span class="st">"FINM"</span>, <span class="st">"MGMT"</span>, <span class="st">"MKTG"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>spatial <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"GEOM"</span>, <span class="st">"ITLS"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>science <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"EDUC"</span>, <span class="st">"SCIE"</span>, <span class="st">"SOCR"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"BINF"</span>, <span class="st">"BMS"</span>, <span class="st">"HTIN"</span>, <span class="st">"PUBH"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It is clear from <a href="#fig-unitcode">Figure&nbsp;<span>5.1</span></a> that IT and Stat/Math are the two dominating components in the Master of Data Science degrees at Go8. Most units (165 out of 298) fall under the IT faculty, followed by Math and Stats, which has 79 units.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-unitcode" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_2-unitext_files/figure-html/fig-unitcode-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 5.1: Teaching Content by Faculty</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Similar findings could be observed from some but not all Go8 universities. <a href="#fig-tile">Figure&nbsp;<span>5.2</span></a> shows a heat map of the faculty breakdown by university. Since the total number of units offered by each university is different, instead of showing the actual number, proportions are plotted to make better comparisons across universities.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-tile" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_2-unitext_files/figure-html/fig-tile-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 5.2: Proportion of IT Units Varys Across Go8 Universities</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Lighter colour represents higher proportion, it is obvious that at Monash University (monash), University of Adelaide (Uuade), University of Sydney (usyd) and University of Western Australia (uwa), units from IT faculty occupies more than 50% of the total units offered, especially at Monash University, the proportion of IT units nearly reaches 87%.</p>
+<p>On the other hand, University of Melbourne (unimelb) and University of Queensland (uq) offers relatively higher proportion of statistical and mathematical (Stat/Math) units, almost the same percentage as IT units. Whereas units offered at the Australian National University (anu) and UNSW Sydney (unsw) are more evenly distributed across IT, Stat/Math, Science/Social Science and Commerce respectively.</p>
+<p>In addition, it is also clear that units offered at University of Melbourne (unimelb), University of Queensland (uq) and University of Western Australia (uwa) covers five out of eight categories, which implies the Master of Data Science degrees at these three universities provide more varieties in terms of units offered.</p>
+<p>Based on the findings above, it seems that there is a shared structure across Go8 that Master of Data Science is a IT based, computational degree, but the proportion it occupies varies by universities. Monash University tends to be heavily focused on IT and computational aspects, whereas the Master of Data Science degree at UNSW Sydney and ANU are more balanced across IT, statistics and math, as well as science and commerce.</p>
+</section>
+<section id="sec-unit-bigram" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-unit-bigram"><span class="header-section-number">5.2</span> Unit Overview and Learning Outcome - Bigram</h2>
+<p>After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. We pre-processed text from learning outcome and unit overview to produce single word analysis, bigram, and tirgram. Words and terms such as ‘student’, ‘successful completion’ add more noises than values to the results, are removed in the pre-processing step.</p>
+<p>The bigram, shown in <a href="#fig-bigram">Figure&nbsp;<span>5.3</span></a> below provides the most informative results among the n-gram analysis. Machine learning (machin learn) appears quite often, as well as software development (softwar develop), linear model, statistical analysis (statist analysi), spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-bigram" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="03_2-unitext_files/figure-html/fig-bigram-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure 5.3: Unit Overview and Learning Outcome - Bigram (n &gt; 4)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the topic modeling technique for natural language processing, which will be discussed in <span class="quarto-unresolved-ref">?sec-topicmod</span>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03_1-preprocessing.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Text Pre-Processing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03_3-jobtext.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Job Text Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -105,8 +105,10 @@ rmv_col <- function(x){
 unidata <- rmv_col("data/unidata.csv")
 ```
 
-The collected data contains **`r nrow(unidata)` units** from 8 universities, and **`r ncol(unidata)` variables** including School, Course, Course_code, Unit, Unit_code, Outcomes, Overview and Description. The full data set is made available below for exploration, note that blank cells represent data unavailable.
+The collected data contains **`r nrow(unidata)` units** from 8 universities, and **`r ncol(unidata)` variables** including School, Course, Course_code, Unit, Unit_code, Outcomes, Overview and Description. 
 
+::: {.content-visible unless-format="pdf"}
+The full data set is made available below for exploration, note that blank cells represent data unavailable.
 ```{r}
 unidata %>% 
   mutate(across(c(Outcomes, Overview, description), 
@@ -126,3 +128,20 @@ unidata %>%
                            pageLength = 3)) %>% 
   formatStyle(columns = c(6,7), fontSize = '80%')
 ```
+:::
+
+
+::: {.content-hidden unless-format="pdf"}
+Here is an example of the data.
+```{r}
+unidata %>% 
+  mutate(across(c(Outcomes, Overview, description), 
+                ~ str_replace_all(.x, "\\\\", ""))) %>% 
+  select(-description) %>% 
+  head(2) %>% 
+  kable() %>% 
+  kable_styling(latex_options = c("striped", "scale_down"), font_size = 12)
+```
+:::
+
+
