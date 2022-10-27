@@ -96,7 +96,7 @@ Similar findings could be observed from some but not all Go8 universities. @fig-
 comp %>% 
   mutate(category = fct_reorder(category, n, sum)) %>% 
   group_by(School) %>% 
-  mutate(prop = round(n/sum(n),3)) %>% 
+  mutate(prop = round(n/sum(n),4)*100) %>% 
   ungroup() %>% 
   ggplot(aes(x = prop,
              y = category,
@@ -110,15 +110,35 @@ comp %>%
   theme(legend.position = "none")
 ```
 
+
+```{r fig-tile, fig.cap = "Proportion of IT Units Varys Across Go8 Universities"}
+comp %>% 
+  group_by(School) %>% 
+  mutate(prop = round(n/sum(n),4)*100) %>% 
+  ungroup() %>% 
+  group_by(School, category) %>% 
+  summarise(prop_sum = sum(prop)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = School, y = category, fill = prop_sum)) +
+  geom_tile(color = "white",
+            lwd = 1.5,
+            linetype = 1) +
+  geom_text(aes(label = prop_sum), color = "white", size = 4) +
+  coord_fixed() +
+  labs(y = "",
+       title = "Proportion of IT Units Varys Across Go8 Universities",
+       fill = "% of total units")
+```
+
 At Monash University (monash), University of Adelaide (Uuade), University of Sydney (usyd) and University of Western Australia (uwa), IT is apparently dominating the Master of Data Science degree, especially at Monash University. However, University of Melbourne (unimelb) and University of Queensland (uq) offers relatively higher proportion of statistical and mathematical (Stat/Math) units, whereas units offered at the Australian National University (anu) and UNSW Sydney (unsw) are more evenly distributed across IT, Stat/Math, Science/Social Science and Commerce respectively.
 
 Based on the findings above, it seems that there is a shared structure across Go8 that Master of Data Science is a IT based, computational degree, but the proportion it occupies varies by universities. Monash University tends to be heavily focused on IT and computational aspects, whereas the Master of Data Science degree at UNSW Sydney and ANU are more balanced across IT, statistics and math, as well as science and commerce.
 
 ## Unit Overview and Learning Outcome - Bigram {#sec-unit-bigram}
 
-After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. Single word analysis, bigram and trigram are all produced in order to identify the frequently mentioned words and/or terms. `distinct` function is applied to unit and term, so that same terms are only counted once in a unit to avoid duplicated counting. Words and terms such as 'student', 'successful completion' add more noises than values to the results, are removed in the pre-processing step.
+After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. Single word analysis, bigram and trigram are all produced in order to identify the frequently mentioned words and/or terms. Words are first stemmed through the pre-processing stage, `distinct` function is then applied to units and terms, so that same words or terms are only counted once in a unit to avoid duplicated counting. Words and terms such as 'student', 'successful completion' add more noises than values to the results, are removed in the pre-processing step.
 
-The bigram, shown in @fig-bigram below provides the most informative results among the n-gram analysis. Machine learning appears quite often, as well as software development, linear models, statistical analysis, spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.
+The bigram, shown in @fig-bigram below provides the most informative results among the n-gram analysis. Machine learning (machin learn) appears quite often, as well as software development (softwar develop), linear model, statistical analysis (statist analysi), spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.
 
 ```{r echo=FALSE, warning=FALSE}
 unidata_bigram <- unidata %>% 
@@ -131,21 +151,14 @@ unidata_bigram <- unidata %>%
          !word2 %in% c("student", "skill", "set", "piece", "concept", "capstone", "delivery", "domain", "manner", "due", "range", "unit", "master")) %>% 
   subset(!grepl("[0-9]", word1)) %>% 
   subset(!grepl("[0-9]", word2)) %>% 
-  mutate(word = as_factor(paste(word1, word2, sep = " "))) %>%
+  mutate(word1_stem = wordStem(word1, language = "english"),
+         word2_stem = wordStem(word2, language = "english")) %>% 
+  mutate(word = as_factor(paste(word1_stem, word2_stem, sep = " "))) %>%
   #filter(!word == "data science") %>% 
   distinct(School, Unit, word) %>% 
   group_by(School) %>% 
   count(word, sort = TRUE) %>% 
-  ungroup() %>% 
-  mutate(category = case_when(str_detect(word, "data") ~ "IT",
-                              str_detect(word, "regression") ~ "Math",
-                              str_detect(word, "software") ~ "IT",
-                              str_detect(word, "information") ~"IT",
-                              str_detect(word, "neural") ~ "IT",
-                              str_detect(word, "artificial") ~ "AI",
-                              str_detect(word, "machine") ~ "IT",
-                              str_detect(word, "debugging") ~ "IT")) %>% 
-  mutate(category = if_else(is.na(category), "Other", category))
+  ungroup()
 ```
 
 ```{r fig-bigram, fig.cap = "Unit Overview and Learning Outcome - Bigram (n > 4)"}
