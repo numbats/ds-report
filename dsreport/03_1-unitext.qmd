@@ -90,26 +90,7 @@ comp %>%
   theme(legend.position = "none")
 ```
 
-Similar findings could be observed from some but not all Go8 universities. @fig-unitcode-breakdown shows the faculty breakdown by university. Since the total number of units offered by each university is different, instead of showing the actual number, proportions are plotted to make better comparisons across universities. 
-
-```{r fig-unitcode-breakdown, fig.cap = "Faculty Breakdown by University (Proportion)"}
-comp %>% 
-  mutate(category = fct_reorder(category, n, sum)) %>% 
-  group_by(School) %>% 
-  mutate(prop = round(n/sum(n),4)*100) %>% 
-  ungroup() %>% 
-  ggplot(aes(x = prop,
-             y = category,
-             fill = category)) +
-  geom_col() +
-  scale_fill_brewer(palette = "Dark2") +
-  labs(x = "",
-       y = "",
-       title = "Breakdown by Univeristy (Proportion)") +
-  facet_wrap(~School, scales = "free_y") +
-  theme(legend.position = "none")
-```
-
+Similar findings could be observed from some but not all Go8 universities. @fig-tile shows a heat map of the faculty breakdown by university. Since the total number of units offered by each university is different, instead of showing the actual number, proportions are plotted to make better comparisons across universities. 
 
 ```{r fig-tile, fig.cap = "Proportion of IT Units Varys Across Go8 Universities"}
 comp %>% 
@@ -130,13 +111,17 @@ comp %>%
        fill = "% of total units")
 ```
 
-At Monash University (monash), University of Adelaide (Uuade), University of Sydney (usyd) and University of Western Australia (uwa), IT is apparently dominating the Master of Data Science degree, especially at Monash University. However, University of Melbourne (unimelb) and University of Queensland (uq) offers relatively higher proportion of statistical and mathematical (Stat/Math) units, whereas units offered at the Australian National University (anu) and UNSW Sydney (unsw) are more evenly distributed across IT, Stat/Math, Science/Social Science and Commerce respectively.
+Lighter colour represents higher proportion, it is obvious that at Monash University (monash), University of Adelaide (Uuade), University of Sydney (usyd) and University of Western Australia (uwa), units from IT faculty occupies more than 50% of the total units offered, especially at Monash University, the proportion of IT units nearly reaches 87%. 
+
+On the other hand, University of Melbourne (unimelb) and University of Queensland (uq) offers relatively higher proportion of statistical and mathematical (Stat/Math) units, almost the same percentage as IT units. Whereas units offered at the Australian National University (anu) and UNSW Sydney (unsw) are more evenly distributed across IT, Stat/Math, Science/Social Science and Commerce respectively.
+
+In addition, it is also clear that units offered at University of Melbourne (unimelb), University of Queensland (uq) and University of Western Australia (uwa) covers five out of eight categories, which implies the Master of Data Science degrees at these three universities provide more varieties in terms of units offered.
 
 Based on the findings above, it seems that there is a shared structure across Go8 that Master of Data Science is a IT based, computational degree, but the proportion it occupies varies by universities. Monash University tends to be heavily focused on IT and computational aspects, whereas the Master of Data Science degree at UNSW Sydney and ANU are more balanced across IT, statistics and math, as well as science and commerce.
 
 ## Unit Overview and Learning Outcome - Bigram {#sec-unit-bigram}
 
-After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. Single word analysis, bigram and trigram are all produced in order to identify the frequently mentioned words and/or terms. Words are first stemmed through the pre-processing stage, `distinct` function is then applied to units and terms, so that same words or terms are only counted once in a unit to avoid duplicated counting. Words and terms such as 'student', 'successful completion' add more noises than values to the results, are removed in the pre-processing step.
+After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. Single word analysis, bigram and trigram are all produced in order to identify the frequently mentioned words and/or terms. Words are first stemmed in the pre-processing stage, `distinct` function is then applied to units and terms, so that same words or terms are only counted once in a unit to avoid duplicated counting. Words and terms such as 'student', 'successful completion' add more noises than values to the results, are removed in the pre-processing step.
 
 The bigram, shown in @fig-bigram below provides the most informative results among the n-gram analysis. Machine learning (machin learn) appears quite often, as well as software development (softwar develop), linear model, statistical analysis (statist analysi), spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.
 
