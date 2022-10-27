@@ -2,9 +2,9 @@
 
 ## Web Scraping
 
-In order to explore the Data Science degrees around Australia Universities, we compiled a list of universities in Australia and the Data Science or related degrees they offered, then web scraped required information from each university's website using R. In total, we collected 298 units from eight postgraduate courses in Data Science across all Group of Eight (Go8) universities.
+In order to explore the Data Science degrees in Australian Universities, we compiled a list of universities in Australia and the Data Science or related degrees they offered, then web scraped required information from each university's website using the R programming language [@Rstats]. In total, we collected 298 units from eight postgraduate courses in Data Science across all Group of Eight (Go8) universities.
 
-To start off the project, Professor Tanaka provided sample code for data scraping using Monash Handbook as an example. Libraries `rvest` and `rSelenium` are two of the main tools. Initially, we studied her code and then tried to replicate her code to be applied to other university's websites.
+To start off the project, Dr Tanaka provided sample code for data scraping using Monash Handbook as an example. Libraries `rvest` and `RSelenium` are two of the main tools. Initially, we studied her code and then tried to replicate her code to be applied to other university's websites.
 
 The flow of the data scraping is as follow (example code from `uom-master-datasci.qmd`):
 
@@ -24,7 +24,7 @@ curriculum <- sub_list %>%
       html_attr("href")
 ```
 
-3.  Use `rSelenium` functions and course unit information, to direct R to the unit information page.
+3.  Use `RSelenium` functions and course unit information, to direct R to the unit information page.
 
 4.  Retrieve the following information from the page using rvest functions:
 
@@ -48,7 +48,7 @@ for(unit in curriculum) {
         ...
 ```
 
-6.  Compile all the retrieved data from the University into a dataframe and export it as csv file.
+6.  Compile all the retrieved data from the University into a single data table and export it as a csv file.
 ```{.r}
 data <- data %>% 
         bind_rows(tibble(!!!c(list(Course = title, 
@@ -64,19 +64,19 @@ data <- data %>%
                                    ))))
 ```
 
-Despite the process being similar for each University, we soon realize the process was going to be more challenging than expected.
+Despite the process being similar for each University, we soon realized the process was going to be more challenging than expected.
 
 ## Inconsistent Information
 
-Monash University's student handbook on Degrees and Courses is a spectacular website for data scraping. Its html code is clearly labeled and anything you need to know about the degree or course can be found on the website. The same cannot be said about other universities.
+Monash University's student handbook on Degrees and Courses is a spectacular website for data scraping. Its html code is clearly labelled and anything you need to know about the degree or course can be found on the website. The same cannot be said about other universities.
 
 The course descriptions on the handbook and universities' website page are usually structured in a different manner, since the majority of the data is collected from universities' handbooks, course descriptions are also extracted from handbooks for consistency purposes.  
 
 In addition, the required unit information listed above is not all available at the targeted universities. The handbook from University of New South Wales contains extremely limited information: unit overview is brief, unit requisites are only available for a few units, and unit outcome is not provided at all. 
 
-## Difficult to Manage Websites
+## Difficulty in webscraping 
 
-Each university website is unique. Sometimes the information is not straightforward. An example of this is University of Adelaide. The main website for the degree does contain the list of units that go into the degree.
+Each university website is unique. Sometimes the information is not straightforward. An example of this is University of Adelaide's course website. The main website for the degree does contain the list of units that go into the degree.
 
 However, instead of having just one page with all the unit information, the link takes you to a page with different unit information depending on when the unit is offered and on what campus.
 
