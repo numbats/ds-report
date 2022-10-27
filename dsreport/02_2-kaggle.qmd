@@ -1,4 +1,4 @@
-# Employer Data
+# Employer Data {#sec-empdata}
 
 For employer's perception of Data Science, we decided to look at the job postings for Data Science relevant positions. We would have scraped career websites given more time. However, due to the circumstances, we found readily available data from [Exploring 2 years' of Data Scientist Job Listings](https://www.kaggle.com/code/nomilk/exploring-2-years-of-data-scientist-job-listings/data).
 
@@ -28,7 +28,7 @@ The a fraction of the data set is made available below for exploration.
 ```{r employerdf}
 jobdata %>% 
   select(jobId, jobTitle, jobClassification, mobileAdTemplate, 25:49) %>% 
-  head(.,5) %>% 
+  head(.,2) %>% 
   datatable(height = "400px",
             options = list(scrollX = TRUE,
             columnDefs = list(list(className = "dt-center", targets = 1:5)))) %>% 

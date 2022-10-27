@@ -170,7 +170,7 @@ comp + stats
 Topic 2 is the only dominating topic based on the results provided by the model using only computing data, which provides a clearer picture than the previous models. The table below listed the top ten words for each topics, it turns out Topic 2 contains words like comput (computation etc.), system, program, softwar (software), which are associated with computational aspects, especially software. This model provides a more meaningful results than the prior ones, however, there is not much interpretations could be made for the other topics, the information it offers is still not very satisfying.
 
 ```{r}
-rmv_col("data/term_comp.csv") %>% 
+rmv_col("data/term_comp30.csv") %>% 
   kable() %>% 
   kable_styling(bootstrap_options = "condensed") %>% 
   scroll_box(width = "1250px")
