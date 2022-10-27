@@ -22,7 +22,7 @@ unidata <- rmv_col("data/unidata.csv")
 ```
 
 
-## Unit Code Analysis {#sec-unit-code}
+## Faculty Unit Code Analysis {#sec-unit-code}
 
 To explore the teaching contents of Master of Data Science at Go8, an analysis based on faculty of units offered is conducted to see what components are included in this degree.
 
@@ -39,7 +39,7 @@ unidata %>%
              width = "1250px")
 ```
 
-The grouping was performed manually using the code listed below. It is a subjective choice made under careful considerations, we are aware that the grouping is not 100% accurate. For example, the code 'DATA' from University of Sydney is classified under IT, however, some of the units start with DATA are actually more related with statistics, which means 'DATA' belongs to multiple departments. Although there would be misclassifieds units, the results could still provide a meaningful guidance regarding the teaching components of Master of Data Science at Go8 universities. 
+The grouping was performed manually using the code listed below. We made certain choices though it should be noted that the grouping is not 100% accurate. For example, the code 'DATA' from the University of Sydney is all classified under IT, however, some of the units that start with DATA are taught by the faculty in the School of Mathematics and Statistics (based on personal knowledge), which means 'DATA' belongs to multiple departments. Although there would be misclassified units, the results could still provide a meaningful guidance regarding the teaching components of Master of Data Science at Go8 universities. 
 
 ```{.r}
 math <- c("STAT", "MATH", "MATHS", "STATS", "MAT", "MAST", "ACTL", "QBUS")
@@ -118,7 +118,7 @@ Based on the findings above, it seems that there is a shared structure across Go
 
 After having a rough idea of the bigger picture, we then moved to explore what exactly are the teaching contents. Single word analysis, bigram and trigram are all produced in order to identify the frequently mentioned words and/or terms. `distinct` function is applied to unit and term, so that same terms are only counted once in a unit to avoid duplicated counting. Words and terms such as 'student', 'successful completion' add more noises than values to the results, are removed in the pre-processing step.
 
-The bigram, which is @fig-bigram below provides the most informative results among all. Machine learning appears quite often, as well as software development, linear models, statistical analysis, spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.
+The bigram, shown in @fig-bigram below provides the most informative results among the n-gram analysis. Machine learning appears quite often, as well as software development, linear models, statistical analysis, spatial data. It seems that these frequently mentioned terms are associated with both computational and statistical concepts and skills, which aligns with the findings from the unit code analysis in previous section.
 
 ```{r echo=FALSE, warning=FALSE}
 unidata_bigram <- unidata %>% 
@@ -163,4 +163,4 @@ unidata_bigram %>%
   scale_x_continuous(expand = c(0, 0.1))
 ```
 
-Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the text2vec technique for natural language processing, which will be discussed in the next chapter.
+Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the text2vec technique for natural language processing, which will be discussed in the next chapter [ET: Chapter 7 not 6?].
