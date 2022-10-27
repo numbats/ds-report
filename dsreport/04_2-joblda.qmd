@@ -4,6 +4,7 @@
 library(tidyverse)
 library(kableExtra)
 library(patchwork)
+theme_set(theme_minimal())
 emp_word_stat <- read.csv("data/emp_stat.csv")%>% 
   select(-`X`)
 
