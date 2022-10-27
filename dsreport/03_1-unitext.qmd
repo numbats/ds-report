@@ -163,4 +163,4 @@ unidata_bigram %>%
   scale_x_continuous(expand = c(0, 0.1))
 ```
 
-Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the text2vec technique for natural language processing, which will be discussed in the next chapter [ET: Chapter 7 not 6?].
+Unfortunately, due to the limited number of observations in the collected data set, the count for each term is too low to make meaningful interpretations or justifications. In addition, similar terms such as research findings, research designs and research literature are supposed to be grouped and counted together, but are not in the bigram. This issue is later solved by introducing the text2vec technique for natural language processing, which will be discussed in the next chapter [ET: next next chapter no?].
