@@ -5,7 +5,7 @@ For employer's perception of Data Science, we decided to look at the job posting
 ## Data Science Job Postings
 The data was scraped from Seek.com by Steve Condylios. The collected data contains **2,857** job posts and  **52 variables**. 
 
-Exploratory data analysis was conducted exploring the salary and breakdown of Go8 emloyers. However they did not yield interesting results and thus put aside. For the purpose of this report, only 29 variables were looked at, including jobId, jobTitle, jobClassification, mobileAdTemplate, 25 programming languages. Of all the job posts, 535 are for senior or managerial positions, 25 for graduate positions, and the rest not specified in the job title. 
+Exploratory data analysis was conducted exploring the salary and breakdown of Go8 employers. However they did not yield interesting results and thus put aside. For the purpose of this report, only 29 variables were looked at, including jobId, jobTitle, jobClassification, mobileAdTemplate, 25 programming languages. Of all the job posts, 535 are for senior or managerial positions, 25 for graduate positions, and the rest not specified in the job title. 
 
 Condylios also included Data Analyst job posting in the data set. 92 jobs are for Data Analyst and 82 jobs are labeled Data Analyst/Data Scientist. This is another interesting topic for comparison between Data Analyst and Data Scientist but for the scope of the project, we do not delve deeper into the data collection decisions. 
 
