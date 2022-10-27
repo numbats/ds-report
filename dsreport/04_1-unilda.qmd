@@ -1,6 +1,6 @@
 ## Apply the Selected Model to Collected University Data {#sec-unitopic}
 
-Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the `SnowballC` package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest probability, instead of counting the appearance of words, the new counts generated are based on topics.
+Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the `SnowballC` package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest beta score, as explained in Section @sec-model. Instead of counting the appearance of words, the new counts generated are based on topics.
 
 Similar with the university breakdown in @sec-unit-bigram, to make more objective comparisons, counts are converted to proportions due to different number of units scraped for the eight universities. @fig-unitopics suggests that Topics 1 and 6 are obviously the dominating topics in Master of data science at all Go8 universities, whereas Topics 2, 5, 9, 10 together also occupies a relatively large proportion. 
 ```{r stats data, echo = FALSE, message=FALSE}
