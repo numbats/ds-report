@@ -1,4 +1,4 @@
-## Apply the Selected Model to Collected University Data
+## Apply the Selected Model to Collected University Data {#sec-unitopic}
 
 Before applying the fitted LDA model to our university data set, words from unit overview and learning outcomes are stemmed using the `SnowballC` package, so that noises like plurals and part of speech are removed. The stemmed words are then assigned to the corresponding topic with the highest probability, instead of counting the appearance of words, the new counts generated are based on topics.
 
