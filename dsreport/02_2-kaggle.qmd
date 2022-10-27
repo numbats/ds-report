@@ -28,7 +28,7 @@ The a fraction of the data set is made available below for exploration.
 ```{r employerdf}
 jobdata %>% 
   select(jobId, jobTitle, jobClassification, mobileAdTemplate, 25:49) %>% 
-  head(.,5) %>% 
+  head(.,2) %>% 
   datatable(height = "400px",
             options = list(scrollX = TRUE,
             columnDefs = list(list(className = "dt-center", targets = 1:5)))) %>% 
