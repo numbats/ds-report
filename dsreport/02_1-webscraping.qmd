@@ -105,7 +105,7 @@ rmv_col <- function(x){
 unidata <- rmv_col("data/unidata.csv")
 ```
 
-The collected data contains **`r nrow(unidata)` units** from 8 universities, and **`r ncol(unidata)` variables** including School, Course, Course_code, Unit, Unit_code, Outcomes, Overview and Description. The full data set is made available below for exploration.
+The collected data contains **`r nrow(unidata)` units** from 8 universities, and **`r ncol(unidata)` variables** including School, Course, Course_code, Unit, Unit_code, Outcomes, Overview and Description. The full data set is made available below for exploration, note that blank cells represent data unavailable.
 
 ```{r}
 unidata %>% 
@@ -114,6 +114,15 @@ unidata %>%
   select(-description) %>% 
   datatable(height = "400px",
             options = list(scrollX = TRUE,
-            columnDefs = list(list(className = "dt-center", targets = 1:7)))) %>% 
-  formatStyle(columns = colnames(.), fontSize = '30%')
+                           autoWidth = TRUE,
+                           columnDefs = list(list(className = "dt-center", 
+                                                  targets = 1:5),
+                                             list(width = '450px',
+                                                  targets = 6:7),
+                                             list(width = '220px',
+                                                  targets = 4),
+                                             list(width = '180px',
+                                                  targets = 2)),
+                           pageLength = 3)) %>% 
+  formatStyle(columns = c(6,7), fontSize = '80%')
 ```

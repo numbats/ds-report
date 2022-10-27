@@ -39,7 +39,7 @@
     "href": "02_1-webscraping.html#collected-data",
     "title": "2  University Data",
     "section": "2.4 Collected Data",
-    "text": "2.4 Collected Data\n\n\n\nThe collected data contains 298 units from 8 universities, and 8 variables including School, Course, Course_code, Unit, Unit_code, Outcomes, Overview and Description. The full data set is made available below for exploration."
+    "text": "2.4 Collected Data\n\n\n\nThe collected data contains 298 units from 8 universities, and 8 variables including School, Course, Course_code, Unit, Unit_code, Outcomes, Overview and Description. The full data set is made available below for exploration, note that blank cells represent data unavailable."
   },
   {
     "objectID": "02_2-kaggle.html",
