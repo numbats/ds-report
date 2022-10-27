@@ -14,7 +14,7 @@ The research has a few limitations. The lack of data consistency within Go8 univ
 
 We assumed the nature of units (computational, statistical..etc.) based on the unit code when in reality the unit code is not a definite measure of the content being taught. Our assumption that the content is implied by unit code may be wrong.
 
-A proper text corpus requires great understanding of linguistics and a large amount of articles. The result of our LDA model topic breakdown can also simply be due to the fact that only a few of the wiki-articles we used are relevant and therefore will consistently be significant for employer and university data.
+A proper text corpus requires great understanding of linguistics and a large amount of articles. The result of our LDA model topic breakdown can also simply be due to the fact that only a few of the wiki-articles we used are relevant and therefore will consistently be significant for employer and university data. In addition, there are latex terms included in the training data acquired through the web scraping process, these terms are not fully removed and might have brought unwanted noises to the fitted model, and possibly twisted the outputs. 
 
 We relied heavily on packages like `tidytext` and `SnowballC` for word processing. However, there still are some drawbacks. The stemmed words are still potentially not "clean" enough and produce misleading results.
 

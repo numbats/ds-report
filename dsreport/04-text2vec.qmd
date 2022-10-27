@@ -8,7 +8,7 @@ There are multiple publicly available models and packages to conduct similar com
 
 According to @das2016data, the algorithm behind the LDA model is to convert words to document-term matrix (DTM), where the rows, columns and entries correspond to documents, terms and counts respectively. LDA then fits a probabilistic model that assumes a mixture of latent topics, where each topic has a multinomial distribution for all words. The number of topics is a parameter that could be adjusted by needs.
 
-The initial code to build the LDA model was provided by Professor Tanaka, the major part of the code to build the first version of LDA model is also provided below.
+The initial code to build the LDA model was provided by Professor Tanaka, we have tested using different values for parameter `ntopics` and tried out training the LDA models with different combinations of data. 
 
 ```{.r}
 list(
@@ -52,7 +52,7 @@ The model must be trained before it could be used, we web scraped over 4448 Wiki
 
 ## Model Adjustments
 
-We have tested using different values for parameter `ntopics` and tried out training the LDA models with different combinations of data. 
+
 
 The results provided differs from models, @fig-ssc-cs compares the results produced by the full model and model without sociology data on ten topics.
 
