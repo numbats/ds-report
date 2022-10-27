@@ -1,6 +1,8 @@
 # Job Text Analysis
 
-To explore the skills and programming languages in demand from employers, we focused on the mobileAdTemplate and the 25 columns of programming languages. Similar to before, single word analysis, bigram, and trigram are all produced. 
+To explore the skills and programming languages in demand from employers, we focused on the mobileAdTemplate [ET: describe this] and the 25 columns of programming languages. Similar to before, single word analysis, bigram, and trigram are all produced [ET: based on ?]. 
+
+[ET: include a brief description of stemming]
 
 ```{r setup, include = FALSE}
 library(tidyverse)
@@ -70,7 +72,7 @@ emp_bigram %>%
        y = "Bigrams")
 ```
 
-For @fig-employer-bigram, we stemmed the words before joining them into bigram in attempt to avoid under-counting. However, from the figure we can still see that some terms like *data analyt* and *data analysi* are still counted separately. From this bigram, the popular skills or knowledge mentioned are *machin learn*, *predict model*, *communic skill*,  *data analyt* and *data mine*. Mathematical skill, *mathemat statist* is also mentioned quite often.  Some of these terms on the list are vague and can mean be grouped together. Trigram yeilded similar results as the bigram. With the same problem of under-counting the n-grams due to insufficient groupings. 
+For @fig-employer-bigram, we stemmed the words before joining them into bigram in attempt to avoid under-counting. However, from the figure we can still see that some terms like *data analyt* and *data analysi* are still counted separately. From this bigram, the popular skills or knowledge mentioned are *machin learn*, *predict model*, *communic skill*,  *data analyt* and *data mine*. Mathematical skill, *mathemat statist* is also mentioned quite often.  Some of these terms on the list are vague and can mean be grouped together. Trigram yielded similar results as the bigram. With the same problem of under-counting the n-grams due to insufficient groupings. 
 
 ## Programming Languages
 
@@ -86,7 +88,7 @@ jobdata %>% select(c(25:49)) %>%
              x= sum,
              fill = Program))+
   geom_col(fill = "#006DAE")+
-  geom_text(aes(label = sum, hjust=0.1), color ="black")+
+  geom_text(aes(label = sum, hjust=0.1), color ="black", nudge_x = 10)+
   theme(legend.position = "none")+
   labs(title = "Programming Languages Mentioned",
        y = "Language", x = "Count")
