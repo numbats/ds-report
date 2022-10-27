@@ -47,35 +47,58 @@ mod_sum %>%
   scroll_box(height = "420px")
 ```
 
-Term shows all the word extracted from the training data (Wikipedia articles), as each latent topic has a multinomial distribution for all words, beta value of a term is the score / probability computed for that particular topic. Highest beta value indicates highest probability, which means the term is most likely belongs to the corresponding topic.
+Term shows all the word extracted from the training data (Wikipedia articles), as each latent topic has a multinomial distribution for all words, beta value of a term is the score / probability computed for that particular topic. Highest beta value indicates highest probability, which means the term is most likely belongs to the corresponding topic. 
+
+Beta values for the same word would differ from model to model, and also subject to change by adjusting the number of latent topics. To acquire the most satisfactory results for our university data, we have fitted and tested multiple LDA models with different subset of training data, as well as various number of topics. 
 
 
 ## Model Adjustments
 
-The results provided differs from models, @fig-ssc-cs compares the results produced by the full model and model without sociology data on ten topics.
-
-
+After applying the fitted LDA models to our university data set, the results delivered by the models are quite different. @fig-com compares the results produced by the four fitted models using different training data on ten topics.
 
 ```{r}
 ssc <- data_ssc %>% 
-  mutate(topic = as_factor(topic)) %>% 
+  mutate(topic = as_factor(topic)) %>%
+  mutate(topic = recode_factor(topic,
+                               "1" = "A1",
+                               "2" = "A2",
+                               "3" = "A3",
+                               "4" = "A4",
+                               "5" = "A5",
+                               "6" = "A6",
+                               "7" = "A7",
+                               "8" = "A8",
+                               "9" = "A9",
+                               "10" = "A10")) %>% 
   group_by(School) %>% 
   count(topic, sort = TRUE) %>%
   mutate(prop = round(n/sum(n),4)) %>% 
   ungroup() %>% 
   mutate(topic = fct_reorder(topic, prop, sum))%>% 
   ggplot(aes(x = prop,
-             y = topic,
-             fill = topic))+
-  geom_col() +
+             y = topic))+
+  geom_col(fill = "#1F78B4",
+           colour = "white") +
   my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
-  labs(x = "proportion",
-       title = "Results of the Full Model")
+  labs(x = "",
+       title = "Model A",
+       subtitle = "Trained by sociology, statistics and computing data")
 
 cs <- data_cs %>% 
   mutate(topic = as_factor(topic)) %>% 
+  mutate(topic = recode_factor(topic,
+                               "1" = "B1",
+                               "2" = "B2",
+                               "3" = "B3",
+                               "4" = "B4",
+                               "5" = "B5",
+                               "6" = "B6",
+                               "7" = "B7",
+                               "8" = "B8",
+                               "9" = "B9",
+                               "10" = "B10")) %>% 
   group_by(School) %>% 
   count(topic, sort = TRUE) %>%
   mutate(prop = round(n/sum(n),4)) %>% 
@@ -84,26 +107,28 @@ cs <- data_cs %>%
   ggplot(aes(x = prop,
              y = topic,
              fill = topic))+
-  geom_col() +
+  geom_col(fill = "#33A02C",
+           colour = "white") +
   my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
-  labs(x = "proportion",
-       y = "",
-       title = "Results of Model Without Sociology Data")
-```
+  labs(x = "",
+       title = "Model B",
+       subtitle = "Trained by statistics and computing data")
 
-```{r fig-ssc-cs, fig.cap = "Compare Results Between Full Model and Without Sociology Data", fig.width=10}
-ssc + cs
-```
-
-From the results computed by the full model, Topics 9, 10, 2 and 8 occupies relatively higher proportion compare with the others, but the order varies across universities, and their proportions are not significantly larger than the rest of other topics, makes it hard to draw meaningful interpretations. On the right hand side, results from the model without sociology data demonstrates a better picture: Topics 6, 8 and 9 in this case are the top 3 topics across all Go8 universities, however, proportions of Topic 10, 5, 7, 3 and 4 are also obvious higher in some of the universities, brings in difficulties to make justifications.     
-
-As sociology data tends to brings in noises to the model, and is not closely relevant to the data science topic compare with statistics and computing, another two models are fitted using only statistics data and computing data respectively, the results of both models are shown in @fig-comp-stats.
-
-```{r fig.width=10}
 comp <- data_comp %>% 
   mutate(topic = as_factor(topic)) %>% 
+  mutate(topic = recode_factor(topic,
+                               "1" = "C1",
+                               "2" = "C2",
+                               "3" = "C3",
+                               "4" = "C4",
+                               "5" = "C5",
+                               "6" = "C6",
+                               "7" = "C7",
+                               "8" = "C8",
+                               "9" = "C9",
+                               "10" = "C10")) %>% 
   group_by(School) %>% 
   count(topic, sort = TRUE) %>%
   mutate(prop = round(n/sum(n),4)) %>% 
@@ -112,15 +137,28 @@ comp <- data_comp %>%
   ggplot(aes(x = prop,
              y = topic,
              fill = topic))+
-  geom_col() +
+  geom_col(fill = "#CAB2D6",
+           colour = "white") +
   my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
   labs(x = "proportion",
-       title = "Results of Model Using Only Comp Data")
+       title = "Model C",
+       subtitle = "Trained by only computing data")
 
 stats <- data_s %>% 
   mutate(topic = as_factor(topic)) %>% 
+  mutate(topic = recode_factor(topic,
+                               "1" = "D1",
+                               "2" = "D2",
+                               "3" = "D3",
+                               "4" = "D4",
+                               "5" = "D5",
+                               "6" = "D6",
+                               "7" = "D7",
+                               "8" = "D8",
+                               "9" = "D9",
+                               "10" = "D10")) %>% 
   group_by(School) %>% 
   count(topic, sort = TRUE) %>%
   mutate(prop = round(n/sum(n),4)) %>% 
@@ -129,29 +167,49 @@ stats <- data_s %>%
   ggplot(aes(x = prop,
              y = topic,
              fill = topic))+
-  geom_col() +
+  geom_col(fill = "#FF7F00",
+           colour = "white") +
   my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
   labs(x = "proportion",
        y = "",
-       title = "Results of Model Using Only Stats Data")
+       title = "Model D",
+       subtitle = "Trained by only statistics data")
+
+fig_comp <- (ssc + cs) / (comp + stats)
 ```
 
-```{r fig-comp-stats, fig.cap = "Compare Results Between Full Model and Without Sociology Data", fig.width=10}
-comp + stats
+```{r fig-com, fig.cap = "Model D Delivers the Most Informative Results on University Data", fig.width=12, fig.height=12}
+fig_comp +
+  plot_annotation(title = "Model D Delivers the Most Informative Results on University Data")
 ```
 
-Topic 2 is the only dominating topic based on the results provided by the model using only computing data, which provides a clearer picture than the previous models. The table below listed the top ten words for each topics, it turns out Topic 2 contains words like comput (computation etc.), system, program, softwar (software), which are associated with computational aspects, especially software. This model provides a more meaningful results than the prior ones, however, there is not much interpretations could be made for the other topics, the information it offers is still not very satisfying.
+For Model A, Topics A9, A10, A2 and A8 occupies relatively higher proportion compare with the others, but the order varies across universities, and their proportions are not significantly larger than the rest of other topics, makes it hard to draw meaningful interpretations. On the top right, Model B demonstrates a better picture: Topics B6, B8 and B9 are the top 3 topics across all Go8 universities, however, proportions of Topics B10, B5, B7, B3 and B4 are also obvious higher in some of the universities, brings in difficulties to make justifications.     
+
+As sociology data tends to brings in noises to the model, and is not closely relevant to the data science topic compare with statistics and computing, Model C and D are fitted using only statistics data and computing data respectively. Topic C2 is the only dominating topic in Model C, where as Topics D6 and D1 occupy significantly large proportion in Model D. Besides, cccccc together took a relatively higher proportion compare with the rest of other topics in Model D.
+
+The table below listed the top 30 words of each topics in Model C, it turns out Topic C2 contains words like comput (computation, computational, computer), system, program, machin (machine), softwar (software), model, test, calcul (calculate, calculation) and data, which seems to be associated with mainly computational aspects. 
 
 ```{r}
 rmv_col("data/term_comp30.csv") %>% 
+  rename("Topic C1" = `Topic 1`,
+         "Topic C2" = `Topic 2`,
+         "Topic C3" = `Topic 3`,
+         "Topic C4" = `Topic 4`,
+         "Topic C5" = `Topic 5`,
+         "Topic C6" = `Topic 6`,
+         "Topic C7" = `Topic 7`,
+         "Topic C8" = `Topic 8`,
+         "Topic C9" = `Topic 9`,
+         "Topic C10" = `Topic 10`) %>% 
   kable() %>% 
   kable_styling(bootstrap_options = "condensed") %>% 
-  scroll_box(width = "1250px")
+  scroll_box(width = "1250px",
+             height = "350px")
 ```
 
-In terms of the model trained by only data in statistics, there are also dominating topics across all eight universities: Topics 6 and 1, besides, topics 5, 10, 2, 9 together took a relatively higher proportion compare with the rest of other topics. Both models using only computing or statistical data delivers better results, model trained by only statistical data provides more information than the other, hence is selected to use for further analysis on our university data.
+Although Model D provides a reasonably meaningful result, there is not much interpretations could be made for the other topics, the information it offers is still not very satisfying. Compares with Model C, Model D has two domination topics D6 and D1, topics D5, D10, D2, D9 also accounts for a large proportion, which together provides more information. Therefore, Model D, which is trained by only statistics data on ten topics, is selected to use for further analysis on our university data.
 
 Note that it requires highly skilled linguists and huge efforts to establish a proper text corpus, the model we built is still fairly basic and could be further optimised by adjustments.
  
