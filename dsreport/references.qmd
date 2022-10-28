@@ -1,5 +1,5 @@
 # References {.unnumbered}
 
 ::: {#refs}
-@knuth84 @r @rstudio @targets @text2vec @rvest @rselenium @dt @tidyverse @tidytext @kableextra @snowballc @glue @wordcloud @patchwork
+@knuth84 @r @rstudio @targets @text2vec @rvest @rselenium @dt @tidyverse @tidytext @kableextra @snowballc @glue @wordcloud @patchwork @quarto @stringr
 :::
