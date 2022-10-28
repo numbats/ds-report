@@ -2,7 +2,7 @@
 
 ## Summary 
 
-In this project, we collected university data and employer data to conduct analysis. For the university data, we used web scraping techniques to build our data set from scratch. Then, in depth exploratory data analysis was conducted. Finally, to try and solve problems we encountered during the analysis, we built LDA models through web scraping over 4000 Wikipedia articles to establish our own 'text corpus'
+In this project, we collected university data and employer data to conduct analysis. For the university data, we used web scraping techniques to build our data set from scratch. Then, in depth exploratory data analysis was conducted. Finally, to try and solve problems we encountered during the analysis, we built LDA models through web scraping over 4000 Wikipedia articles to establish our own 'text corpus'.
 
 From the exploratory data analysis, we find that Master of Data Science degrees offered at Go8 are mostly dominated by **computational component**, even the statistical aspects of it are more computational. There is no obvious standard structure or skill set for data science degrees across Go8. Hence we fail to give a definite answer on what is universities' definition of data science in Australia. The employer's data offered us insight to the type of programming languages are favored by employers. We find that Python, R and SQL are the dominating ones. Data visualization is an important skill from employers' perspective since it appears frequently in @fig-employer-bigram and Tableau is quite popular in @fig-languages.
   
@@ -16,7 +16,7 @@ We assumed the nature of units (computational, statistical..etc.) based on the u
 
 A proper text corpus requires great understanding of linguistics and a large amount of articles. The result of our LDA model topic breakdown can also simply be due to the fact that only a few of the wiki-articles we used are relevant and therefore will consistently be significant for employer and university data. In addition, there are latex terms included in the training data acquired through the web scraping process, these terms are not fully removed and might have brought unwanted noises to the fitted model, and possibly twisted the outputs. 
 
-We relied heavily on packages like `tidytext` and `SnowballC` for word processing. However, there still are some drawbacks. The stemmed words are still potentially not "clean" enough and produce misleading results.
+We relied heavily on packages like `tidytext` and `SnowballC` for word pre-processing. However, there still are some drawbacks. Some of the mathematical equations in latex is still not removed properly. Also the stemmed words are still potentially not "clean" enough and produce misleading results. 
 
 ## Furture Directions
 
