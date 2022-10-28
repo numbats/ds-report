@@ -19,7 +19,7 @@ jobdata <- read_csv("data/listings2019_2021.csv")
 ```
 
 ## Word Frequency {#sec-word-frequency}
-```{r fig-job-freqency, fig.cap = "Job Word Frequency (freq >200)"}
+```{r fig-job-freqency, fig.cap = "Technical skills such as Python and Sql are mentioned."}
 emp_word <- jobdata %>%
   select(c('jobId', 'jobTitle', 'jobClassification', 'advertiserName', 
            'workType', 'mobileAdTemplate')) %>% 
@@ -46,7 +46,7 @@ wordcloud(words = cloud$word,
 Word frequency was calculated using the same method as @sec-unit-bigram. Programming languages Python and SQL seems prominent. Potentially due to the amount of senior positions in the data, *experience* is mentioned a lot. In terms of other knowledge or skills, *statistics*, *modelling*,  *analysis* are some terms that seems to be standing out. To ensure frequency is meaningful, we looked at bigram and trigram.
 
 ## Bigram
-```{r fig-employer-bigram, fig.cap = "Job Description - Bigram (n > 300"}
+```{r fig-employer-bigram, fig.cap = "There are many data related terms that potentially can be grouped together in future actions."}
 emp_bigram <- jobdata%>%
   select(c('jobId', 'jobTitle', 'jobClassification', 'advertiserName', 'workType', 'mobileAdTemplate')) %>% 
   unnest_tokens(bigram, mobileAdTemplate, token = "ngrams",n=2) %>% 
@@ -75,7 +75,7 @@ For @fig-employer-bigram, we stemmed the words before joining them into bigram i
 
 ## Programming Languages
 
-```{r fig-languages, fig.cap="Programming Skills Mentioned by Employers"}
+```{r fig-languages, fig.cap="Tableau's popularity corresponds to the popularity of 'data visualis'."}
 jobdata %>% select(c(25:49)) %>% 
   pivot_longer(everything(),
                names_to = "Program", 
@@ -93,4 +93,4 @@ jobdata %>% select(c(25:49)) %>%
        y = "Language", x = "Count")
 ```
 
-@fig-languages shows the count of each language mentioned by employers. 89% of the jobs mentioned Python, 69% mentioned R and 68% mentioned SQL. Tableau's popularity is not a surprise given the high frequency for *data visualis* in the previous section.
+@fig-languages shows the count of each language mentioned by employers. 89% of the jobs mentioned Python, 69% mentioned R and 68% mentioned SQL. R potentially did not show up in the previous n-grams due to the letter being dismissed during the automated pre-processing. Tableau's popularity is not a surprise given the high frequency for *data visualis* in the previous section.

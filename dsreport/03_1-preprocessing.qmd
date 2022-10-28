@@ -9,11 +9,11 @@ Before any analysis can be done with the text, the target content needs to go th
   5. Limit the number of times words from the same unit or job posting is counted
 
  
-Tokenization takes the original text and breaks it up into words. Of all the words, many of them will just be stop words which offers no insight. Hence, it is important to remove those stop words. We inspect the words after this step and realized that many of the "words" that were tokenized were actually just numbers. Therefore we filter the data to remove them. If we stop at this stage, we will see that many words are being under counted. For example "student" and "students" will be seen as two different words an counted separately, when in reality they are the same. The `singularize()` function singularizes words to fix this problem. However, we also noticed that this is not enough. Thus we used` wordStem()`to stem the words in attempt to get the root form. This does not necessarily mean to reduce the word into the dictionary root. Instead, we want to stem it only so much to remove the tenses of the word. For example "work", "works", and "worked" will al be stemmed to "work." 
+Tokenization takes the original text and breaks it up into words. Of all the words, many of them will just be stop words which offers no insight. Hence, it is important to remove those stop words. We inspect the words after this step and realized that many of the "words" that were tokenized were actually just numbers. Therefore we filter the data to remove them. If we stop at this stage, we will see that many words are being under counted. For example "student" and "students" will be seen as two different words an counted separately, when in reality they are the same. The `singularize()` function singularizes words to fix this problem. However, we also noticed that this is not enough. Thus we used` wordStem()`to stem the words in attempt to get the root form. This does not necessarily mean to reduce the word into the dictionary root. Instead, we want to stem it only so much to remove the tenses of the word. For example "work", "works", and "worked" will all be stemmed to "work". It is important to note that for the purpose of interpretability, some of the analysis will be done without stemming. This does not inidicate that it was not attempted. 
 
 Each unit and job description has raw text of varying lengths. If we just take the count of words directly, sometimes a word can be falsely inflated to occur a number of times due to the topic under which it is discussed. Therefore, we only allow the unique words of each unit /job description to included in the final count. 
 
-We check the words after each processes and sometimes manually remove words when we find it bring more noise than actual insight. Here is an example code of the pre-processing for unit outcomes.
+We check the words after each process, and sometimes manually remove words when we find it bring more noise than actual insight. Here is an example code of the pre-processing for unit outcomes.
 
 ```{.r}
 singlewords <- unidata %>% 
@@ -23,3 +23,5 @@ singlewords <- unidata %>%
   mutate(word = wordStem(word, language = "english")) %>%
   distinct(School, Unit, word)
 ```
+
+

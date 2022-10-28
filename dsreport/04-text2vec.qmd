@@ -194,7 +194,7 @@ fig_comp <- (ssc + cs) / (comp + stats)
 
 ```{r fig-com, fig.cap = "Model D Delivers the Most Informative Results on University Data", fig.width=12, fig.height=12}
 fig_comp +
-  plot_annotation(title = "Model D Delivers the Most Informative Results on University Data")
+  plot_annotation(title = "Comparison of fitted model.")
 ```
 
 For Model A, Topics A9, A10, A2 and A8 occupies relatively higher proportion compare with the others, but the order varies across universities, and their proportions are not significantly larger than the rest of other topics, makes it hard to draw meaningful interpretations. On the top right, Model B demonstrates a better picture: Topics B6, B8 and B9 are the top 3 topics across all Go8 universities, however, proportions of Topics B10, B5, B7, B3 and B4 are also obvious higher in some of the universities, brings in difficulties to make justifications.     

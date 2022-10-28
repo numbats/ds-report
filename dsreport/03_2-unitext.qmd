@@ -91,7 +91,7 @@ comp <- unidata %>%
   mutate(category = if_else(is.na(category), "Other", category))
 ```
 
-```{r fig-unitcode, fig.cap = "Teaching Content by Faculty"}
+```{r fig-unitcode, fig.cap = "Significant portion of the units are IT."}
 comp %>% 
   mutate(category = fct_reorder(category, n, sum)) %>% 
   ggplot(aes(x = n,
@@ -122,7 +122,7 @@ comp %>%
   geom_text(aes(label = prop_sum), color = "white", size = 4) +
   coord_fixed() +
   labs(y = "",
-       title = "Proportion of IT Units Varys Across Go8 Universities",
+       title = "Proportion of Units by Faculty Across Go8 Universities",
        fill = "% of total units")
 ```
 
@@ -161,7 +161,7 @@ unidata_bigram <- unidata %>%
   ungroup()
 ```
 
-```{r fig-bigram, fig.cap = "Unit Overview and Learning Outcome - Bigram (n > 4)"}
+```{r fig-bigram, fig.cap = "Words associated with computational elements are most popular in unit bigram."}
 unidata_bigram %>% 
   filter(n > 4) %>% 
   mutate(word = fct_reorder(word, n, sum))%>% 

@@ -37,7 +37,7 @@ stats <- data_s %>%
 ```
 
 
-```{r fig-unitopics, fig.cap = "Topics Proportion by University", echo=FALSE}
+```{r fig-unitopics, fig.cap = "Topics Proportion are similar across all universities with slight variations.", echo=FALSE}
 stats
 ```
 
