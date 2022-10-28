@@ -15,21 +15,30 @@ my_scale <- scale_fill_manual(name = "topic", values = colors)
 
 To remain consistent with the analysis, we also applied the LDA model trained by only data in statistics to the employer data with the same stemming and standardizing procedures. Unlike the university data with both Topic 6 and 1 as the most dominant topics, @fig-emp-lda suggests that Topic 1 is significantly more dominant than the rest of the topics across the different job sectors. While Topic 6 and 5 collectively takes up a large portion.
 
-```{r fig-emp-lda, fig.cap = "Topics Proportion by Job Classification", message=FALSE}
+```{r fig-emp-lda, fig.cap = "Topics Proportion by Job Classification", message=FALSE, fig.height=10, fig.width=12}
 emp_word_stat %>% 
   group_by(jobClassification) %>% 
   count(topic, sort = TRUE) %>% 
   mutate(prop = round(n/sum(n),4)) %>% 
   ungroup() %>% 
-  mutate(topic = fct_reorder(as.factor(topic), n, sum)) %>%
+  mutate(topic = fct_reorder(as.factor(topic), n, sum),
+         jobClassification = as.factor(jobClassification)) %>%
+  mutate(jobClass = recode_factor(jobClassification,
+                    "Information & Communication Technology" = "ICT",
+                    "Banking & Financial Services" = "Banking & Finance",
+                    "Human Resources & Recruitment"  = "HR & Recruitment",
+                    "Insurance & Superannuation" = "Insrance & Super",
+                    "Advertising, Arts & Media" = "Ad, Arts & Media",
+                  "Administration & Office Support" = "Admin & Office Support",
+       "Manufacturing, Transport & Logistics" = "Manu, Trans & Logistics")) %>% 
   ggplot(aes(x = prop,
              y = topic,
              fill = topic))+
   geom_col() +
   my_scale +
-  facet_wrap(~jobClassification) +
+  facet_wrap(~jobClass) +
   theme(legend.position = "none",
-        strip.text.x = element_text(size = 7)
+        strip.text.x = element_text(size = 12)
         ) +
   labs(title = "Topic Proportion by Job Classification",
        x= "proportion")
