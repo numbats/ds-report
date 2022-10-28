@@ -95,6 +95,7 @@ ssc <- data_ssc %>%
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
   labs(x = "",
+       y = "Topic",
        title = "Model A",
        subtitle = "Trained by sociology, statistics and computing data")
 
@@ -125,6 +126,7 @@ cs <- data_cs %>%
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
   labs(x = "",
+       y = "",
        title = "Model B",
        subtitle = "Trained by statistics and computing data")
 
@@ -154,7 +156,8 @@ comp <- data_comp %>%
   #my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
-  labs(x = "proportion",
+  labs(x = "Proportion",
+       y = "Topic",
        title = "Model C",
        subtitle = "Trained by only computing data")
 
@@ -184,7 +187,7 @@ stats <- data_s %>%
   #my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
-  labs(x = "proportion",
+  labs(x = "Proportion",
        y = "",
        title = "Model D",
        subtitle = "Trained by only statistics data")

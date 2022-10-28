@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.36">
+<meta name="generator" content="quarto-1.1.189">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 </style>
 
 
@@ -184,13 +189,13 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-word-frequency" id="toc-sec-word-frequency" class="nav-link active" data-scroll-target="#sec-word-frequency"> <span class="header-section-number">6.1</span> Word Frequency</a></li>
-  <li><a href="#bigram" id="toc-bigram" class="nav-link" data-scroll-target="#bigram"> <span class="header-section-number">6.2</span> Bigram</a></li>
-  <li><a href="#programming-languages" id="toc-programming-languages" class="nav-link" data-scroll-target="#programming-languages"> <span class="header-section-number">6.3</span> Programming Languages</a></li>
+  <li><a href="#sec-word-frequency" id="toc-sec-word-frequency" class="nav-link active" data-scroll-target="#sec-word-frequency"><span class="toc-section-number">6.1</span>  Word Frequency</a></li>
+  <li><a href="#bigram" id="toc-bigram" class="nav-link" data-scroll-target="#bigram"><span class="toc-section-number">6.2</span>  Bigram</a></li>
+  <li><a href="#programming-languages" id="toc-programming-languages" class="nav-link" data-scroll-target="#programming-languages"><span class="toc-section-number">6.3</span>  Programming Languages</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/numbats/ds-report/blob/main/03_3-jobtext.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -224,7 +229,7 @@ ul.task-list{list-style: none;}
 <div id="fig-job-freqency" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03_3-jobtext_files/figure-html/fig-job-freqency-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 6.1: Technical skills such as Python and Sql are mentioned.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Technical skills such as Python and Sql are mentioned.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -238,7 +243,7 @@ ul.task-list{list-style: none;}
 <div id="fig-employer-bigram" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03_3-jobtext_files/figure-html/fig-employer-bigram-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 6.2: There are many data related terms that potentially can be grouped together in future actions.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.2: There are many data related terms that potentially can be grouped together in future actions.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -252,7 +257,7 @@ ul.task-list{list-style: none;}
 <div id="fig-languages" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="03_3-jobtext_files/figure-html/fig-languages-1.png" class="img-fluid figure-img" width="672"></p>
-<p></p><figcaption class="figure-caption">Figure 6.3: Tableau’s popularity corresponds to the popularity of ‘data visualis’.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6.3: Tableau’s popularity corresponds to the popularity of ‘data visualis’.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -333,6 +338,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           toggle.classList.remove("alternate");
         }
       }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
     }
   }
   const isFileUrl = () => { 
@@ -435,7 +450,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

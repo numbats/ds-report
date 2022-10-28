@@ -99,8 +99,8 @@ comp %>%
              fill = category)) +
   geom_col() +
   scale_fill_brewer(palette = "Dark2") +
-  labs(x = "",
-       y = "",
+  labs(x = "Count",
+       y = "Category",
        title = "Teaching Content by Faculty") +
   theme(legend.position = "none")
 ```
@@ -121,7 +121,7 @@ comp %>%
             linetype = 1) +
   geom_text(aes(label = prop_sum), color = "white", size = 4) +
   coord_fixed() +
-  labs(y = "",
+  labs(y = "Category",
        title = "Proportion of Units by Faculty Across Go8 Universities",
        fill = "% of total units")
 ```
@@ -170,7 +170,8 @@ unidata_bigram %>%
   geom_col(fill = "#006DAE")+
   #scale_fill_brewer(palette = "Dark2") +
   theme(legend.position = "bottom") +
-  labs(y = "",
+  labs(x = "n",
+       y = "Bigrams",
        fill = "Category",
        title = "Unit Overview and Learning Outcome - Bigram (n > 4)") +
   scale_x_continuous(expand = c(0, 0.1))

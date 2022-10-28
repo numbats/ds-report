@@ -31,8 +31,8 @@ stats <- data_s %>%
   my_scale +
   facet_wrap(~School, scales = "free_y") +
   theme(legend.position = "none") +
-  labs(x = "proportion",
-       y = "",
+  labs(x = "Proportion",
+       y = "Topic",
        title = "Results of Model Using Only Stats Data")
 ```
 
@@ -90,7 +90,7 @@ data_s %>%
   scale_fill_brewer(palette = "Paired") +
   facet_wrap(~topic, scales = "free_y") +
   theme(legend.position = "none") +
-  labs(x = "proportion",
+  labs(x = "Proportion",
        title = "Breakdown by Topic")
 ```
 
